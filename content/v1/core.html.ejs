@@ -355,7 +355,8 @@ async function force_create_new_user(){
     user_pub=user.is.pub;
     let userN= user.get(store_dir);
     // ---------------------------------
-    frames['profile'].postMessage({innerHTML:{id:'iam', content:`<p> logged in as: <a>${user_pub}@${peers[0]}</a></p>`}},'https://maygame.xxx')
+    let content = `<p> logged in as: <a>${user_pub}@${peers[0]}</a></p>`;
+    frames['profile'].postMessage({'innerHTML':{id:'iam', content: content}},'https://maygame.xxx')
     // ---------------------------------
     // userN.get('items/bookmarks').on((e)=>{console.log('core bookmarks gunfire',e)},{change: true});
     userN.get('map/last_bookmark').on((msg)=>{console.log('core map bm: ', msg)});

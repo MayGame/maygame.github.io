@@ -1,5 +1,6 @@
 <style>
     .container{
+        background-color: pink;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
         grid-template-areas: "header";
@@ -10,7 +11,7 @@
 </style>
 <div class="container">
     <div class="header">
-        <div id="iam"></div>
+        <div id="iam">iam</div>
     </div>
 </div>
 
@@ -22,6 +23,7 @@
         let id = e.data['innerHTML'].id;
         let content = e.data['innerHTML'].content;
         document.getElementById(id).innerHTML=content;//very dirty and unsafe. I am dangerous.
+        console.log('profile innerHTML: ', id, content)
     }
 }
 </script>
