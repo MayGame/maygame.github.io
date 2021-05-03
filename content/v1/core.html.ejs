@@ -119,7 +119,7 @@ html, body, iframe
     <!-- <button onclick="gun.get('test').get('stuff').put({'hud_test':'from_core'});">GUN TEST</button> -->
     <!-- <div id="message_div"></div> -->
 </div>
-<div class="menu_bar_right"><button>menu right</button></div>
+<div class="menu_bar_right"><button onclick="toggle(hotbar)" style="float: right;">*</button></div>
 <!-- #region -->
 <div id="quests_layer" class="layer_b b" style="display: none; ">
     <!-- there's no styling for the layer_b. temporaly disabling 'layer' this way -->
@@ -158,9 +158,9 @@ html, body, iframe
     <iframe scrolling="auto"name="currencies" src="<%= currency_url %>" id="frame_profile" style="border: 0; width: 100%; height: 100%"></iframe>
 </div></div>
 <div class="footer">
-    <p>some footer stuff</p>
+    <!-- <p>some footer stuff</p> -->
 </div>
-<div class="footer_b" style="display: flex;">
+<div class="footer_b" style="display: flex;" id="hotbar">
     <button>hotbar key 1</button>
     <button>hotbar key 2</button>
 </div>
