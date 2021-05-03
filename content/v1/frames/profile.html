@@ -11,7 +11,7 @@
 </style>
 <div class="container">
     <div class="header">
-        <div id="iam">iam</div>
+        <p>My id (click to copy): <a id="iam" onclick="copyToClibboard(this.innerHTML);"></a></p>
     </div>
 </div>
 
@@ -25,5 +25,14 @@
         document.getElementById(id).innerHTML=content;//very dirty and unsafe. I am dangerous.
         console.log('profile innerHTML: ', id, content)
     }
+}
+function copyToClipboard(text) {
+    var dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    dummy.setSelectionRange(0,99999);
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
 }
 </script>

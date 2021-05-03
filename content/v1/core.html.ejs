@@ -357,7 +357,7 @@ async function force_create_new_user(){
     var frames = window.frames; // or // var frames = window.parent.frames;
 
     // ---------------------------------
-    let content = `<p> logged in as: <a>${user_pub}@${peers[0]}</a></p>`;
+    let content = `${user_pub}@${peers[0]}`;
     frames['profile'].postMessage({'innerHTML':{id:'iam', content: content}},'https://maygame.xxx')
     // ---------------------------------
     // userN.get('items/bookmarks').on((e)=>{console.log('core bookmarks gunfire',e)},{change: true});
