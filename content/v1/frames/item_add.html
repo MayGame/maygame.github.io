@@ -50,7 +50,9 @@
             user_id=e.data.user_id;
             console.log("item_add",e)
             }
-
+            else if(e.data.login){
+        onlogin(e.data.login);
+    }
             else console.log('item_add got weird msg: ', e)
         }
 
@@ -63,9 +65,17 @@
             let timestamp = Date.now();
             result.timestamp=timestamp;
             console.log(result)
-            window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
+            window.parent.postMessage({gun_put: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
+            // window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
         } else console.log('Need user id first.')
     }
+    window.onmessage=(e)=>{
+
+}
+function onlogin(pub){
+    user_id=pub;
+
+}
         </script>
     </body>
 </html>
