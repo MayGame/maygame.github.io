@@ -354,6 +354,8 @@ async function force_create_new_user(){
     function logIn(){console.info('Logged in as ', user.is);
     user_pub=user.is.pub;
     let userN= user.get(store_dir);
+    var frames = window.frames; // or // var frames = window.parent.frames;
+
     // ---------------------------------
     let content = `<p> logged in as: <a>${user_pub}@${peers[0]}</a></p>`;
     frames['profile'].postMessage({'innerHTML':{id:'iam', content: content}},'https://maygame.xxx')
@@ -363,7 +365,6 @@ async function force_create_new_user(){
     userN.get('map/show').on((msg)=>{console.log('core map show gunfire ', msg)});
     userN.get('map/gps_my_pos').on((crd)=>{console.log('core got user/gps pos, ',crd)});//tmp, fixme
     userN.get('map/gps_map_click').on((crd)=>{console.log('core got user/map_click, ',crd)});//rmmmber, then off on relog
-    var frames = window.frames; // or // var frames = window.parent.frames;
     for (var i = 0; i < frames.length; i++) {
         frames[i].postMessage({login: user.is.pub}, 'https://maygame.xxx');//todo track frame domains
     }
