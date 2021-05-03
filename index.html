@@ -89,10 +89,10 @@ console.log(config);
     <a onclick="template_showdown.lastChild.innerText='';" style="background-color: plum; position: absolute; pointer-events: all;">Reset</a><a style="pointer-events: none;"></a></p>
 </div>
 <br>
+<!--
 <h1>-------------------------------</h1>
 <p>Things bellow don't work</p>
 <h1>-------------------------------</h1>
-<!--  -->
 <br>
 <button>Change default behavior</button>
 <br>
@@ -114,7 +114,6 @@ console.log(config);
 
 <button id="btn_customize_submit" onclick="customize_submit();">Submit</button>
 
-<!-- #region -->
 <h3>__Following section is just a ui example from the past__</h3>
 <h1>Customization:</h1>
 <div id="customization_div" style="background: mediumorchid;">
@@ -128,7 +127,6 @@ console.log(config);
     </li>
     <li><label for="module_core_footer">Core footer</label><input type="checkbox" id="module_core_footer" checked
         disabled></li>
-    <!-- groups: unchecking one unchecks related (todo) -->
   </ul>
 
   <label>Save template as</label>
@@ -142,7 +140,7 @@ btn_to_local.disabled=!btn_to_local.disabled
   <button disabled id="btn_to_local">To localStorage</button>
   <br>
 </div>
-
+<!--  -->
 
 </div>
 <script>
