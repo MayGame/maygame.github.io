@@ -55,6 +55,7 @@
         }
 
         function item_add(){
+            if(user_id){
             var result = {}
             result.issuer=user_id;
             result.description = item_description.value;
@@ -63,7 +64,8 @@
             result.timestamp=timestamp;
             console.log(result)
             window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
-        }
+        } else console.log('Need user id first.')
+    }
         </script>
     </body>
 </html>
