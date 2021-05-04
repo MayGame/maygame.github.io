@@ -20,16 +20,16 @@
     <div class="header1">Your items</div>
     <div class="header2">Description</div>
 <div class="c"><button onclick="window.parent.postMessage({open_window: 'item_add'},'https://maygame.xxx');">Add</button>
-    <button onclick="parent_sub_on('map/last_bookmark');">Track bookmarks</button>
+    <!-- <button onclick="parent_sub_on('map/last_bookmark');">Track bookmarks</button> -->
     <!-- <button onclick="window.parent.postMessage({gundelete: 'items/bookmarks'},'https://maygame.xxx')">Clear bookmarks:</button> -->
 </div>
 <!-- <div class="d">Content d</div> -->
 <div class="footer">
     <button onclick="item_list.innerHTML=ejs.render(items.template, items.list);
-    pop_mode='items';">Populate</button>
+    pop_mode='items';">Items</button>
     <button onclick="item_list.innerHTML=ejs.render(items.bmtemplate, items.bookmarks);
     pop_mode='bookmarks';
-    ">Populate bm</button><button onclick="
+    ">bookmark</button><button onclick="
     parent_put(items, 'items/list');
     ">Dev_gun_put_items</button>
 </div>
@@ -94,6 +94,8 @@ html, body
 </style>
 
 <script>
+    function populate_(){item_list.innerHTML=ejs.render(items.template, items.list);
+    pop_mode='items';}
     var pop_mode='';
 var items={}
 items.template=`
@@ -179,6 +181,7 @@ window.onmessage=async (e)=>{
             console.log('Got items list: ', e.data);
             let res = await sea.verify(msg,a.m.issuer);
             console.log('verified: ', res);
+            populate_();
         }
         else if(e.data.soul=='item/add'){
             let data=e.data['your_topic_pub'];
