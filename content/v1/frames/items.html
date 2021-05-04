@@ -121,7 +121,7 @@ function el_click(el){
     }
     let name = el.children[1].innerText
     document.getElementsByClassName('b')[0].innerHTML='<img src="' +items.list[name].img_url+'">'+"<br>ID"+items.list[name].id+
-    " name: " + name;
+    " name: " + name+`<br><p>Description: ${items.list[name].description}</p>`;
 }
 function el_bm(el){
     if(el.nodeName!='LI'){
@@ -172,7 +172,8 @@ window.onmessage=async (e)=>{
         else if(e.data.soul=='items/list'){
             let msg = e.data['your_topic_pub'].e
             let a = JSON.parse(msg.substring(3));//fixme: json validation, might break
-            items.list[0]=a.m;//fixme: verify logic// getting message part of signed message using as unsigned
+            let obj={id: a.m.timestamp, img_url: a.m.img_url,meta: a.m.meta,description: a.m.description}
+            items.list[a.m.name]=a.m;//fixme: verify logic// getting message part of signed message using as unsigned
             //todo: verify(msg, pub). if true - show whos
             console.log('Got items list: ', e.data);
             let res = await sea.verify(msg,a.m.issuer);
