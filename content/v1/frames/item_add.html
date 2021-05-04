@@ -92,7 +92,7 @@ function update_f_list(){
     <option value='<%= friends[key].pub %>'></option>
 <% }) %>
 </optgroup>`
-    issue_to_list.innerHTML=ejs.render(template,agents);
+    issue_to_list.innerHTML=ejs.render(template,{friends: agents});//fixme
 }
         function item_add(){
             if(user_id){
@@ -113,13 +113,13 @@ function update_f_list(){
 
 function onlogin(pub){
     user_id=pub;
-    let template=
-`<optgroup label="Friends">
-    <% agents.forEach(agent=> { %>
-<option value='<%= agent.pub %>'></option>
-<% }) %>
-</optgroup>`
-    issue_to_list.innerHTML=ejs.render(template,agents);
+//     let template=
+// `<optgroup label="Friends">
+//     <% agents.forEach(agent=> { %>
+// <option value='<%= agent.pub %>'></option>
+// <% }) %>
+// </optgroup>`
+//     issue_to_list.innerHTML=ejs.render(template,agents);
     parent_sub_on('item_add/last_meta');
     parent_sub_on('agents/friends');
 
