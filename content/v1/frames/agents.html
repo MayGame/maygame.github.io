@@ -56,23 +56,60 @@
         <div style="grid-area: footer1;"><button style="width: 100%; height: 100%;" onclick="
             btn_all();
             ">All</button></div>
-        <div style="grid-area: footer2;"><button onclick="test_populate();" style="width: 100%; height: 100%;">Populate</button></div>
-        <div style="grid-area: footer3;"><button style="width: 100%; height: 100%;">F3</button></div>
+        <div style="grid-area: footer2;"><button style="width: 100%; height: 100%;" onclick="button_friends();">Friends</button></div>
+        <div style="grid-area: footer3;"><button onclick="render_add();" style="width: 100%; height: 100%;">Add</button></div>
     </div>
 </div>
 <script>
 function btn_all(){
-    let all={}
-    all.list=[{id: 2}]
-    let text = `
-    <table>
-        <% Object.keys(all.list).forEach(key=> { %>
-            <tr><td><%= all.list[key].id %></td><td><%= key %></td></tr>  
-<% }) %>
+    console.log('agents, all. not supported, falling back to friends')
+//     var all={}
+//     all.list=[{id: 2}]//fixme
+//     let text = `
+//     <table>
+//         <% Object.keys(all.list).forEach(key=> { %>
+//             <tr><td><%= all.list[key].id %></td><td><%= key %></td></tr>  
+// <% }) %>
   
-    </table>
+//     </table>
+//     `
+//     body_.innerHTML=ejs.render(text,{all:all});
+tab='all';
+button_friends()
+}
+var tab = 'friends';
+function button_friends(){
+    // let obj={"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw":{pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'}}
+
+    let text=`
+    <table>
+    <tr><th> Name </th><th>Pub</th><th></th></tr>  
+    <% Object.keys(friends).forEach(key=> { %>
+            <tr><td><%= friends[key].name %>  </td><td><%= key %></td><td></td></tr>  
+<% }) %>
+</table>
     `
-    body_.innerHTML=ejs.render(text,all.list);
+    // let friends = {}
+    tab='friends';
+    body_.innerHTML=ejs.render(text, {friends: friends})
+}
+var friends;
+friends = {"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw":{pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'}}
+function render_add(){
+    var text=`
+    <div style="display: grid; grid-template-columns: 0.3fr 1fr; grid-template-areas: 'h h' 'a b' 'c d' 'f f'">
+        <p style="grid-area: h;">Friend add</p>
+    <label for="add_pub">Pub</label><textarea id="add_pub"></textarea>
+    <label for="add_name">Name</label><textarea id="add_name"></textarea>
+    <button onclick="
+    let obj={pub: add_pub.value,name: add_name.value}
+    console.log('f add: ', obj)
+    window.parent.postMessage({gun_pub: obj,soul:'agents/friends'},'https://maygame.xxx');
+    " style="grid-area: f;">Submit</button>
+</div>
+    `
+    body_.innerHTML=ejs.render(text,{})
+    tab='add'
 }
 let agent = {u: {me:0,//calculated utility
 pub1:0.2,//utility of it to pub1. declared or calculated
@@ -91,8 +128,10 @@ function test_populate(){
 window.onmessage=(e)=>{
     if(e.data['your_topic_pub']){
                 if(e.data.soul=='agents/friends'){
-                    console.log('agents friemds pub: ', e.data['your_topic_pub'])
-                    friends=e.data['your_topic_pub'].e;}}
+                    console.log('agents friends pub: ', e.data['your_topic_pub'])
+                    friends=e.data['your_topic_pub'].e;
+                    if(tab=='friends')button_friends();
+                }}
     else if(e.data.user_id){
     user_id=e.data.user_id;
             }
