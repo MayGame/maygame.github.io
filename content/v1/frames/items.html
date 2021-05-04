@@ -124,8 +124,9 @@ function el_click(el){
         el=el.parentElement;
     }
     let name = el.children[1].innerText
-    document.getElementsByClassName('b')[0].innerHTML='<img src="' +items.list[name].img_url+'" style="width: 100px; height: 100px;">'+"<br>ID"+items.list[name].id+
+    document.getElementsByClassName('b')[0].innerHTML='<img src="' +items.list[name].img_url+'" style="width: 100px; height: 100px;">'+
     " name: " + name+`<br><p>Description: ${items.list[name].description}</p>`;
+    // "<br>ID"+items.list[name].id+
 }
 function el_bm(el){
     if(el.nodeName!='LI'){
