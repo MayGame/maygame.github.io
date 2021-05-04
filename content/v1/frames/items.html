@@ -1,8 +1,11 @@
 <html>
-    <body>
-<script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <head>
+        <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
 <script src="../../../js/cdn/ejs.min.js"></script>
+    </head>
+    <body>
+
 <!-- <script src="js/cdn/ejs.min.js"></script> prod -->
 
 <div class="container" id="container">
@@ -89,9 +92,7 @@ html, body
  overflow: hidden;
 }
 </style>
-<script>
-    ;var sea = Gun.SEA;
-</script>
+
 <script>
     var pop_mode='';
 var items={}
@@ -207,6 +208,8 @@ entity_link: soul
 */
 //#endregion
 </script>
-        
+<script>
+    var sea = Gun.SEA;
+</script>
 </body>
 </html>
