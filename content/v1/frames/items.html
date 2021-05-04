@@ -120,7 +120,7 @@ function el_click(el){
         el=el.parentElement;
     }
     let name = el.children[1].innerText
-    document.getElementsByClassName('b')[0].innerHTML='<img src="' +items.list[name].img_url+'">'+"<br>ID"+items.list[name].id+
+    document.getElementsByClassName('b')[0].innerHTML='<img src="' +items.list[name].img_url+'" style="width: 100px; height: 100px;">'+"<br>ID"+items.list[name].id+
     " name: " + name+`<br><p>Description: ${items.list[name].description}</p>`;
 }
 function el_bm(el){
@@ -128,7 +128,7 @@ function el_bm(el){
         el=el.parentElement;
     }
     let name = el.children[1].innerText
-    document.getElementsByClassName('b')[0].innerHTML='<img src="' +items.bookmarks[name].img_url+'">'+"<br>ID"+items.bookmarks[name].id+
+    document.getElementsByClassName('b')[0].innerHTML='<img src="' +items.bookmarks[name].img_url+'" style="width: 100px; height: 100px;">'+"<br>ID"+items.bookmarks[name].id+
     " name: " + name + '<br><p>Description:'+items.bookmarks[name].description+' </p>'+`
     <br><button onclick="bm_show_on_map('${name}')">Show on map</button><button onclick="console.log('edit not implemented')">Edit</button>
     `;
