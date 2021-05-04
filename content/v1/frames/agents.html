@@ -93,8 +93,8 @@ function button_friends(){
     tab='friends';
     body_.innerHTML=ejs.render(text, {friends: friends})
 }
-var friends;
-friends = {"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw":{pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'}}
+var friends={};
+// friends = {"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw":{pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'}}
 function render_add(){
     var text=`
     <div style="display: grid; grid-template-columns: 0.3fr 1fr; grid-template-areas: 'h h' 'a b' 'c d' 'f f'">
@@ -104,7 +104,7 @@ function render_add(){
     <button onclick="
     let obj={[add_pub.value]:{pub: add_pub.value,name: add_name.value}}
     console.log('f add: ', obj)
-    window.parent.postMessage({gun_pub: obj,soul:'agents/friends'},'https://maygame.xxx');
+    window.parent.postMessage({gun_put: obj,soul:'agents/friends'},'https://maygame.xxx');
     " style="grid-area: f;">Submit</button>
 </div>
     `//fixme: validate
@@ -120,11 +120,11 @@ pub1:0.2,//utility of it to pub1. declared or calculated
 
 }
 let node={data:{},access_level:{},access_fallback_function: {}}
-function test_populate(){
-    let obj={"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw":{pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'}}
+// function test_populate(){
+//     let obj={"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw":{pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'}}
 
-    window.parent.postMessage({gun_put: obj,soul:'agents/friends'},'https://maygame.xxx');
-}
+//     window.parent.postMessage({gun_put: obj,soul:'agents/friends'},'https://maygame.xxx');
+// }
 window.onmessage=(e)=>{
     if(e.data['your_topic_pub']){
                 if(e.data.soul=='agents/friends'){
