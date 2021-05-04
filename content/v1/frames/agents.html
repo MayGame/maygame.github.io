@@ -86,7 +86,7 @@ let node={data:{},access_level:{},access_fallback_function: {}}
 function test_populate(){
     let obj={"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw":{pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'}}
 
-    window.parent.postMessage({gun_put: obj,soul:'agents/friends'},'htps://maygame.xxx');
+    window.parent.postMessage({gun_put: obj,soul:'agents/friends'},'https://maygame.xxx');
 }
 window.onmessage=(e)=>{
     if(e.data['your_topic_pub']){
@@ -102,7 +102,7 @@ window.onmessage=(e)=>{
 let user_id=0;
 function onlogin(pub){
     user_id=pub;
-    window.parent.postMessage({gun_sub: 'agents/friends' },'htps://maygame.xxx');
+    window.parent.postMessage({gun_sub: 'agents/friends' },'https://maygame.xxx');
     }
 </script>
 
