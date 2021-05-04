@@ -84,10 +84,16 @@ pub1:0.2,//utility of it to pub1. declared or calculated
 }
 let node={data:{},access_level:{},access_fallback_function: {}}
 function test_populate(){
-    let obj={}
-    window.parent.postMessage({gun_put: obj,soul:'agents'},'htps://maygame.xxx');
+    let obj={"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw":{pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'}}
+
+    window.parent.postMessage({gun_put: obj,soul:'agents/friends'},'htps://maygame.xxx');
 }
-window.onmessage=(e)=>{if(e.data.user_id){
+window.onmessage=(e)=>{
+    if(e.data['your_topic_pub']){
+                if(e.data.soul=='agents/friends'){
+                    console.log('agents friemds pub: ', e.data['your_topic_pub'])
+                    friends=e.data['your_topic_pub'].e;}}
+    else if(e.data.user_id){
     user_id=e.data.user_id;
             }
             else if(e.data.login){
