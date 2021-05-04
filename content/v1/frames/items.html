@@ -153,7 +153,7 @@ function parent_ask_once(soul){
     window.parent.postMessage(msg, "https://maygame.xxx");
 }
 //#region common part?
-window.onmessage=(e)=>{
+window.onmessage=async (e)=>{
     console.log(e.data);
     if(e.data['your_topic_pub']){
         // console.log('items onmessage bookmark: ',e.data)
