@@ -1,6 +1,7 @@
 <html>
     <body>
-
+<script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
 <script src="../../../js/cdn/ejs.min.js"></script>
 <!-- <script src="js/cdn/ejs.min.js"></script> prod -->
 
@@ -89,6 +90,7 @@ html, body
 }
 </style>
 <script>
+    var sea = Gun.SEA
     var pop_mode='';
 var items={}
 items.template=`
@@ -165,9 +167,13 @@ window.onmessage=(e)=>{
 
         }
         else if(e.data.soul=='items/list'){
-            let a = JSON.parse(e.data['your_topic_pub'].e.substring(3));//fixme: json validation, might break
-            items.list=a.m;
+            let msg = e.data['your_topic_pub'].e
+            let a = JSON.parse(msg.substring(3));//fixme: json validation, might break
+            items.list=a.m;//fixme: verify logic// getting message part of signed message using as unsigned
+            //todo: verify(msg, pub). if true - show whos
             console.log('Got items list: ', e.data);
+            let res = await sea.verify(msg,a.m.issuer);
+            console.log('verified: ', res);
         }
         else if(e.data.soul=='item/add'){
             let data=e.data['your_topic_pub'];
