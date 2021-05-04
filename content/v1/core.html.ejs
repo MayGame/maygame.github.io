@@ -373,7 +373,7 @@ async function force_create_new_user(){
 }
 function gun_filter(obj){//todo (attention marker!) might need those nulls sometimes. 
     //swapping whole objects is a chosen strategy for now
-    if(_.is_Object(obj)){
+    if(_.isObject(obj)){
     let result = {}
     _.keys(obj).forEach(key=>{
         if(obj[key])
