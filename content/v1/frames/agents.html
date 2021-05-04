@@ -102,7 +102,7 @@ function render_add(){
     <label for="add_pub">Pub</label><textarea id="add_pub"></textarea>
     <label for="add_name">Name</label><textarea id="add_name"></textarea>
     <button onclick="
-    let obj={[add_pub.value]:{pub: add_pub.value,name: add_name.value}}
+    let obj={[add_pub.value]:JSON.stringify({pub: add_pub.value,name: add_name.value})};
     console.log('f add: ', obj)
     window.parent.postMessage({gun_put: JSON.stringify(obj), soul:'agents/friends'},'https://maygame.xxx');
     " style="grid-area: f;">Submit</button>
@@ -130,6 +130,7 @@ window.onmessage=(e)=>{
                 if(e.data.soul=='agents/friends'){
                     console.log('agents friends pub: ', e.data['your_topic_pub'])
                     friends=e.data['your_topic_pub'].e;
+                    Object.keys(friends).forEach(friends[key]=JSON.parse(friends[key]));//fixme: fix gun
                     if(tab=='friends')button_friends();
                 }}
     else if(e.data.user_id){
