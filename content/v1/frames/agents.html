@@ -102,12 +102,12 @@ function render_add(){
     <label for="add_pub">Pub</label><textarea id="add_pub"></textarea>
     <label for="add_name">Name</label><textarea id="add_name"></textarea>
     <button onclick="
-    let obj={pub: add_pub.value,name: add_name.value}
+    let obj={[add_pub.value]:{pub: add_pub.value,name: add_name.value}}
     console.log('f add: ', obj)
     window.parent.postMessage({gun_pub: obj,soul:'agents/friends'},'https://maygame.xxx');
     " style="grid-area: f;">Submit</button>
 </div>
-    `
+    `//fixme: validate
     body_.innerHTML=ejs.render(text,{})
     tab='add'
 }
