@@ -72,7 +72,7 @@ function btn_all(){
   
     </table>
     `
-    body_.innerHTML=ejs.render(text,[]);
+    body_.innerHTML=ejs.render(text,all.list);
 }
 let agent = {u: {me:0,//calculated utility
 pub1:0.2,//utility of it to pub1. declared or calculated

@@ -151,11 +151,11 @@ function parent_ask_once(soul){
 window.onmessage=(e)=>{
     console.log(e.data);
     if(e.data['your_topic_pub']){
-        console.log('items onmessage bookmark: ',e.data)
+        // console.log('items onmessage bookmark: ',e.data)
         if(e.data.soul=='map/last_bookmark'){
-            console.log('items processing bookmark');
-            let bm = e.data['your_topic_pub'].e
-            console.log(bm.time)
+            // console.log('items processing bookmark');
+            let bm = e.data['your_topic_pub'].e;
+            // console.log(bm.time);
             let desc=`Gps bookmark. Coordinates, x: ${bm.lat}, y: ${bm.long}, z: ${bm.alt}.`
             items.bookmarks[bm.time]={
                 id: bm.time, img_url: '../resources/Parchment_02.png', description: desc, meta: {bm}}
@@ -170,6 +170,9 @@ window.onmessage=(e)=>{
         else if(e.data.soul=='item/add'){
             let data=e.data['your_topic_pub'];
             console.log('items got item add: ', data);
+//todo: more complex flow. mocking with just adding it for now;
+            window.parent.postMessage({gun_put: JSON.stringify(data),soul: 'items/list'},'https://maygame.xxx');
+
         }
     }
     else if(e.data.login){
