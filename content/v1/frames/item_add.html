@@ -22,15 +22,15 @@
         }
         .footer{
             grid-area: footer;
-            background-color: slategray;
+            background-color: rebeccapurple;
         }
         .body{
             grid-area: body;
-            background-color: slategray;
+            background-color: hotpink;
         }
         .header{
             grid-area: header;
-            background-color: slategray;
+            background-color: burlywood;
         }
         </style>
         <div class="container" style="background-color: silver; height: 100vh; width: 100vw;">
@@ -45,7 +45,8 @@
                 >get</button>
                 <br><label for="item_description">Description: </label>
                 <textarea id="item_description">Can be exchanged for a small wish granted.</textarea><br>
-                <label for="img_url">Icon url</label> <input type="text" id='img_url' value="../resources/tickets-ticket-pngrepo-com.png" onchange="img_preview.src=this.value;"><img id="img_preview" src="../resources/tickets-ticket-pngrepo-com.png"><br>
+                <label for="img_url">Icon url</label><input type="text" id='img_url' value="../resources/tickets-ticket-pngrepo-com.png" onchange="img_preview.src=this.value;">
+                <img id="img_preview" src="../resources/tickets-ticket-pngrepo-com.png" style="width:100px;height:100px;"><br>
                 <label for="issue_to">To:</label><input type="text" placeholder="issued to" list="issue_to_list" id="issue_to" onchange="
                 for(i=0;i<agents.length;i++)if(agents[i].pub==this.value)
                 friend_name.value=agents[i].name;
@@ -55,7 +56,7 @@
                 </datalist><br>
                 <input type="text" id='friend_name' disabled>
             </div>
-            <button class="footer" onclick="item_add()" style="border-radius: 8px;">Create</button>
+            <button class="footer" onclick="item_add()" style="border-radius: 2em; background-color: darkslategray;">Create</button>
         </div>
         <script>
             var user_id=0;
@@ -89,7 +90,7 @@
             let timestamp = Date.now();
             result.timestamp=timestamp;
             result.meta=item_meta;
-            result.img_url=img_url.value
+            result.img_url=img_url.value;//todo/fixme: resize + to base64
             console.log(result)
             window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
             // window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
@@ -122,6 +123,6 @@ function parent_sub_on(soul){
 var my_subs={};
 var item_meta={};
         </script>
-        <button onclick="onlogin('lEUnB6jIz3CJpa_oNFJeSDs5wkBHwb4cl0WtE6TV3K0.taG9Srbil-wUx9LQUoZ8hDhiP6Eia39UOy9lehZesmg')">dev</button>
+        <!-- <button onclick="onlogin('lEUnB6jIz3CJpa_oNFJeSDs5wkBHwb4cl0WtE6TV3K0.taG9Srbil-wUx9LQUoZ8hDhiP6Eia39UOy9lehZesmg')">dev</button> -->
     </body>
 </html>
