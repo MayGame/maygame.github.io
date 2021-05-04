@@ -45,7 +45,7 @@
                 >get</button>
                 <br><label for="item_description">Description: </label>
                 <textarea id="item_description">Can be exchanged for a small wish granted.</textarea><br>
-                <label for="img_url">Icon url</label> <input type="text" id='img_url'><br>
+                <label for="img_url">Icon url</label> <input type="text" id='img_url' value="../resources/tickets-ticket-pngrepo-com.png" onchange="img_preview.src=this.value;"><img id="img_preview" src="../resources/tickets-ticket-pngrepo-com.png"><br>
                 <label for="issue_to">To:</label><input type="text" placeholder="issued to" list="issue_to_list" id="issue_to" onchange="
                 for(i=0;i<agents.length;i++)if(agents[i].pub==this.value)
                 friend_name.value=agents[i].name;
