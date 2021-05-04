@@ -87,7 +87,17 @@ function test_populate(){
     let obj={}
     window.parent.postMessage({gun_put: obj,soul:'agents'},'htps://maygame.xxx');
 }
-
+window.onmessage=(e)=>{if(e.data.user_id){
+    user_id=e.data.user_id;
+            }
+            else if(e.data.login){
+        onlogin(e.data.login);
+    }}
+let user_id=0;
+function onlogin(pub){
+    user_id=pub;
+    window.parent.postMessage({gun_sub: 'agents/friends' },'htps://maygame.xxx');
+    }
 </script>
 
 </body>

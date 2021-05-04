@@ -1,6 +1,10 @@
 <html>
+    <head>
+    <script src="../../../js/cdn/ejs.min.js"></script>
+
+    </head>
     <body>
-        <style>
+    <style>
         *{
             box-sizing: border-box;
             padding: 0;
@@ -40,19 +44,37 @@
                 "
                 >get</button>
                 <br><label for="item_description">Description: </label>
-                <textarea id="item_description">Can be exchanged for a small wish granted.</textarea>
+                <textarea id="item_description">Can be exchanged for a small wish granted.</textarea><br>
+                <label for="issue_to">To:</label><input type="text" placeholder="issued to" list="issue_to_list" id="issue_to" onchange="
+                for(i=0;i<agents.length;i++)if(agents[i].pub==this.value)
+                friend_name.value=agents[i].name;
+
+                ">
+                <datalist id="issue_to_list">
+                </datalist><br>
+                <input type="text" id='friend_name' disabled>
             </div>
             <button class="footer" onclick="item_add()" style="border-radius: 8px;">Create</button>
         </div>
         <script>
             var user_id=0;
-            window.onmessage=(e)=>{if(e.data.user_id){
+            window.onmessage=(e)=>{
+            if(e.data['your_topic_pub']){
+                if(e.data.soul=='item_add/last_meta'){
+                    console.log('i_add pub i_meta: ', e.data['your_topic_pub'])
+                    item_meta=e.data['your_topic_pub'].e;}
+                else if(e.data.soul=='agents/friends'){
+                    console.log('i_add friends: ', e.data['your_topic_pub']);
+                    agents=e.data['your_topic_pub'].e;
+                }
+            }
+            else if(e.data.user_id){
             user_id=e.data.user_id;
-            console.log("item_add",e)
+            user_pub.value=user_id;
             }
             else if(e.data.login){
         onlogin(e.data.login);
-    }
+            }
             else console.log('item_add got weird msg: ', e)
         }
 
@@ -62,20 +84,42 @@
             result.issuer=user_id;
             result.description = item_description.value;
             result.name=item_name.value;
+            result.for=issue_to.value;
             let timestamp = Date.now();
             result.timestamp=timestamp;
+            result.meta=item_meta;
             console.log(result)
-            window.parent.postMessage({gun_put: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
+            window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
             // window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
         } else console.log('Need user id first.')
     }
-    window.onmessage=(e)=>{
 
-}
 function onlogin(pub){
     user_id=pub;
+    let template=
+`<optgroup label="Friends">
+    <% agents.forEach(agent=> { %>
+<option value='<%= agent.pub %>'></option>
+<% }) %>
+</optgroup>`
+    issue_to_list.innerHTML=ejs.render(template,agents);
+    parent_sub_on('item_add/last_meta');
+    parent_sub_on('agents/friends');
 
 }
+var agents=[
+    {pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'},
+    {pub:"OLIjWXUOdoYV6ydVqTFfun_Bf2kWMKG0jp1FicNYZZY.qJkP-ZAGiMGyvEm1jk0N0Mmg9CyyueKbHDTz2gw-_zE",address:"https://vine-mature-morocco.glitch.me/gun",name: 'OL'}
+]
+function parent_sub_on(soul){
+    let msg={gun_sub: soul};
+    my_subs[soul]=true;
+    window.parent.postMessage(msg, "https://maygame.xxx");
+    //extra code to remember it on this page
+}
+var my_subs={};
+var item_meta={};
         </script>
+        <button onclick="onlogin('lEUnB6jIz3CJpa_oNFJeSDs5wkBHwb4cl0WtE6TV3K0.taG9Srbil-wUx9LQUoZ8hDhiP6Eia39UOy9lehZesmg')">dev</button>
     </body>
 </html>
