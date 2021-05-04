@@ -60,6 +60,7 @@
         </div>
         <script>
             var user_id=0;
+            var friends;
             window.onmessage=(e)=>{
             if(e.data['your_topic_pub']){
                 if(e.data.soul=='item_add/last_meta'){
@@ -67,7 +68,12 @@
                     item_meta=e.data['your_topic_pub'].e;}
                 else if(e.data.soul=='agents/friends'){
                     console.log('i_add friends: ', e.data['your_topic_pub']);
-                    agents=e.data['your_topic_pub'].e;
+                    // agents=e.data['your_topic_pub'].e;
+                    friends=e.data['your_topic_pub'].e;
+                    Object.keys(friends).forEach((key)=>{friends[key]=JSON.parse(friends[key])});//fixme: fix gun
+                    // if(tab=='friends')button_friends();
+                    agents=friends;
+                    update_f_list();
                 }
             }
             else if(e.data.user_id){
@@ -79,7 +85,15 @@
             }
             else console.log('item_add got weird msg: ', e)
         }
-
+function update_f_list(){
+    let template=
+`<optgroup label="Friends">
+<% Object.keys(friends).forEach(key=> { %>
+    <option value='<%= friends[key].pub %>'></option>
+<% }) %>
+</optgroup>`
+    issue_to_list.innerHTML=ejs.render(template,agents);
+}
         function item_add(){
             if(user_id){
             var result = {}
@@ -92,7 +106,7 @@
             result.meta=item_meta;
             result.img_url=img_url.value;//todo/fixme: resize + to base64
             console.log(result)
-            window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
+            window.parent.postMessage({sign_add: JSON.stringify(result),soul:'items/list'},'https://maygame.xxx');
             // window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
         } else console.log('Need user id first.')
     }
@@ -110,10 +124,11 @@ function onlogin(pub){
     parent_sub_on('agents/friends');
 
 }
-var agents=[
-    {pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'},
-    {pub:"OLIjWXUOdoYV6ydVqTFfun_Bf2kWMKG0jp1FicNYZZY.qJkP-ZAGiMGyvEm1jk0N0Mmg9CyyueKbHDTz2gw-_zE",address:"https://vine-mature-morocco.glitch.me/gun",name: 'OL'}
-]
+var agents;
+// agents=[
+//     {pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'},
+//     {pub:"OLIjWXUOdoYV6ydVqTFfun_Bf2kWMKG0jp1FicNYZZY.qJkP-ZAGiMGyvEm1jk0N0Mmg9CyyueKbHDTz2gw-_zE",address:"https://vine-mature-morocco.glitch.me/gun",name: 'OL'}
+// ]
 function parent_sub_on(soul){
     let msg={gun_sub: soul};
     my_subs[soul]=true;
