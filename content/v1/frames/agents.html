@@ -102,7 +102,7 @@ function render_add(){
     <label for="add_pub">Pub</label><textarea id="add_pub"></textarea>
     <label for="add_name">Name</label><textarea id="add_name"></textarea>
     <button onclick="
-    let obj={[add_pub.value]:JSON.stringify({pub: add_pub.value,name: add_name.value})};
+    let obj={[add_pub.value.trim()]:JSON.stringify({pub: add_pub.value.trim(),name: add_name.value.trim()})};
     console.log('f add: ', obj)
     window.parent.postMessage({gun_put: JSON.stringify(obj), soul:'agents/friends'},'https://maygame.xxx');
     " style="grid-area: f;">Submit</button>
