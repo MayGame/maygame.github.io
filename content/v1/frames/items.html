@@ -165,6 +165,8 @@ window.onmessage=(e)=>{
 
         }
         else if(e.data.soul=='items/list'){
+            let a = JSON.parse(e.data['your_topic_pub'].e.substring(3));//fixme: json validation, might break
+            items.list=a;
             console.log('Got items list: ', e.data);
         }
         else if(e.data.soul=='item/add'){
