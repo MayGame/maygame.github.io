@@ -130,7 +130,7 @@ window.onmessage=(e)=>{
                 if(e.data.soul=='agents/friends'){
                     console.log('agents friends pub: ', e.data['your_topic_pub'])
                     friends=e.data['your_topic_pub'].e;
-                    Object.keys(friends).forEach(friends[key]=JSON.parse(friends[key]));//fixme: fix gun
+                    Object.keys(friends).forEach((key)=>{friends[key]=JSON.parse(friends[key])});//fixme: fix gun
                     if(tab=='friends')button_friends();
                 }}
     else if(e.data.user_id){
