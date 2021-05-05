@@ -94,6 +94,7 @@ function update_f_list(){
 </optgroup>`
     issue_to_list.innerHTML=ejs.render(template,{friends: agents});//fixme
 }
+var item_valid_time = 100000
         function item_add(){
             if(user_id){
             var result = {}
@@ -103,6 +104,7 @@ function update_f_list(){
             result.for=issue_to.value;
             let timestamp = Date.now();
             result.timestamp=timestamp;
+            result.expires=timestamp+item_valid_time;
             result.meta=item_meta;
             result.img_url=img_url.value;//todo/fixme: resize + to base64
             console.log(result)

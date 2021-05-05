@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>MayGame</title>
+  <meta name="description" content="No description">
+  <meta name="author" content="Some dude">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- #region -->
+<script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js" integrity="sha512-ZuOjyqq409+q6uc49UiBF3fTeyRyP8Qs0Jf/7FxH5LfhqBMzrR5cwbpDA4BgzSo884w6q/+oNdIeHenOqhISGw==" crossorigin="anonymous"></script>
+  <script id="wsjs_innerscript" src="js/core/wsjs.js"></script>
+  <link id="css_styles_core" rel="stylesheet" href="css/styles.css" />
+</head>
+<body >
+<style>
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+iframe{
+        /* position: fixed; */
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    pointer-events: all;
+}
+        /* html 
+{
+ overflow: auto;
+} */
+ 
+html, body, iframe 
+{
+    height: 100vh; 
+    width: 100vw;
+    border: none;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto minmax(auto, 10vh) max-content;
+    grid-template-columns: 1fr 1fr auto;
+    grid-template-areas: 
+    "a b map"
+    "footer footer footer_b"
+    "menu_bar menu_bar menu_bar_right"
+    ;
+    margin-left: calc(-50vw + 50%);
+    }
+.header{
+    grid-area: header;
+    background-color: pink;
+}
+.menu_bar{
+    grid-area: menu_bar;
+}
+.menu_bar_right{
+    grid-area: menu_bar_right;
+}
+.a{
+    grid-area: a;
+    /* background-color: lightcoral; */
+}
+.b{
+    grid-area: b;
+    /* background-color: violet; */
+}
+.map{
+    grid-area: map;
+    /* background-color: palevioletred; */
+}
+.footer{
+    grid-area: footer;
+    /* background-color: pink; */
+}
+.footer_b{
+    /* background-color: rgb(172, 77, 172); */
+    grid-area: footer_b;
+}
+</style>
+<div class="layer" id="top_layer">
+    <div class="container" style="position: absolute; z-index: 2147483212; bottom: 0;" >
+        <div class="menu_bar">
+            <input type="text" id="text_pair" placeholder="paste your key here or log in with default">
+            <br>
+            <button style="background-color: grey; border-radius: 8px;" 
+            onclick="toggle(top_layer); toggle(main_layer); default_sign_in();">Quick sign in</button>
+            <button onclick="toggle(top_layer); toggle(main_layer); force_create_new_user();">Force new user</button>
+        </div>
+    </div>
+</div>
+<div class="layer" id="relm_layer" style="z-index: 0;">
+<iframe src="https://staging.relm.us/town" style="height: 100vh; width: 100vw;"></iframe>
+</div>
+<div class="layer" id="main_layer" style="display: none;">
+<div class="container">
+<div id="menu" class="menu_bar" style="position: absolute; z-index: 2147483210; bottom: 0; pointer-events: all;">
+    <!-- <button onclick="default_sign_in();" style="color: seagreen;">Quick sign in</button> -->
+    <!-- <br> -->
+    <button onclick="toggle(top_layer); toggle(main_layer);">Login menu</button>
+    <button onclick="toggle(quests_layer)" disabled>Quests</button>
+    <button onclick="toggle(quests_add_layer)" disabled>Quests Add/Edit</button>
+    <button onclick="toggle(profile_layer)" >Profile</button>
+    <button onclick="toggle(map_layer)">Map</button>
+    <button onclick="toggle(relm_layer)">Relm</button>
+    <!-- <button onclick="toggle_pevents(frame_hud)">Hud</button> -->
+    <button onclick="toggle(curr_layer)" style="background-color: mediumpurple;" disabled>Currencies</button>
+    <button onclick="toggle(agents_layer)" style="background-color: mediumpurple;">AGents</button>
+    <button onclick="toggle(items_layer)" style="background-color: mediumpurple;">Items</button>
+    <button onclick="toggle(skills_layer)" disabled style="background-color: mediumpurple;">Skills</button>
+    <!-- <button onclick="toggle(test_layer)" style="background-color: mediumturquoise;">Test</button> -->
+    <!-- <input type="text" value=""> -->
+    <!-- <button onclick="window.frames.test.postMessage('Lunar blessings to you all!','https://maygame.xxx')">Send test message</button> -->
+    <!-- <button onclick="gun.get('test').get('stuff').put({'hud_test':'from_core'});">GUN TEST</button> -->
+    <!-- <div id="message_div"></div> -->
+</div>
+<div class="menu_bar_right"><button onclick="toggle(hotbar)" style="float: right;">*</button></div>
+<!-- #region -->
+<div id="quests_layer" class="layer_b b" style="display: none; ">
+    <!-- there's no styling for the layer_b. temporaly disabling 'layer' this way -->
+    <iframe scrolling="auto"name="quests" src="<%= quests_url %>" id="frame_quests" style="border: 0; width: 100%; height: 100%"></iframe>
+</div>
+<div id="quests_add_layer" class="layer_b b" style="display: none; ">
+    <iframe scrolling="auto"name="quests_add" src="<%= quests_add_url %>" id="frame_quests_add" style="border: 0; width: 100%; height: 100%"></iframe>
+</div>
+<div id="skills_layer" class="skills b" style="display: none; ">
+    <iframe scrolling="auto"name="skills" src="<%= skills_url %>" id="frame_skills" style="border: 0; width: 100%; height: 100%"></iframe>
+</div>
+<!-- <div id="hud_layer" class="layer_b" style="z-index: -5;">
+    <iframe scrolling="auto"name="hud" src="<%= hud_url %>" id="frame_hud" style="border: 0; width: 100%; height: 100%; z-index: -5;"></iframe>
+</div> -->
+<div id="map_layer" class="layer_b map" style="display: none; right: 0;">
+    <iframe scrolling="auto"name="map" src="<%= map_url %>" id="frame_map" style="border: 0; width: 160px; height: 100%"></iframe>
+</div>
+<div id="profile_layer" class="layer_b b" style="display: none;">
+    <iframe scrolling="auto"name="profile" src="<%= profile_url %>" id="frame_profile" style="border: 0; width: 100%; height: 100%"></iframe>
+</div>
+<div id="items_layer" class="layer_b a" style="display: none;">
+    <iframe scrolling="auto"name="items" src="<%= items_url %>" id="frame_items" style="border: 0; width: 100%; height: 100%"></iframe>
+</div>
+<div id="agents_layer" class=" a" style="display: none;">
+    <iframe scrolling="auto"name="agents" src="<%= agents_url %>" id="frame_agents" style="border: 0; width: 100%; height: 100%"></iframe>
+</div>
+<div id="item_add" class="b " style="display: none;">
+    <iframe scrolling="auto"name="item_add" src="<%= item_add_url %>" id="frame_item_add" style="border: 0; width: 100%; height: 100%"></iframe>
+</div>
+<div id="curr_layer" class="layer_b b" style="display: none;">
+<div style="
+    border: 5px solid royalblue; background-color: midnightblue;
+    top: 0; left: 0; right: 0; bottom: 0;
+    height: 100%; width: 100%;"
+    >
+    <iframe scrolling="auto"name="currencies" src="<%= currency_url %>" id="frame_profile" style="border: 0; width: 100%; height: 100%"></iframe>
+</div></div>
+<div class="footer">
+    <!-- <p>some footer stuff</p> -->
+</div>
+<div class="footer_b" style="display: none;" id="hotbar">
+    <button>hotbar key 1</button>
+    <button>hotbar key 2</button>
+</div>
+</div>
+</div>
+<!-- <div id="test_layer" class="layer_b" style="display: none;">
+    <iframe scrolling="auto"name="test" src="frames/test" id="frame_test" style="border: 0; width: 100%; height: 100%"></iframe>
+</div> -->
+<!-- #endregion -->
+<script defer id="js_init">
+    (()=>{
+        let newFid="quests_add_new_fid";
+        let qed=document.getElementById('frame_quests_add');
+        qed.src=qed.src.split('?')[0]+`?fid=${newFid}`;
+    })();
+    /**
+     * todo: memorize frames domains and check em or drop this feature.
+     * Fixme: It works only with main domain like this.
+     */
+</script>
+<script>
+    var peers=["<%= peers %>"];//exactly one peer for now.
+    var gun = Gun({peers:peers});
+    var sea = Gun.SEA;
+    const store_dir="nouveau_dossier"
+    var user = gun.user().recall({ sessionStorage: true }, () => {
+      logIn()
+    });
+    var keyring = {};//todo
+    
+    gun.on('auth', () => {
+        logIn();
+    })
+    function frame_pub(frame, e, topic){
+        frame.postMessage({'your_topic_pub':{e},'soul': topic});
+        console.log('from frame pub: ',frame, e)
+    }
+    var user_pub;
+    window.onmessage=async(e)=>{
+        // if(e.data.gun_put_sub){
+        //     user.get(store_dir).get(e.data.soul).get(e.data.subdir).put(JSON.parse(e.data.gun_put_sub))}
+        // else
+        // if(e.data.frame_click){
+        //     console.log('click on', e.source, e.data)
+        // }
+        // else
+        if(e.data.open_window){
+            toggle(document.getElementById(e.data.open_window));
+        }
+        else
+        if(e.data.gun_put){
+            // console.log("gun_put: ", e.data.gun_put);
+            if(validate_access(e.source,e.data.soul))//todo: memoize
+            user.get(store_dir).get(e.data.soul).put(JSON.parse(e.data.gun_put))
+        }
+        else
+        // if(e.data.gundelete){
+        //     if(validate_access(e.source,e.data.gundelete))//todo: memoize
+        //     {
+        //     console.log('gundelete: ', e.data);
+        //     user.get(store_dir).get(e.data.gundelete).put(null);
+        //     }
+        // }
+        // else Doesn't work anyways.
+        if(e.data.sign_add){
+            if(validate_access(e.source,e.data.soul))//todo: memoize
+            {
+                let data= await sea.sign(JSON.parse(e.data.sign_add),user._.sea)
+                console.log('signed: ',data)
+                user.get(store_dir).get(e.data.soul).put(data)
+            }
+        }
+        else
+        if(e.data.gun_sub)
+        {
+            let frame_subscriber = e.source;
+            let soul = e.data.gun_sub;
+            if(!validate_access(frame_subscriber,soul))
+            return false;
+            console.log(frame_subscriber, "subscribed to ", soul, "topic")
+            user.get(store_dir).get(soul).on((e)=>{//fixme? e persists as e in storage objects :-(
+                frame_pub(frame_subscriber,gun_filter(e), soul);
+                // frame_subscriber.postMessage({'your_topic_pub':{e}});
+                // console.log('items/bookmarks fires pub: ',e)
+            },{change: true});
+        }else if(e.data.get_id){
+            if(e.data.get_id=='user')
+            e.source.postMessage({user_id: user.is.pub})
+        }
+        else if(e.data.gun_map_once){
+            let frame = e.source;
+            let soul = e.data.gun_map_once;
+            if(!validate_access(frame,soul))
+            return false;
+            var result=[]
+            await user.get(store_dir).get(soul).map().once((e)=>
+            {
+                result.push(e);
+            })
+            frame.postMessage({data: result,map_once_reply: soul});
+        }
+        else
+        if(e.data.frame_resize){
+            let fname = e.source.name;
+            // console.log('resize',fname,e.data.frame_resize,document.getElementsByName(fname)[0].parentElement.style)
+            if(e.data.frame_resize.width)
+            document.getElementsByName(fname)[0].style.width=e.data.frame_resize.width;
+            if(e.data.frame_resize.height)
+            document.getElementsByName(fname)[0].style.height=e.data.frame_resize.height;
+        }
+        // if(e.data.gunrelay){
+        //     let translated=JSON.parse(e.data.gunrelay)
+        //     // translated?._.#=user.is+translated._['#']
+        //     console.log('translated', translated)
+        //     gun._.on('in',JSON.parse(e.data.gunrelay));
+        //     console.log(e.data.gunrelay);
+        // }
+        // message_div.innerText=e.data; console.log(e.data)
+        else
+        if(e.data.topic=='pair_request'){
+            if(pairs[e.source.name])
+            e.source.postMessage({'topic':'your_pair','pair':pairs[e.source.name]})
+            else(console.log('No pair found for '+e.source.name))
+        }
+        // else
+        // if(e.data.topic=='data_request'){
+        //     console.log('data request:');
+        //     console.log(e.data);
+        //     console.log('from:');
+        //     console.log(e.source);
+        //     let msgSource=e.source;//todo:remember
+        //     msgSource.postMessage({'rid':e.data.rid,'body':'Mock response','topic':'req_response'});
+        // }
+
+    }
+    function validate_access(source,soul){
+        let fname = source.name;//fixme, in case it's not an iframe
+        if(pubres[soul]){console.log('access to', soul, "granted to frame: ", fname); return true;}
+        //starts with for directory access?
+        else if(access_list[soul]?.frames.includes(fname)){
+            {console.log('access to', soul, "granted to frame: ", fname, "in white list"); return true;}
+        }
+        else
+        {console.log('access to', soul, "denied to frame: ", source.name); return false;};
+        //todo: better access management
+        //wip
+        //fixme
+    }
+   let pubres={'map/gps_map_click':true,
+    'map/last_bookmark':true,
+    'map/show':true,
+    'items/edit':true,
+    'items/list':true,
+}
+    let access_levels={
+
+    }
+    let access_list={
+        'map/gps_my_pos':{frames:['map',//frame name, not an id
+    'items']},
+    'item/add':{frames:['items','item_add']},
+    'agents':{frames:[agents]},
+    'agents/friends':{frames:['agents','item_add']},
+    'item_add/last_meta':{frames:['item_add']},
+    // 'items/list':{frames:['item_add', 'items']}
+    }
+    function add_agent(){
+        user.get('nouveau_dossier').get('agents').put()
+    }
+    //todo: manage access in runtime, validation access deny fallback to request
+    const default_ti=0.0;//trust index for anyone
+    const default_access_level=1.0;//ti required to get access
+    //#region Sign in
+async function default_sign_in(){
+    let text_pair = document.getElementById('text_pair').value;
+    let pair = localStorage.getItem('user_pair');
+    if(text_pair){console.log('Logging in with a pasted key', pair);
+    pair=JSON.parse(text_pair);//fixme: validation
+    }
+    else{
+    if(!pair){console.log('No pair stored. Creating.');
+    pair = await sea.pair();
+    localStorage.setItem('user_pair', JSON.stringify(pair));
+    console.log('Logged in as a new user.', pair);
+    }
+    else { pair = JSON.parse(pair); console.log('logged in using saved key: ',pair);}}
+    user.auth(pair);
+}
+async function force_create_new_user(){
+    let pair = await sea.pair();
+    localStorage.setItem('user_pair', JSON.stringify(pair));
+    user.auth(pair);
+}
+    function logIn(){console.info('Logged in as ', user.is);
+    user_pub=user.is.pub;
+    let userN= user.get(store_dir);
+    var frames = window.frames; // or // var frames = window.parent.frames;
+
+    // ---------------------------------
+    let content = `${user_pub}@${peers[0]}`;
+    frames['profile'].postMessage({'innerHTML':{id:'iam', content: content}},'https://maygame.xxx')
+    // ---------------------------------
+    // userN.get('items/bookmarks').on((e)=>{console.log('core bookmarks gunfire',e)},{change: true});
+    userN.get('map/last_bookmark').on((msg)=>{console.log('core map bm: ', _.omit(msg,'_'))});
+    userN.get('map/show').on((msg)=>{console.log('core map show gunfire ', _.omit(msg,'_'))});
+    userN.get('map/gps_my_pos').on((crd)=>{console.log('core got user/gps pos, ',_.omit(crd,'_'))});//tmp, fixme
+    userN.get('map/gps_map_click').on((crd)=>{console.log('core got user/map_click, ',_.omit(crd,'_'))});//rmmmber, then off on relog
+    for (var i = 0; i < frames.length; i++) {
+        frames[i].postMessage({login: user.is.pub}, 'https://maygame.xxx');//todo track frame domains
+    }
+}
+function gun_filter(obj){//todo (attention marker!) might need those nulls sometimes. 
+    //swapping whole objects is a chosen strategy for now
+    if(_.isObject(obj)){
+    let result = {}
+    _.keys(obj).forEach(key=>{
+        if(obj[key])
+            if(key != '_')
+                result[key]=obj[key];
+    })
+    return result;
+} else return obj;}
+
+    async function create_key() {
+temp_key =  await sea.pair();
+document.getElementById("current_key").value=JSON.stringify(temp_key);
+}
+</script> 
+<script>
+    function toggle_pevents(target){
+        if(target.style.pointerEvents=='none')
+        target.style.pointerEvents='all'
+        else target.style.pointerEvents = 'none'
+    }
+</script>
+<script>
+</script>
+</body>
+</html>

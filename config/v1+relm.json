@@ -1,0 +1,14 @@
+{"core":{"url":"content/v1/core.html.ejs"}, 
+"replace":{
+    "quests_url":"content/v1/frames/quests.html",
+    "quests_add_url":"content/v1/frames/quests_add.html",
+    "profile_url":"content/v1/frames/profile.html",
+    "hud_url":"content/v1/frames/hud.html",
+    "currency_url":"content/v1/frames/currencies.html",
+    "items_url":"content/v1/frames/items.html",
+    "skills_url":"content/v1/frames/skills.html",
+    "item_add_url":"content/v1/frames/item_add.html",
+    "map_url":"content/v1/frames/map.html",
+    "agents_url":"content/v1/frames/agents.html",
+    "peers":"https://vine-mature-morocco.glitch.me/gun"
+}}
