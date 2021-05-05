@@ -87,7 +87,7 @@ fetch('').then((response)=>{response.text().then((e)=>console.log(e))});
 <br>
 <!-- Content security policy stuff: todo -->
 <label for="config_url">url to fetch your config from</label>
-<input type="text" value="config/v1+relm.json" id="config_url">
+<input type="text" value="config/v1.json" id="config_url">
 <button onclick="
 fetch_config(config_url.value)
 ">Load config file</button><br>
