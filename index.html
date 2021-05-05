@@ -34,12 +34,42 @@
 <a style="position: fixed; z-index: 200000; display: block; top: 0; right: 0; float: right;" id="device_width"></a>
 <button style="position: fixed; z-index: 200000; display: block; top: 0; right: 0; float: right;"
  onclick="if(stuff.style.display=='block')stuff.style.display='none';else stuff.style.display='block';">Stuff</button>
-
+<div id="version_hint" style="background-color: slategray; position: absolute; display: none; height: 20vh; width: 90vw; right: 50; left: 50; bottom: 0;">
+<p>Page is generated from eJs template, based on Json config. <a href="https://github.com/MayGame/maygame.github.io/blob/mistress/config/v1.json">example for v1</a></p>
+<p>You can edit config on the client before applying it</p>
+<p>Check 'Stuff' for customization (May be changed)</p>
+<p>this very bottom menu does nothing for now</p>
+<p>Default behavior: ...</p>
+</div>
 <div class="container">
 <button class="big_button" style="background-color: #bb00bb; text-overflow: ellipsis; white-space: nowrap; font-size: 1.7rem;" onclick="t2p();">Tap a few times to
   play</button>
   <!-- fixme -->
-<p class="footer"><a href="https://maygame.xxx/default">Load sample</a></p>
+<p class="footer"><button onclick="if(version_hint.style.display=='block')version_hint.style.display='none';else version_hint.style.display='block';">?</button><label for="version_select" >Version to load:</label>
+  <select id="version_select" onchange="v_select();">
+  <option value="v1">v1</option>
+  <option value="vr">VR (WIP)</option>
+  <option value="ar">AR (WIP)</option>
+  <option value="custom">custom</option>
+  <option value="first_dev">First dev version</option>
+</select>
+<a id="config_summary"></a>
+</p>
+<script>
+var version;
+function v_select(){
+  version=version_select.value;
+  let text =`<a>Summary: ${version}</a> `;
+  if(version=='first_dev')
+  text+=` <a href="https://maygame.xxx/default">Load sample</a>`;
+  else if(version=='custom'){
+  text+=`<input type="text" placeholder="your config url"><button>cfg</button>`
+  }
+  config_summary.innerHTML=text;
+
+}
+v_select();
+</script>
 </div>
 <div id="stuff" style="background-color: lightcoral; position: absolute; display: none; height: 100vh; width: 100vw; z-index: 300; top: 0;">
 <button onclick="
