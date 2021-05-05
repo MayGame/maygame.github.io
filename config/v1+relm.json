@@ -1,4 +1,4 @@
-{"core":{"url":"content/v1/core.html.ejs"}, 
+{"core":{"url":"content/v1/core+relm.html.ejs"}, 
 "replace":{
     "quests_url":"content/v1/frames/quests.html",
     "quests_add_url":"content/v1/frames/quests_add.html",
