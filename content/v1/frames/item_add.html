@@ -107,6 +107,7 @@ var item_valid_time = 100000
             result.expires=timestamp+item_valid_time;
             result.meta=item_meta;
             result.img_url=img_url.value;//todo/fixme: resize + to base64
+            result.state_sot='fixme';//source of truth. one that confirms the actual state of an object
             console.log(result)
             window.parent.postMessage({sign_add: JSON.stringify(result),soul:'items/list'},'https://maygame.xxx');
             // window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');

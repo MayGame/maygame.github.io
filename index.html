@@ -55,7 +55,7 @@
   <option value="custom">custom</option>
   <option value="first_dev">First dev version</option>
 </select>
-<a id="config_summary"></a>
+<a id="config_summary"></a><label for="new_tab_check">Open in a new tab</label><input type="checkbox" id="new_tab_check">
 </p>
 <script>
 var version;
@@ -189,7 +189,10 @@ btn_to_local.disabled=!btn_to_local.disabled
    if(!dd)do_default;//
    else if(dd=='cached_page'){
     let url = localStorage.getItem('cached_url')||'core_sample.html'
+    if(new_tab_check.checked)
     window.open(url, '_blank');
+    else
+    window.open(url);
    }
    else if(dd==''){
 
