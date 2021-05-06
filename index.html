@@ -223,7 +223,11 @@ btn_to_local.disabled=!btn_to_local.disabled
         //#endregion
         //cache result, url = cached core link, if no cached version already
         localStorage.setItem('default_do','cached_page');
+        if(new_tab_check.checked)
         window.open(url, '_blank');
+        else
+        location.href=url;
+        // window.open(url, '_blank');
         })
       })    
     } else {}}
