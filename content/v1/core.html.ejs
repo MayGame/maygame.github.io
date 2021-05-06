@@ -91,8 +91,7 @@ html, body, iframe
 <div class="layer" id="bg_layer">
     <iframe src="<%= background_url %>" allow="fullscreen; xr-spatial-tracking"></iframe>
 </div>
-<div class="layer" id="top_layer">
-    <div class="container" style="position: absolute; z-index: 2147483212; bottom: 0;" >
+    <div class="layer container" id="top_layer" style="position: absolute; z-index: 2147483212; bottom: 0;" >
         <div class="menu_bar">
             <input type="text" id="text_pair" placeholder="paste your key here or log in with default">
             <br>
@@ -100,7 +99,6 @@ html, body, iframe
             onclick="toggle(top_layer); toggle(main_layer); default_sign_in();">Quick sign in</button>
             <button onclick="toggle(top_layer); toggle(main_layer); force_create_new_user();">Force new user</button>
         </div>
-    </div>
 </div>
 <div class="layer" id="main_layer" style="display: none;">
 <div class="container">
