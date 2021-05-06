@@ -11,24 +11,29 @@ var hide = function (elem) {
 	elem.style.display = 'none';
 };
 var toggled = [];
-
 // Toggle element visibility
 var toggle = function (elem) {
-
-	// If the element is visible, hide it
-	if (window.getComputedStyle(elem).display === 'flex') {
-		hide(elem);
+	let old_style=window.getComputedStyle(elem).display 
+	if(old_style != 'none')
+	{
+		elem.setAttribute('data-defdisp',old_style);
+		elem.style.display='none';
 		const index=toggled.indexOf(elem)
 		if(index > -1){
 			toggled.splice(index, 1);
 		}
 		return;
 	}
-
-	// Otherwise, show it
-	show(elem);
+	else {elem.style.display=elem.getAttribute('data-defdisp');
 	toggled.push(elem);
-
+	}
+	// // If the element is visible, hide it
+	// if (window.getComputedStyle(elem).display === 'flex') {
+	// 	hide(elem);
+	// }
+	// // Otherwise, show it
+	// show(elem);
+	// toggled.push(elem);
 };
 function toggle2(el1, el2) //convenience wrapper
 {
