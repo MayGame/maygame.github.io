@@ -203,6 +203,8 @@ btn_to_local.disabled=!btn_to_local.disabled
   // }
  async function do_default(){
     //#region second login 
+    var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+    if(isSafari)document.body.style.backgroundColor='red';
     if(localStorage.getItem('saved_cfg')){
       config = JSON.parse(localStorage.getItem('saved_cfg'));
       console.log('config loaded:')
