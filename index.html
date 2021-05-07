@@ -32,12 +32,10 @@
 }
 </style>
 <div id="webkit_hint" style="display: none; position: fixed; width: 100vw; background-color: deeppink; height: 100vh; font-size: 1.2em;">
-  <h1>Most of the features won't work on IOS.</h1>
-  <h2>Get a better device, or use another client.</h2>
-  <h2>(there is none so far).</h2>
+  <h1>Some features might not work on IOS.</h1>
   <div style="display: grid; grid-template-columns: 1fr 1fr;">
     <button style="height: 100%; font-size: 2em;" onclick="if(lastCached)document.documentElement.innerHTML=lastCached;
-    ">Try it anyways!</button><button style="height: 100%; font-size: 2em;" onclick="webkit_hint.style.display='none';">Back.</button>
+    ">Proceed</button><button style="height: 100%; font-size: 2em;" onclick="webkit_hint.style.display='none';">Back.</button>
     </div>
 </div>
 <a style="position: fixed; z-index: 200000; display: block; top: 0; right: 0; float: right;" id="device_width"></a>
