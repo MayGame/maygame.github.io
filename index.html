@@ -77,9 +77,10 @@
   <option value="first_dev">First dev version</option>
 </select>
 
-<a id="config_summary"></a><label for="new_tab_check">Open in a new tab</label><input type="checkbox" id="new_tab_check">
+<a id="config_summary"></a><label for="new_tab_check">Open in a new tab</label><input type="checkbox" id="new_tab_check" checked>
 <a><input type="text" id="url_to_cache" value="may_go_forth">
-</a></p><br><p>Progress: <a id="progress_last_action"></a>
+</a></p>
+<br><p>Progress: <a id="progress_last_action"></a>
 <a><label for="progress_config_loaded" id="label_cfg_loaded">Cfg loaded:</label><input type="checkbox" id="progress_config_loaded" disabled></a>
 <a><label for="progress_core_fetched" id="label_core_fetched">Core fetched:</label><input type="checkbox" id="progress_core_fetched" disabled></a>
 <a><label for="progress_page_cached" id="label_page_cached">Page cached:</label><input type="checkbox" id="progress_page_cached" disabled></a>
@@ -130,7 +131,9 @@ async function v_select(){
   if(version=='first_dev')
   text+=` <a href="https://maygame.xxx/default">Load sample</a>`;
   else if(version=='custom'){
-  text+=`<input type="text" placeholder="your config url" onchange="custom_cfg_onchange();" id="custom_cfg_url">`
+  text+=`<input type="text" placeholder="your config url" onchange="custom_cfg_onchange();" id="custom_cfg_url">
+  <button onclick="if(stuff.style.display=='block')stuff.style.display='none';else stuff.style.display='block';>
+  modify here</button>`
   }
   config_summary.innerHTML=text;
 
