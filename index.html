@@ -74,7 +74,7 @@
 </p><br><p>Progress: <a id="progress_last_action"></a>
 <a><label for="progress_config_loaded" id="label_cfg_loaded">Cfg loaded:</label><input type="checkbox" id="progress_config_loaded" disabled></a>
 <a><label for="progress_core_fetched" id="label_core_fetched">Core fetched:</label><input type="checkbox" id="progress_core_fetched" disabled></a>
-<a><label for="progress_page_cached">Page cached:</label><input type="checkbox" id="progress_page_cached" disabled></a>
+<a><label for="progress_page_cached" id="label_page_cached">Page cached:</label><input type="checkbox" id="progress_page_cached" disabled></a>
 <a id="cached_page_link">Link</a>
 </p></div>
 <script>
@@ -487,6 +487,9 @@ function Base64DecodeUrl(str){
     return str.replace(/-/g, '+').replace(/_/g, '/');
 }
   async function t2p2() {
+  label_page_cached.style.backgroundColor='chartreuse';
+  progress_page_cached.checked=true;
+
 
   }
   async function t2p() {
