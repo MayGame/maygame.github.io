@@ -344,12 +344,15 @@ async function fetch_config(url){
   })
 })}
 async function fetch_core(){
-  let address=config.core.url;
+  let address=config?.core?.url;
+  if(address){
   console.log('fetch_core: ', address);
   fetch(address)
   .then((response)=>{response.text()
     .then((e)=>{console.log('core_text',e)
     })})
+  }
+  else console.log('core fetch error')
 }
 </script>
 <!-- #endregion -->
