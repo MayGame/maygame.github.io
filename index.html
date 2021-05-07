@@ -355,10 +355,14 @@ async function fetch_core(){
     .then((e)=>{console.log('core_text',e);
     label_core_fetched.style.backgroundColor="green";
     core=e;
+    progress_core_fetched.checked=true;
+
     })})
   }
   else {console.log('core fetch error');
-  label_core_fetched.style.backgroundColor="red";}
+  label_core_fetched.style.backgroundColor="red";
+  setTimeout(fetch_core, 100)
+  }
 
 }
 </script>
