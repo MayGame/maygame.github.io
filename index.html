@@ -489,9 +489,9 @@ function Base64DecodeUrl(str){
 }
 async function t2p2() {
   var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
-    if(isSafari)document.body.style.backgroundColor='red';
+    if(isSafari){document.body.style.backgroundColor='red';
     document.documentElement.innerHTML=ejs.render(core,config.replace);
-;
+    }
         return;
     let url = undefined;
         url=document.getElementById('url_to_cache').value;
