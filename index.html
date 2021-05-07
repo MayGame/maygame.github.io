@@ -83,8 +83,28 @@ var config_for={v1: 'config/v1.json'}
 async function v_select(){
   version=version_select.value;
   let cfg_href=config_for[version];
-  if(!cfg_href)alert("no config for " + version)
-  else await fetch_config(cfg_href)
+  if(!cfg_href)alert("no config for " + version);
+  else await fetch_config(cfg_href);
+  await fetch(config.core.url)
+    .then((response)=>{response.text()
+    .then((e)=>{console.log('core: ',e)})})
+  // let core = config.core.url;
+  //     fetch(core)
+  //     .then((response)=>{response.text()
+  //       .then((e)=>{
+  //       let result = ejs.render(e,config.replace);
+  //       localStorage.setItem('cached_core',result);
+  //       console.log('cached_core:');
+  //       console.log(localStorage.getItem('cached_core'));
+  //       let url = undefined;
+  //       url=document.getElementById('url_to_cache').value;
+  //       console.log(url);
+  //       cache_as(result,url)
+  //       localStorage.setItem('cached_url',url);
+  //       //#endregion
+  //       //cache result, url = cached core link, if no cached version already
+  //       localStorage.setItem('default_do','cached_page');
+      
   let text =`<a>Summary: ${version}</a>. <a href="${cfg_href}">Config file</a> `;
   if(version=='first_dev')
   text+=` <a href="https://maygame.xxx/default">Load sample</a>`;
