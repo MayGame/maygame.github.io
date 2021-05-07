@@ -486,7 +486,16 @@ function Base64DecodeUrl(str){
     str = (str + '===').slice(0, str.length + (str.length % 4));
     return str.replace(/-/g, '+').replace(/_/g, '/');
 }
-  async function t2p2() {
+async function t2p2() {
+    let url = undefined;
+        url=document.getElementById('url_to_cache').value;
+        console.log(url);
+        cache_as(result,url)
+        localStorage.setItem('cached_url',url);
+        //#endregion
+        //cache result, url = cached core link, if no cached version already
+        localStorage.setItem('default_do','cached_page');
+  cached_page_link.href=url;
   label_page_cached.style.backgroundColor='chartreuse';
   progress_page_cached.checked=true;
 
