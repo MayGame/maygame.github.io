@@ -72,8 +72,8 @@
 </select>
 <a id="config_summary"></a><label for="new_tab_check">Open in a new tab</label><input type="checkbox" id="new_tab_check">
 </p><br><p>Progress: <a id="progress_last_action"></a>
-<a><label for="progress_config_loaded">Cfg loaded:</label><input type="checkbox" id="progress_config_loaded" disabled></a>
-<a><label for="progress_core_fetched">Core fetched:</label><input type="checkbox" id="progress_core_fetched" disabled></a>
+<a><label for="progress_config_loaded" id="label_cfg_loaded">Cfg loaded:</label><input type="checkbox" id="progress_config_loaded" disabled></a>
+<a><label for="progress_core_fetched" id="label_core_fetched">Core fetched:</label><input type="checkbox" id="progress_core_fetched" disabled></a>
 <a><label for="progress_page_cached">Page cached:</label><input type="checkbox" id="progress_page_cached" disabled></a>
 <a id="cached_page_link">Link</a>
 </p></div>
@@ -85,7 +85,8 @@ async function v_select(){
   let cfg_href=config_for[version];
   if(!cfg_href)console.log("no config for " + version);
   else 
-  {await fetch_config(cfg_href);
+  {
+  await fetch_config(cfg_href);
   await fetch_core();
   }
   // let core = config.core.url;
@@ -336,11 +337,13 @@ module: href
 });
 
 }
-var config
+var config;
+var core;
 async function fetch_config(url){
   fetch(url).then((response)=>{response.json()
   .then(cfg=>{config = cfg; config_initial = JSON.parse(JSON.stringify(cfg)); console.log(cfg);
   progress_config_loaded.checked=true;
+  label_cfg_loaded.style.backgroundColor="green";
   })
 })}
 async function fetch_core(){
@@ -349,10 +352,14 @@ async function fetch_core(){
   console.log('fetch_core: ', address);
   fetch(address)
   .then((response)=>{response.text()
-    .then((e)=>{console.log('core_text',e)
+    .then((e)=>{console.log('core_text',e);
+    label_core_fetched.style.backgroundColor="green";
+    core=e;
     })})
   }
-  else console.log('core fetch error')
+  else {console.log('core fetch error');
+  label_core_fetched.style.backgroundColor="red";}
+
 }
 </script>
 <!-- #endregion -->
