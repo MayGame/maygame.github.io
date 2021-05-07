@@ -34,20 +34,35 @@
 <a style="position: fixed; z-index: 200000; display: block; top: 0; right: 0; float: right;" id="device_width"></a>
 <button style="position: fixed; z-index: 200000; display: block; top: 0; right: 0; float: right;"
  onclick="if(stuff.style.display=='block')stuff.style.display='none';else stuff.style.display='block';">Stuff</button>
-<div id="version_hint" style="background-color: slategray; position: absolute; display: none; height: 20vh; width: 90vw; right: 50; left: 50; bottom: 0;">
+<div id="version_hint" style="background-color: slategray; position: absolute; display: none; height: 40vh; width: 90vw; right: 50; left: 50; bottom: 0;">
 <p>Page is generated from eJs template, based on Json config. <a href="https://github.com/MayGame/maygame.github.io/blob/mistress/config/v1.json">example for v1</a></p>
 <p>You can edit config on the client before applying it</p>
 <p>Check 'Stuff' for customization (May be changed)</p>
 <p>this very bottom menu does nothing for now</p>
 <p>Default behavior: ...</p>
 <p>Tips: Want it to look less ugly? - Customize it! </p>
+<p>Flow: </p>
+<ul>
+  <li>Choose config file.</li>
+  <li>Load it</li>
+  <li>(optional) Modify it</li>
+  <li>Fetch the template</li>
+  <li>Apply config</li>
+  <li>Cache the resulted page</li>
+  <li>Load cached</li>
+</ul>
 <!-- <p>Also, assembled client opens in new tab, => doesn't work on iphones.</p> -->
 </div>
 <div class="container">
-<button class="big_button" style="background-color: #bb00bb; text-overflow: ellipsis; white-space: nowrap; font-size: 1.7rem;" onclick="t2p();">Tap a few times to
-  play</button>
+  <div class="big_button" style="display: grid; grid-template-rows: 1fr 1fr;">
+
+    <button  style="background-color: #bb00bb; text-overflow: ellipsis; white-space: nowrap; font-size: 1.7rem;" onclick="t2p();">Tap a few times to
+      play</button>
+    <button  style="background-color: #bb00bb; text-overflow: ellipsis; white-space: nowrap; font-size: 1.7rem;" onclick="t2p2();">Tap to play v2</button>
+    </div>
   <!-- fixme -->
-<p class="footer"><button onclick="if(version_hint.style.display=='block')version_hint.style.display='none';else version_hint.style.display='block';">?</button><label for="version_select" >Version to load:</label>
+<div class="footer"><p><button onclick="if(version_hint.style.display=='block')version_hint.style.display='none';else version_hint.style.display='block';">?</button>
+  <label for="version_select" >Version to load:</label>
   <select id="version_select" onchange="v_select();">
   <option value="v1">v1</option>
   <option value="vr">VR (WIP)</option>
@@ -56,12 +71,21 @@
   <option value="first_dev">First dev version</option>
 </select>
 <a id="config_summary"></a><label for="new_tab_check">Open in a new tab</label><input type="checkbox" id="new_tab_check">
-</p>
+</p><br><p>Progress: <a id="progress_last_action"></a>
+<a><label for="progress_config_loaded">Cfg loaded:</label><input type="checkbox" id="progress_config_loaded" disabled></a>
+<a><label for="progress_core_fetched">Core fetched:</label><input type="checkbox" id="progress_core_fetched" disabled></a>
+<a><label for="progress_page_cached">Page cached:</label><input type="checkbox" id="progress_page_cached" disabled></a>
+<a id="cached_page_link">Link</a>
+</p></div>
 <script>
 var version;
-function v_select(){
+var config_for={v1: 'config/v1.json'}
+async function v_select(){
   version=version_select.value;
-  let text =`<a>Summary: ${version}</a> `;
+  let cfg_href=config_for[version];
+  if(!cfg_href)alert("no config for " + version)
+  else await fetch_config(cfg_href)
+  let text =`<a>Summary: ${version}</a>. <a href="${cfg_href}">Config file</a> `;
   if(version=='first_dev')
   text+=` <a href="https://maygame.xxx/default">Load sample</a>`;
   else if(version=='custom'){
@@ -295,7 +319,9 @@ module: href
 var config
 async function fetch_config(url){
   fetch(url).then((response)=>{response.json()
-  .then(cfg=>{config = cfg; config_initial = JSON.parse(JSON.stringify(cfg)); console.log(cfg)})
+  .then(cfg=>{config = cfg; config_initial = JSON.parse(JSON.stringify(cfg)); console.log(cfg);
+  progress_config_loaded.checked=true;
+  })
 })}
 </script>
 <!-- #endregion -->
@@ -412,6 +438,9 @@ function Base64DecodeUrl(str){
     str = (str + '===').slice(0, str.length + (str.length % 4));
     return str.replace(/-/g, '+').replace(/_/g, '/');
 }
+  async function t2p2() {
+
+  }
   async function t2p() {
     localStorage.setItem('saved_cfg',JSON.stringify(config));
     fetch_config(config_url.value);
