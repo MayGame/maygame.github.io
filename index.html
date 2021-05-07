@@ -31,6 +31,12 @@
   grid-area: footer;
 }
 </style>
+<div id="webkit_hint" style="display: none; position: fixed; width: 100vw; background-color: deeppink;">
+  <h1>Most of the features won't work on IOS.</h1>
+  <h2>Get a better device, or use another client (there is none so far).</h2>
+    <button onclick="document.documentElement.innerHTML=lastCached;
+    ">Try it anyways!</button><button onclick="webkit_hint.style.display='none';">Back.</button>
+</div>
 <a style="position: fixed; z-index: 200000; display: block; top: 0; right: 0; float: right;" id="device_width"></a>
 <button style="position: fixed; z-index: 200000; display: block; top: 0; right: 0; float: right;"
  onclick="if(stuff.style.display=='block')stuff.style.display='none';else stuff.style.display='block';">Stuff</button>
@@ -490,7 +496,8 @@ function Base64DecodeUrl(str){
 async function t2p2() {
   var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
     if(isSafari){document.body.style.backgroundColor='red';
-    document.documentElement.innerHTML=ejs.render(core,config.replace);
+    lastCached=ejs.render(core,config.replace);
+    webkit_hint.style.display="block";
     return;
     }
     let url = undefined;
@@ -517,8 +524,6 @@ async function t2p2() {
     //#endregion
     //cache result, url = cached core link, if no cached version already
     // window.open(url, '_blank');
-
-
   }
-  var lastCached
+  var lastCached;
 </script>
