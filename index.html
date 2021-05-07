@@ -89,6 +89,7 @@
 var version;
 var config_for={v1: 'config/v1.json'}
 async function custom_cfg_onchange(){
+  config_anchor.href=custom_cfg_url.value
   await fetch_config(custom_cfg_url.value);
   await fetch_core();
 }
@@ -123,7 +124,7 @@ async function v_select(){
   //       //cache result, url = cached core link, if no cached version already
   //       localStorage.setItem('default_do','cached_page');
       
-  let text =`<a>Summary: ${version}</a>. <a href="${cfg_href}">Config file</a> `;
+  let text =`<a>Summary: ${version}</a>. <a href="${cfg_href}" id="config_anchor">Config file</a> `;
   if(version=='first_dev')
   text+=` <a href="https://maygame.xxx/default">Load sample</a>`;
   else if(version=='custom'){
