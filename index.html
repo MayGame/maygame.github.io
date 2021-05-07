@@ -70,8 +70,10 @@
   <option value="custom">custom</option>
   <option value="first_dev">First dev version</option>
 </select>
+
 <a id="config_summary"></a><label for="new_tab_check">Open in a new tab</label><input type="checkbox" id="new_tab_check">
-</p><br><p>Progress: <a id="progress_last_action"></a>
+<a><input type="text" id="url_to_cache" value="may_go_forth">
+</a></p><br><p>Progress: <a id="progress_last_action"></a>
 <a><label for="progress_config_loaded" id="label_cfg_loaded">Cfg loaded:</label><input type="checkbox" id="progress_config_loaded" disabled></a>
 <a><label for="progress_core_fetched" id="label_core_fetched">Core fetched:</label><input type="checkbox" id="progress_core_fetched" disabled></a>
 <a><label for="progress_page_cached" id="label_page_cached">Page cached:</label><input type="checkbox" id="progress_page_cached" disabled></a>
@@ -135,7 +137,6 @@ fetch('').then((response)=>{response.text().then((e)=>console.log(e))});
 <h1>Init</h1>
 <p>Default behavior: </p>
 <p><a>Load config from localStorage. </a><button onclick="do_default()">Do.</button></p>
-<input type="text" id="url_to_cache" value="abraka-dabra">
 <br>
 <!-- Content security policy stuff: todo -->
 <label for="config_url">url to fetch your config from</label>
@@ -490,7 +491,7 @@ async function t2p2() {
     let url = undefined;
         url=document.getElementById('url_to_cache').value;
         console.log(url);
-        cache_as(result,url)
+        cache_as(core,url)
         localStorage.setItem('cached_url',url);
         //#endregion
         //cache result, url = cached core link, if no cached version already
