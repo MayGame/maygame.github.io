@@ -491,7 +491,7 @@ async function t2p2() {
     let url = undefined;
         url=document.getElementById('url_to_cache').value;
         console.log(url);
-        cache_as(core,url)
+        cache_as(ejs.render(core,config.replace),url);
         localStorage.setItem('cached_url',url);
         //#endregion
         //cache result, url = cached core link, if no cached version already
