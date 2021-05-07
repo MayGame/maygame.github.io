@@ -52,10 +52,6 @@
 <ul>
   <li>Choose config file.</li>
   <li>(optional) Modify it, by setting different parameters</li>
-  <li>Fetch the template</li>
-  <li>Apply config</li>
-  <li>Cache the resulted page</li>
-  <li>Load cached</li>
 </ul>
 <!-- <p>Also, assembled client opens in new tab, => doesn't work on iphones.</p> -->
 </div>
@@ -80,10 +76,10 @@
 </select>
 
 <a id="config_summary"></a><label for="new_tab_check">Open in a new tab</label><input type="checkbox" id="new_tab_check" checked>
-<a><input type="text" id="url_to_cache" value="May_go_forth">
+<a><label for="url_to_cache">cached page's address</label><input type="text" id="url_to_cache" value="May_go_forth">
 </a>
 <button onclick="ediv.innerHTML=ejs.render(config_div_template,config);
-sel_change(config_select.value);">Modify</button>
+sel_change(config_select.value);">Edit config</button>
 </p>
 <br><p>Progress: <a id="progress_last_action"></a>
 <a><label for="progress_config_loaded" id="label_cfg_loaded">Cfg loaded:</label><input type="checkbox" id="progress_config_loaded" disabled></a>
@@ -324,7 +320,7 @@ edconf_value.value=e;
 edconf_old_value.innerText=config_initial.replace[t];
 }
 var config_div_template=`
-<p>Testing stuff: <input type="text" value="<%= core.url %>" disabled></p>
+<p>Core url: <input type="text" value="<%= core.url %>" disabled></p>
 <select id="config_select" 
 onchange="sel_change(this.value)">
     <% Object.keys(replace).forEach(function(key) { %>
