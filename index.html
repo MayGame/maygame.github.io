@@ -83,7 +83,12 @@ var config_for={v1: 'config/v1.json'}
 async function v_select(){
   version=version_select.value;
   let cfg_href=config_for[version];
-  if(!cfg_href)console.log("no config for " + version);
+  if(!cfg_href){console.log("no config for " + version);
+  progress_config_loaded.checked=false;
+  label_cfg_loaded.style.backgroundColor="red";
+  progress_core_fetched.checked=false;
+  label_core_fetched.style.backgroundColor="red";
+  }
   else 
   {
   await fetch_config(cfg_href);
@@ -352,7 +357,8 @@ async function fetch_core(){
   console.log('fetch_core: ', address);
   fetch(address)
   .then((response)=>{response.text()
-    .then((e)=>{console.log('core_text',e);
+    .then((e)=>{
+      // console.log('core_text',e);
     label_core_fetched.style.backgroundColor="green";
     core=e;
     progress_core_fetched.checked=true;
@@ -361,7 +367,7 @@ async function fetch_core(){
   }
   else {console.log('core fetch error');
   label_core_fetched.style.backgroundColor="red";
-  setTimeout(fetch_core, 100)
+  setTimeout(fetch_core, 100);
   }
 
 }
