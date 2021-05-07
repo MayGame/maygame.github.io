@@ -101,6 +101,8 @@ async function v_select(){
   label_cfg_loaded.style.backgroundColor="red";
   progress_core_fetched.checked=false;
   label_core_fetched.style.backgroundColor="red";
+  label_page_cached.style.backgroundColor="red";
+  progress_page_cached.checked=false;
   }
   else 
   {
@@ -379,6 +381,9 @@ async function fetch_core(){
   }
   else {console.log('core fetch error');
   label_core_fetched.style.backgroundColor="red";
+  progress_core_fetched.checked=false;
+  label_page_cached.style.backgroundColor="red";
+  progress_page_cached.checked=false;
   setTimeout(fetch_core, 100);
   }
 
@@ -397,6 +402,7 @@ async function fetch_core(){
       });
     });
   }
+  else alert("No service worker. Might not work.");
 </script>
 <script id="js_init">
   ; (() => {
