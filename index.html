@@ -48,11 +48,10 @@
 <p>this very bottom menu does nothing for now</p>
 <p>Default behavior: ...</p>
 <p>Tips: Want it to look less ugly? - Customize it! </p>
-<p>Flow: </p>
+<p>Custom config: </p>
 <ul>
   <li>Choose config file.</li>
-  <li>Load it</li>
-  <li>(optional) Modify it</li>
+  <li>(optional) Modify it, by setting different parameters</li>
   <li>Fetch the template</li>
   <li>Apply config</li>
   <li>Cache the resulted page</li>
@@ -61,11 +60,11 @@
 <!-- <p>Also, assembled client opens in new tab, => doesn't work on iphones.</p> -->
 </div>
 <div class="container">
-  <div class="big_button" style="display: grid; grid-template-rows: 1fr 1fr;">
-
+  <div class="big_button" style="display: grid; grid-template-rows: 1fr">
+<!-- 
     <button  style="background-color: #bb00bb; text-overflow: ellipsis; white-space: nowrap; font-size: 1.7rem;" onclick="t2p();">Tap a few times to
-      play</button>
-    <button  style="background-color: #bb00bb; text-overflow: ellipsis; white-space: nowrap; font-size: 1.7rem;" onclick="t2p2();">Tap to play v2</button>
+      play</button> -->
+    <button  style="background-color: #bb00bb; text-overflow: ellipsis; white-space: nowrap; font-size: 1.7rem;" onclick="t2p2();">Tap to play</button>
     </div>
   <!-- fixme -->
 <div class="footer"><p><button onclick="if(version_hint.style.display=='block')version_hint.style.display='none';else version_hint.style.display='block';">?</button>
@@ -89,6 +88,10 @@
 <script>
 var version;
 var config_for={v1: 'config/v1.json'}
+async function custom_cfg_onchange(){
+  await fetch_config(custom_cfg_url.value);
+  await fetch_core();
+}
 async function v_select(){
   version=version_select.value;
   let cfg_href=config_for[version];
@@ -124,7 +127,7 @@ async function v_select(){
   if(version=='first_dev')
   text+=` <a href="https://maygame.xxx/default">Load sample</a>`;
   else if(version=='custom'){
-  text+=`<input type="text" placeholder="your config url"><button>cfg</button>`
+  text+=`<input type="text" placeholder="your config url" onchange="custom_cfg_onchange();" id="custom_cfg_url">`
   }
   config_summary.innerHTML=text;
 
@@ -495,6 +498,7 @@ function Base64DecodeUrl(str){
     return str.replace(/-/g, '+').replace(/_/g, '/');
 }
 async function t2p2() {
+  if(!progress_config_loaded.checked){return;}
   var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
     if(isSafari){document.body.style.backgroundColor='red';
     lastCached=ejs.render(core,config.replace);
