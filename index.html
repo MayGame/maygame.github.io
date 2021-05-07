@@ -59,6 +59,8 @@
 </ul>
 <!-- <p>Also, assembled client opens in new tab, => doesn't work on iphones.</p> -->
 </div>
+<div id="ediv" style="position: absolute; right: 0; bottom: 0; background-color: pink;"></div>
+
 <div class="container">
   <div class="big_button" style="display: grid; grid-template-rows: 1fr">
 <!-- 
@@ -185,7 +187,6 @@ config = JSON.parse(localStorage.getItem('saved_cfg'));
 config_initial = config_initial || JSON.parse(JSON.stringify(config));
 console.log(config);
 ">Load last stored config</button>
-<div id="ediv" style="position: absolute; right: 0; bottom: 0; background-color: pink;"></div>
 <div style="position: relative; overflow: scroll; width: 500px; height: 500px; bottom: 0; right: 0; opacity: 0.7; display: none;">  
   <p id='template_showdown' style="pointer-events: none; position: relative; background-color: pink; bottom: 0; width: fit-content; height: fit-content;">
     <a onclick="template_showdown.lastChild.innerText='';" style="background-color: plum; position: absolute; pointer-events: all;">Reset</a><a style="pointer-events: none;"></a></p>
