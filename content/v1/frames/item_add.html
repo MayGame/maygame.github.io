@@ -113,6 +113,28 @@ var item_valid_time = 100000
             // window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
         } else console.log('Need user id first.')
     }
+let Item1={
+version:'1',//protocol/object version
+id:'initial hash',
+object:{},
+current_owner:[],
+log:[],//tranfer letters, edits and so on.
+state_keeper:'pub',//
+keeper_meta:{contacts:[]}
+}
+/**
+ * 
+ */
+let Item2={
+version:'2',//protocol/object version
+id:'initial hash',
+object:{},
+current_owner:[],
+state_keeper:'pub',//keeper is the only one keeping logs
+keeper_meta:{contacts:[]}
+}
+
+
 
 function onlogin(pub){
     user_id=pub;

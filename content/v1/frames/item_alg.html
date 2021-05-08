@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+        <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    </head>
+    <body>
+    <script>
+        let hashCode = s => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0)
+        let p1 = await sea.pair();
+        let p2 = await sea.pair();
+        let p3 = await sea.pair();
+        let p4 = await sea.pair();
+        let p5 = await sea.pair();
+        let item = {
+            object:'Just a string value',
+            ver:'1',
+        }
+        item.timestamp=Date.now();
+        item.owner=p1.pub;
+        item.id=hashCode(JSON.stringify(item));
+        console.log('Item:', item);
+        function verify_all(item){
+
+        }
+        function get_chain_pub(){
+
+        }
+        let keeper={}
+        function get_id(item){
+            return item.id;
+        }
+        function get_owner(){}
+        function change_owner(item){}
+        var state={};
+    </script>
+    </body>
+</html>
