@@ -10,6 +10,6 @@
     "item_add_url":"content/v1/frames/item_add.html",
     "map_url":"content/v1/frames/map.html",
     "agents_url":"content/v1/frames/agents.html",
-    "background_url":"bg_pink.html",
+    "background_url":"content/v1/frames/bg_pink.html",
     "peers":"https://vine-mature-morocco.glitch.me/gun"
 }}
