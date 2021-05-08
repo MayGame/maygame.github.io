@@ -1,4 +1,4 @@
-{"core":{"url":"content/v1/core+relm.html.ejs"}, 
+{"core":{"url":"content/v1/core.html.ejs"}, 
 "replace":{
     "quests_url":"content/v1/frames/quests.html",
     "quests_add_url":"content/v1/frames/quests_add.html",
@@ -10,5 +10,6 @@
     "item_add_url":"content/v1/frames/item_add.html",
     "map_url":"content/v1/frames/map.html",
     "agents_url":"content/v1/frames/agents.html",
+    "background_url":"staging.relm.us",
     "peers":"https://vine-mature-morocco.glitch.me/gun"
 }}
