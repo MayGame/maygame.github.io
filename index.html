@@ -110,24 +110,7 @@ async function v_select(){
   {
   await fetch_config(cfg_href);
   await fetch_core();
-  }
-  // let core = config.core.url;
-  //     fetch(core)
-  //     .then((response)=>{response.text()
-  //       .then((e)=>{
-  //       let result = ejs.render(e,config.replace);
-  //       localStorage.setItem('cached_core',result);
-  //       console.log('cached_core:');
-  //       console.log(localStorage.getItem('cached_core'));
-  //       let url = undefined;
-  //       url=document.getElementById('url_to_cache').value;
-  //       console.log(url);
-  //       cache_as(result,url)
-  //       localStorage.setItem('cached_url',url);
-  //       //#endregion
-  //       //cache result, url = cached core link, if no cached version already
-  //       localStorage.setItem('default_do','cached_page');
-      
+  }   
   let text =`<a>Summary: ${version}</a>. <a href="${cfg_href}" id="config_anchor">Config file</a> `;
   if(version=='first_dev')
   text+=` <a href="https://maygame.xxx/default">Load sample</a>`;
@@ -343,7 +326,6 @@ function cache_as(html,href){
   console.log(self.location.origin+'/'+href)
   console.log(html)
   var response = new Response(html, {
-  // headers: {
   url: self.location.origin+'/'+href, 
   status: 200,
   headers: {
@@ -535,12 +517,6 @@ async function t2p2() {
     localStorage.setItem('saved_cfg',JSON.stringify(config));
     fetch_config(config_url.value);
     do_default();
-
-    // //#region second login 
-    // console.log(localStorage.getItem('cached_core'))
-    //#endregion
-    //cache result, url = cached core link, if no cached version already
-    // window.open(url, '_blank');
   }
   var lastCached;
 </script>
