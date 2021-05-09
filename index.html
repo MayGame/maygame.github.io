@@ -76,8 +76,8 @@
   <option value="dev">dev</option>
   <option value="first_dev">First dev version</option>
 </select>
-
-<a id="config_summary"></a><label for="new_tab_check">Open in a new tab</label><input type="checkbox" id="new_tab_check" checked>
+<a id="config_summary"></a><br>
+<label for="new_tab_check">Open in a new tab</label><input type="checkbox" id="new_tab_check" checked>
 <a><label for="url_to_cache">cached page's address</label><input type="text" id="url_to_cache" value="May_go_forth">
 </a>
 <button onclick="ediv.innerHTML=ejs.render(config_div_template,config);
@@ -87,7 +87,7 @@ sel_change(config_select.value);">Edit config</button>
 <a><label for="progress_config_loaded" id="label_cfg_loaded">Cfg loaded:</label><input type="checkbox" id="progress_config_loaded" disabled></a>
 <a><label for="progress_core_fetched" id="label_core_fetched">Core fetched:</label><input type="checkbox" id="progress_core_fetched" disabled></a>
 <a><label for="progress_page_cached" id="label_page_cached">Page cached:</label><input type="checkbox" id="progress_page_cached" disabled></a>
-<a id="cached_page_link">Link</a>
+<a id="cached_page_link">Link</a><button onclick="if(core_address!=config.core.url)fetch_core();">Quick fix</button>
 </p></div>
 <script>
 var version;
@@ -345,6 +345,7 @@ module: href
 }
 var config;
 var core;
+var core_address;
 async function fetch_config(url){
   fetch(url).then((response)=>{response.json()
   .then(cfg=>{config = cfg; config_initial = JSON.parse(JSON.stringify(cfg)); console.log(cfg);
@@ -356,6 +357,7 @@ async function fetch_core(){
   let address=config?.core?.url;
   if(address){
   console.log('fetch_core: ', address);
+  core_address;
   fetch(address)
   .then((response)=>{response.text()
     .then((e)=>{
@@ -499,6 +501,7 @@ async function t2p2() {
     webkit_hint.style.display="block";
     return;
     }
+
     let url = undefined;
         url=document.getElementById('url_to_cache').value;
         console.log(url);
