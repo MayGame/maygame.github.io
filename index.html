@@ -495,6 +495,7 @@ function Base64DecodeUrl(str){
 }
 async function t2p2() {
   if(!progress_config_loaded.checked){return;}
+  if(core_address!=config.core.url)await fetch_core();
   var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
     if(isSafari){document.body.style.backgroundColor='red';
     lastCached=ejs.render(core,config.replace);
