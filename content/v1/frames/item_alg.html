@@ -2,15 +2,37 @@
     <head>
         <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
         <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+        <script src="../../../js/cdn/ejs.min.js"></script>
+
     </head>
     <body>
+
+        <div class="container">
+<div class="p1" id="p1div">
+    <button onclick="issue_item(p1,'JSON or something');">issue p1</button>
+</div>
+<div class="p2" id="p2div"></div>
+<div class="p3" id="p3div"></div>
+<div class="p4" id="p4div"></div>
+<div class="p5" id="p5div"></div>
+<div class="ui" id="uidiv">
+</div>
+        </div>
     <script>
-        let hashCode = s => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0)
-        let p1 = await sea.pair();
-        let p2 = await sea.pair();
-        let p3 = await sea.pair();
-        let p4 = await sea.pair();
-        let p5 = await sea.pair();
+        let hashCode = s => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
+        let sea = Gun.SEA;
+        var p1;
+        var p2;
+        var p3;
+        var p4;
+        var p5;
+        ;(async ()=>{
+        p1 = await sea.pair();
+        p2 = await sea.pair();
+        p3 = await sea.pair();
+        p4 = await sea.pair();
+        p5 = await sea.pair();})();
+        function issue_item(){}
         let item = {
             object:'Just a string value',
             ver:'1',
@@ -18,7 +40,14 @@
         item.timestamp=Date.now();
         item.owner=p1.pub;
         item.id=hashCode(JSON.stringify(item));
+        item.log=[];
         console.log('Item:', item);
+        var c1;
+        ;(async ()=>{
+c1 = await sea.sign(item, p1);})();
+        /*
+        hash of obj - signature must be verified with obj.lastowner.pub
+        */
         function verify_all(item){
 
         }
@@ -30,8 +59,64 @@
             return item.id;
         }
         function get_owner(){}
-        function change_owner(item){}
+        function owner_write_transfer_letter(item, pair){
+
+        }
+/*
+default behavoir: issuer = keeper, as they are most interested in proving a state;
+
+*/
+
+        async function change_owner(item, owners_pair){
+            let tranfer_letter = owner_write_transfer_letter();
+            let res = await sea.sign(item, owners_pair, )
+            JSON.parse(item.substring(3));
+            // ...
+            item.owner.push(new_owner);
+        }
+        item.log.transfer_history.split
+
+
         var state={};
+        //#region v2:
+        /*
+        just a server that remembers last state;
+        */
     </script>
+            <style>
+                .container{
+                    display: grid;
+                    grid-template-areas: "header header header" "p1 p2 p3" "p4 p5 ui";
+                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-rows: 0.2fr 2fr 2fr;
+                    gap: 2px;
+                    height: 100vh;
+                    width: 100vw;
+                }
+                .p1{
+                    grid-area: p1;
+                    background-color: pink;
+                }
+                .p2{
+                    grid-area: p2;
+                    background-color: hotpink;
+                }
+                .p3{
+                    grid-area: p3;
+                    background-color: fuchsia;
+                }
+                .p4{
+                    grid-area: p4;
+                    background-color: palevioletred;
+                }
+                .p5{
+                    grid-area: p5;
+                    background-color: #bb00bb;
+                }
+                .ui{
+                    grid-area: ui;
+                    background-color: deeppink;
+                }
+            </style>
     </body>
 </html>
