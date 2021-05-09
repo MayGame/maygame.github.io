@@ -10,16 +10,20 @@
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-rows: 10vh 60vh  auto 10vh;
+    grid-template-rows: 5vh 60vh 5vh auto auto;
     grid-template-columns: 0.2fr 1fr 0.2fr;
     grid-template-areas: 
     "header header header"
     "pad_left big_button pad_right"
     "pad_left settings pad_right"
-    "footer footer footer";
+    "footer footer footer"
+    "progress_ progress_ progress_";
     }
 .big_button{
   grid-area: big_button;
+}
+.progress_{
+  grid-area: progress_;
 }
 .header{
   grid-area: header;
@@ -62,7 +66,7 @@
 <!-- 
     <button  style="background-color: #bb00bb; text-overflow: ellipsis; white-space: nowrap; font-size: 1.7rem;" onclick="t2p();">Tap a few times to
       play</button> -->
-    <button  style="background-color: #bb00bb; text-overflow: ellipsis; white-space: nowrap; font-size: 1.7rem;" onclick="t2p2();">Tap to play <br>(a few times, if needed)</button>
+    <button  style="background-color: #bb00bb; text-overflow: ellipsis; white-space: nowrap; font-size: 1.7rem;" onclick="t2p2();">Tap to play</button>
     </div>
   <!-- fixme -->
 <div class="footer"><p><button onclick="if(version_hint.style.display=='block')version_hint.style.display='none';else version_hint.style.display='block';">?</button>
@@ -83,11 +87,14 @@
 <button onclick="ediv.innerHTML=ejs.render(config_div_template,config);
 sel_change(config_select.value);">Edit config</button>
 </p>
-<br><p>Progress: <a id="progress_last_action"></a>
+</div>
+<div class="progress_">
+<p>Progress: <a id="progress_last_action"></a>
 <a><label for="progress_config_loaded" id="label_cfg_loaded">Cfg loaded:</label><input type="checkbox" id="progress_config_loaded" disabled></a>
 <a><label for="progress_core_fetched" id="label_core_fetched">Core fetched:</label><input type="checkbox" id="progress_core_fetched" disabled></a>
 <a><label for="progress_page_cached" id="label_page_cached">Page cached:</label><input type="checkbox" id="progress_page_cached" disabled></a>
-<a id="cached_page_link">Link</a><button onclick="if(core_address!=config.core.url)fetch_core();">Quick fix</button>
+<a id="cached_page_link">Link</a>
+<!-- <button onclick="if(core_address!=config.core.url)fetch_core();">Quick fix</button> -->
 </p></div>
 <script>
 var version;
