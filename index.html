@@ -69,6 +69,7 @@
   <label for="version_select" >Version to load:</label>
   <select id="version_select" onchange="v_select();">
   <option value="v1">v1</option>
+  <option value="v2">v2</option>
   <option value="vr">VR (WIP)</option>
   <option value="ar">AR (WIP)</option>
   <option value="custom">custom</option>
@@ -90,7 +91,7 @@ sel_change(config_select.value);">Edit config</button>
 </p></div>
 <script>
 var version;
-var config_for={v1: 'config/v1.json',dev:'config/dev.json'}
+var config_for={v1: 'config/v1.json',v2: 'config/v2.json',dev:'config/dev.json'}
 async function custom_cfg_onchange(){
   config_anchor.href=custom_cfg_url.value
   await fetch_config(custom_cfg_url.value);
