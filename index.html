@@ -94,8 +94,9 @@ var version;
 var config_for={v1: 'config/v1.json',v2: 'config/v2.json',dev:'config/dev.json'}
 async function custom_cfg_onchange(){
   config_anchor.href=custom_cfg_url.value
-  await fetch_config(custom_cfg_url.value);
-  await fetch_core();
+  // await fetch_config(custom_cfg_url.value);
+  await fetch_both(custom_cfg_url.value);
+  // await fetch_core();
 }
 async function v_select(){
   version=version_select.value;
@@ -110,8 +111,9 @@ async function v_select(){
   }
   else 
   {
-  await fetch_config(cfg_href);
-  await fetch_core();
+  await fetch_both(cfg_href);
+  // await fetch_config(cfg_href);
+  // await fetch_core();
   }   
   let text =`<a>Summary: ${version}</a>. <a href="${cfg_href}" id="config_anchor">Config file</a> `;
   if(version=='first_dev')
@@ -376,6 +378,15 @@ async function fetch_core(){
   setTimeout(fetch_core, 100);
   }
 
+}
+async function fetch_both(url){
+  fetch(url).then((response)=>{response.json()
+  .then(cfg=>{config = cfg; config_initial = JSON.parse(JSON.stringify(cfg)); console.log(cfg);
+  progress_config_loaded.checked=true;
+  label_cfg_loaded.style.backgroundColor="green";
+  fetch_core();
+  })
+})
 }
 </script>
 <!-- #endregion -->
