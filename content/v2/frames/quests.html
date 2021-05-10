@@ -4,15 +4,36 @@
 
     </head>
     <body style="background-color: hotpink;">
-        <h1>Quests</h1>
+        <div class="cotainer">
+            <h1 class="header">Quests</h1>
+<p class="body">Body</p>
+<p class="footer">footer</p>
+        </div>
 
 <script>
     window.onmessage=e=>{console.log('quests onmessage',e)}
 </script>
 <style>
     .container{
+        height: 100vh;
+        width: 100vw;
         display: grid;
-        grid-template-areas: "a a";
+        grid-template-areas: "header"
+        "body"
+        "footer";
+        grid-template-rows: 1fr 5fr 1fr;
+    }
+    .header{
+        grid-area: header;
+        /* background-color: deeppink; */
+    }
+    .body{
+        grid-area: body;
+        background-color: deeppink;
+    }
+    .footer{
+        grid-area: footer;
+        /* background-color: deeppink; */
     }
 </style>
     </body>
