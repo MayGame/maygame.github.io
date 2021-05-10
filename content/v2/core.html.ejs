@@ -106,15 +106,27 @@ html, body, iframe
 <!-- <button onclick="default_sign_in();" style="color: seagreen;">Quick sign in</button> -->
 <!-- <br> -->
 <button onclick="toggle(top_layer); toggle(main_layer);">Login menu</button>
-<button onclick="toggle(quests_layer)" disabled>Quests</button>
+<button onclick="toggle(quests_layer)">Quests</button>
+<button onclick="toggle(skills_layer)">Skills</button>
+<button onclick="toggle(problems_layer)">Problems</button>
+<button onclick="toggle(hud_layer)">HUD</button>
 </div>
 <div class="menu_bar_right"><button onclick="toggle(hotbar)" style="float: right;">*</button></div>
-<div id="quests_layer" class="layer_b b" style="display: none; ">
-    <!-- there's no styling for the layer_b. temporaly disabling 'layer' this way -->
+<div id="quests_layer" class="b" style="display: none; ">
     <iframe scrolling="auto"name="quests" src="<%= quests_url %>" id="frame_quests" style="border: 0; width: 100%; height: 100%"></iframe>
 </div>
+<div id="skills_layer" class="b" style="display: none; ">
+    <iframe scrolling="auto"name="skills" src="<%= skills_url %>" id="frame_skills" style="border: 0; width: 100%; height: 100%"></iframe>
 </div>
+<div id="problems_layer" class="b" style="display: none; ">
+    <iframe scrolling="auto"name="problems" src="<%= problems_url %>" id="frame_problems" style="border: 0; width: 100%; height: 100%"></iframe>
+</div>
+<div id="hud_layer" class="b" style="display: none; ">
+    <iframe scrolling="auto"name="hud" src="<%= hud_url %>" id="frame_hud" style="border: 0; width: 100%; height: 100%"></iframe>
+</div>
+</div></div>
 <script>
+    var frames_trust;//url, data. 
     var peers=["<%= peers %>"];//exactly one peer for now.
     var gun = Gun({peers:peers});
     var sea = Gun.SEA;
@@ -276,12 +288,6 @@ async function force_create_new_user(){
     // ---------------------------------
     let content = `${user_pub}@${peers[0]}`;
     frames['profile'].postMessage({'innerHTML':{id:'iam', content: content}},'https://maygame.xxx')
-    // ---------------------------------
-    // userN.get('items/bookmarks').on((e)=>{console.log('core bookmarks gunfire',e)},{change: true});
-    userN.get('map/last_bookmark').on((msg)=>{console.log('core map bm: ', _.omit(msg,'_'))});
-    userN.get('map/show').on((msg)=>{console.log('core map show gunfire ', _.omit(msg,'_'))});
-    userN.get('map/gps_my_pos').on((crd)=>{console.log('core got user/gps pos, ',_.omit(crd,'_'))});//tmp, fixme
-    userN.get('map/gps_map_click').on((crd)=>{console.log('core got user/map_click, ',_.omit(crd,'_'))});//rmmmber, then off on relog
     for (var i = 0; i < frames.length; i++) {
         frames[i].postMessage({login: user.is.pub}, 'https://maygame.xxx');//todo track frame domains
     }

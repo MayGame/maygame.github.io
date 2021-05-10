@@ -3,6 +3,7 @@
     "quests_url":"content/v2/frames/quests.html",
     "problems_url":"content/v2/frames/problems.html",
     "background_url":"content/v1/frames/bg_pink.html",
+    "skills_url":"content/v2/frames/skills.html",
     "hud_url":"content/v2/frames/hud.html",
     "peers":"https://vine-mature-morocco.glitch.me/gun"
 }}
