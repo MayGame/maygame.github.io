@@ -5,12 +5,28 @@
     </head>
     <body style="background-color: hotpink;">
         <div class="cotainer">
-            <h1 class="header">Quests</h1>
-<p class="body">Body</p>
-<p class="footer">footer</p>
+            <div class="header">
+                <h1>Quests</h1>
+            </div>
+            <div class="body split2">
+                <div class="left" id="body_left">
+                    <p>Body Left</p>
+                </div>
+                <div class="right">
+                    <p>Body right</p>
+                </div>
+            </div>
+            <div class="footer">
+                <p>footer</p>
+                <button onclick="dev();">Dev</button>
+            </div>
         </div>
 
 <script>
+    var template=`<p>temolate</p>`;
+    function dev(){
+        body_left.innerHTML=ejs.render(template);
+    }
     window.onmessage=e=>{console.log('quests onmessage',e)}
 </script>
 <style>
@@ -34,6 +50,17 @@
     .footer{
         grid-area: footer;
         /* background-color: deeppink; */
+    }
+    .split2{
+        display: grid;
+        grid-template-areas: "left right";
+        grid-template-columns: 1fr 1fr;
+    }
+    .left{
+        grid-area: left;
+    }
+    .right{
+        grid-area: right;
     }
 </style>
     </body>
