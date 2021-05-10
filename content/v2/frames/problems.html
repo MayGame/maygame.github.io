@@ -8,7 +8,11 @@
 </div>
 <script>
     var goals;
+var desired_world_state;//^_^
 var problems_weights=[];
+var autodos=[];//trusted actions to be done automatically
+//fixme: move to core ^
+
 var problems_descriptions=[];
 var reverse_index={};
 var solver={their_uf:{},cost_for_them:{},greed:1.2}
@@ -29,6 +33,41 @@ var tokenize = function(input){
     let list_of_activated={'230432':0.6}
     return list_of_activated;
 }
+///state defines actions/thoughts
+var var_={desired_state:{},actual_state:{},way_to_get_there:{discover:''},
+state_source:{},what_affects_it:{changers:[]}}//"how'd you know if it is.."}
+function make_decision(
+    confidence_level_needed,vars_to_be_cheked,decesion_pattern, callback
+){
+let confidence=0;
+vars_to_be_cheked.forEach(v => {
+    v.trust*v.value
+});
 
-var var_={desired_state:{},actual_state:{},way_to_get_there:{discover:''}}
+if(confidence>=confidence_level_needed)
+callback();
+return confidence;
+}
+/*
+
+if something else affects it - define additional variables, state unknown
+
+confirmation dialogue with auto confirm option checked by default
+
+*/
+/*
+am I qualified?
+
+check user state against the list of criteria,
+namely: current state, 
+skills.
+
+export difference as a todo list wth priorities (confirm?)
+skills=>training plan
+state=>mini quests
+*/
+/*
+var a = b
+discover tha one is another, use it, substitute, aggregate
+*/
 </script>
