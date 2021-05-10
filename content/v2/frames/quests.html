@@ -12,7 +12,7 @@
                 <div class="left" id="body_left">
                     <p>Body Left</p>
                 </div>
-                <div class="right">
+                <div class="right" id="body_right">
                     <p>Body right</p>
                 </div>
             </div>
@@ -24,8 +24,13 @@
 
 <script>
     var template=`<p>temolate</p>`;
+    var q_sample=`
+    <h3>Go eat</h3>
+    <input type="checkbox">
+    `
     function dev(){
         body_left.innerHTML=ejs.render(template);
+        body_right.innerHTML=ejs.render(q_sample);
     }
     window.onmessage=e=>{console.log('quests onmessage',e)}
 </script>
