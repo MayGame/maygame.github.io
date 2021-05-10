@@ -145,13 +145,6 @@ html, body, iframe
     }
     var user_pub;
     window.onmessage=async(e)=>{
-        // if(e.data.gun_put_sub){
-        //     user.get(store_dir).get(e.data.soul).get(e.data.subdir).put(JSON.parse(e.data.gun_put_sub))}
-        // else
-        // if(e.data.frame_click){
-        //     console.log('click on', e.source, e.data)
-        // }
-        // else
         if(e.data.open_window){
             toggle(document.getElementById(e.data.open_window));
         }
@@ -162,14 +155,6 @@ html, body, iframe
             user.get(store_dir).get(e.data.soul).put(JSON.parse(e.data.gun_put))
         }
         else
-        // if(e.data.gundelete){
-        //     if(validate_access(e.source,e.data.gundelete))//todo: memoize
-        //     {
-        //     console.log('gundelete: ', e.data);
-        //     user.get(store_dir).get(e.data.gundelete).put(null);
-        //     }
-        // }
-        // else Doesn't work anyways.
         if(e.data.sign_add){
             if(validate_access(e.source,e.data.soul))//todo: memoize
             {
@@ -210,7 +195,6 @@ html, body, iframe
         else
         if(e.data.frame_resize){
             let fname = e.source.name;
-            // console.log('resize',fname,e.data.frame_resize,document.getElementsByName(fname)[0].parentElement.style)
             if(e.data.frame_resize.width)
             document.getElementsByName(fname)[0].style.width=e.data.frame_resize.width;
             if(e.data.frame_resize.height)
@@ -221,7 +205,7 @@ html, body, iframe
             if(pairs[e.source.name])
             e.source.postMessage({'topic':'your_pair','pair':pairs[e.source.name]})
             else(console.log('No pair found for '+e.source.name))
-    }
+    }}
     function validate_access(source,soul){
         let fname = source.name;//fixme, in case it's not an iframe
         if(pubres[soul]){console.log('access to', soul, "granted to frame: ", fname); return true;}
@@ -309,3 +293,5 @@ temp_key =  await sea.pair();
 document.getElementById("current_key").value=JSON.stringify(temp_key);
 }
 </script> 
+</body>
+</html>
