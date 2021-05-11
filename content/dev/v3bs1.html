@@ -1,0 +1,137 @@
+<html>
+<head>
+        <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+        <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+        <script src="../../js/cdn/ejs.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+<div class="p1" id="p1div">
+    <h3>Goal:</h3>
+    <p>Beecum stronk!</p>
+    <h3>State:</h3>
+    <h4>Known vars:</h4>
+    <ul>
+        <li>Rested (after 9 hours of sleep)</li>
+        <li>Hungry</li>
+        <li></li>
+    </ul>
+    <h3>Skills</h3>
+    <ul>
+        <li></li>
+    </ul>
+    <h3>Traits</h3>
+    <ul>
+        <li>Is a girl</li>
+        <li></li>
+</ul>
+<p>-------------------------------</p>
+<h2>Flow:</h2>
+<ol>
+    <li>Discovers that they are out of food</li>
+    <li>No known algorithm to get it</li>
+    <li><p>Broadcasts wannafood message to their pubs</p></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ol>
+</div>
+<div class="p2" id="p2div">
+    <h3>Goal</h3>
+    <p>Haf foon</p>
+    <p>Faind tha gell</p>
+    <h3>Skills</h3>
+    <ul>
+        <li>Cook</li>
+        <li></li>
+    </ul>
+    <p>-------------------------------</p>
+<h2>Flow:</h2>
+<ol>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ol>
+</div>
+<div class="p3" id="p3div">
+    <h3>Goal</h3>
+    <p>Take over the planet</p>
+    <h3>Intermediate goals</h3>
+    <p>Get minions</p>
+    <p>Feed the army</p>
+    <h3>Resources</h3>
+    <ul>
+        <li>Raw food</li>
+        <li></li>
+    </ul>
+    <p>-------------------------------</p>
+<h2>Flow:</h2>
+<ol>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ol>
+</div>
+<!-- <div class="p4" id="p4div"></div> -->
+<!-- <div class="p5" id="p5div"></div> -->
+<!-- <div class="ui" id="uidiv"> -->
+</div>
+</div>
+<script>
+var player1={}
+player1.skills={cook:true}
+
+var player2={}
+player2.state={}
+player2.goal={}
+
+
+
+</script>
+<style>
+    *{
+        margin: 0;
+    }
+.container{
+display: grid;
+grid-template-areas: 
+/* "header header header" */
+ "p1 p2 p3";
+/* "p4 p5 ui"; */
+grid-template-columns: 1fr 1fr 1fr;
+/* grid-template-rows: 0.2fr 2fr 2fr; */
+gap: 2px;
+height: 100vh;
+width: 100vw;
+}
+.p1{
+grid-area: p1;
+background-color: pink;
+}
+.p2{
+grid-area: p2;
+background-color: hotpink;
+}
+.p3{
+grid-area: p3;
+background-color: deeppink;
+}
+.p4{
+grid-area: p4;
+background-color: palevioletred;
+}
+.p5{
+grid-area: p5;
+background-color: #bb00bb;
+}
+.ui{
+grid-area: ui;
+background-color: fuchsia;
+}
+</style>
+</body>
+</html>
