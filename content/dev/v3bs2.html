@@ -1,0 +1,194 @@
+<html>
+<head>
+        <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+        <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+        <script src="../../js/cdn/ejs.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+<div class="p1" id="p1div">
+  <label for="loop_checkbox">Loop</label>  <input type="checkbox" checked onchange="loop_flag=!loop_flag" id="loop_checkbox">
+<div id='loop_render'></div>
+
+</div>
+<div class="p2" id="p2div">
+    <label for="goal_add_name">Goal name</label><input type="text" id="goal_add_name">
+    <br>
+<p><button onclick="add_goal();">Add goal</button></p>
+<p>-------------------------------------</p>
+<p><strong>Input generation</strong></p>
+<p>Describe the situation you are in:</p>
+<textarea style="height: 7em;" id="situation_desc">Nothing helps, I'm fucked, my life has no meaning.</textarea><br>
+<button onclick="whine();">Whine</button>
+<p>-------------------------------------</p>
+</div>
+<div class="p3" id="p3div">
+    <button onclick="
+    player1.goals={};
+    update_ls('player1');
+    ">Init</button>
+    <p>-------------------------------------</p>
+    <div id="div32"></div>
+</div>
+</div>
+<script>
+    var player1={}
+player1.skills={cook:true}
+player1.state={}
+//data provider: (per var)
+//do, delay...
+//[]
+player1.goals={'J':{solutions:'a',weight:1},'stay healthy':{weight:0.7},'learn korean':{weight:0.1}}
+var player2={}
+player2.state={}
+player2.goal={
+    stay_productive:{}
+}
+var default_agent='player1';
+var goals = {'survive':{priority: 0.5},'good_story':{priority:0.7}}
+function goal(goal,agent_name){
+    if(!agent_name){
+        agent_name=default_agent;
+    }
+    var agent=window[agent_name];
+    console.log(agent)
+    agent.goals[goal]={};
+    update_ls(agent_name)
+}
+function whine(){
+if(situation_desc.value=`Nothing helps, I'm fucked, my life has no meaning.`)
+goal('rest');
+}
+function add_goal(){
+player1.goals[goal_add_name.value]={}
+update_ls('player1');
+}
+let solution={related_vars:[
+    {name:'a',optimal_state:'a',done_criteria:{one_of:['a','A']}}],human_description:'Some nonsense'}
+var loop_flag=true;
+//-------------------------------------
+function update_ls(agent_name){
+    localStorage.setItem(agent_name+'goals',JSON.stringify(window[agent_name].goals))
+}
+function load_goals(agent_name){
+    window[agent_name].goals=JSON.parse(localStorage.getItem(agent_name+'goals'));
+}
+function seq2state(){
+    let description;
+    let state={tellers_state:{stress_level:{value:'low',confidence:0.7},},situation:{}}
+}
+function loop(){
+    setTimeout(function(){
+        if(loop_flag){
+            load_goals('player1');
+        let text=`Goals:
+        <ul>
+        `
+
+        Object.keys(player1.goals).forEach((key) => {
+            text+=`<li onclick="div32.innerHTML=player1.goals['${key}'].solutions[0]">`+key;
+            if(player1.goals[key].solutions)
+            text+=` Ough, there's a solution`; 
+            // console.log('solution:',goal.solutions[0] );
+            else text+=`<button onclick="player1.goals['${key}'].solutions=['sleep'];
+            update_ls('player1');
+            console.log(player1);
+            ">Problem ${key}, add solution</button>`
+            text+='</li>'
+        });
+        text+='</ul>'
+    loop_render.innerHTML=ejs.render(text);
+    }
+        loop();},700);
+}
+loop();
+
+function empathy(){
+    //calc declared (or estimated) goals of another agent 
+
+}
+function try_get_val(){}
+function try_get_alg(){}
+var logs={}
+logs.process_and_clear=function(){
+    //summarize, aggregate, turn into a story, clear
+}
+var userspace={
+    //related to the user state and their .. whatever
+}
+var systemspace={
+    //problems the system has, its variables and related stuff. 
+    //like gui, inner logic, miodules.
+}
+</script>
+
+<script>
+    var tgoal='rest';//temp
+    var tsolution={lights_off:true}
+    var lights_off={address:undefined}
+/**
+ * Alg:
+ * Get a goal.
+ * for that goal:
+ * done criteria, final state for the related vars
+ * solution: 
+ * alg to run.
+ * If there's no solution: run discovery alg:
+ * ask others, ask user, try generate (combine from solutions for rel vars)
+ * 
+ * 
+ * 
+ * 
+ * /
+/**
+ * offer/need, match?
+*/
+
+</script>
+
+
+<style>
+    *{
+        margin: 0;
+    }
+.container{
+display: grid;
+grid-template-areas: 
+/* "header header header" */
+ "p1 p2 p3";
+/* "p4 p5 ui"; */
+grid-template-columns: 1fr 1fr 1fr;
+/* grid-template-rows: 0.2fr 2fr 2fr; */
+gap: 2px;
+height: 100vh;
+width: 100vw;
+}
+.p1{
+grid-area: p1;
+background-color: pink;
+}
+.p2{
+grid-area: p2;
+background-color: hotpink;
+}
+.p3{
+grid-area: p3;
+background-color: deeppink;
+}
+.p4{
+grid-area: p4;
+background-color: palevioletred;
+}
+.p5{
+grid-area: p5;
+background-color: #bb00bb;
+}
+.ui{
+grid-area: ui;
+background-color: fuchsia;
+}
+</style>
+</body>
+</html>
