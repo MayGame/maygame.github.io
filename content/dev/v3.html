@@ -1,8 +1,32 @@
+<html>
+<head>
+        <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+        <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+        <script src="../../js/cdn/ejs.min.js"></script>
+
+</head>
+<body>
 <button onclick="try_do(goal);">J</button>
 <button onclick="console.log(goal);">log</button>
 <br><label for="test_mode_checkbox">Test mode</label><input type="checkbox" onchange="
-trusted_loop_flag=!trusted_loop_flag; test_loop_flag=!test_loop_flag;">
+trusted_loop_flag=!trusted_loop_flag; test_loop_flag=!test_loop_flag;"><br>
+<button onclick="ask_for_lever.action();">Test</button><br>
+<p id="lever_hint" style="background-color: red; width: max-content;">Push the lever</p>
+<button onclick="lever_pressed();lever_hint.style.backgroundColor='red';">lever</button>
+<p>Learning to predict action's consequences within the scope.</p>
+<p>Supposed: </p>
+<p>Action fires (turning hint green)</p>
+<p>External environment should set expected var to true (lever button is pressed)</p>
+<p>Prediction contains time in milliseconds, within which that would happen</p>
 <script>
+    var gun = Gun();
+    var sea = Gun.SEA;
+    var user = gun.user();
+    var pair = {pub: "lEUnB6jIz3CJpa_oNFJeSDs5wkBHwb4cl0WtE6TV3K0.taG9Srbil-wUx9LQUoZ8hDhiP6Eia39UOy9lehZesmg", priv: "0p8286sAJamcYfixpnwFdPs_zEl6Zt8Wupj_7xunEWs", epub: "H4pSwApr32p_3KsqQlZ8DxFXCKJLmZj_F-uAhril8KQ.KfStC2bDzLZ157fJ0ORkxAI-WbW2BMdK3q1giYeZTSo", epriv: "YpaoPsVXdVFSy2QDLLDJ5BO9b2ZtBLh9Nrq97AkA7Mw"}
+    user.auth(pair);
+    path='a';
+    var mpath;
+
     var goal = {name:'build fluggegecheimen',reward:200,}
     // var goal = {name:'build fluggegecheimen',reward:200,algs:[1,2,3]}
     var flugge_alg1='alg1';
@@ -23,22 +47,28 @@ trusted_loop_flag=!trusted_loop_flag; test_loop_flag=!test_loop_flag;">
         goal.algs.push(flugge_alg2)
     }
     class Action{
-        constructor(calcback,version,context,meta)
+        constructor(action, calcback, context, version,meta)
         {   
-            this.name = meta.name;
-            this.description = meta.description;
+            this.action=action;
+            this.name = meta?.name;
+            this.description = meta?.description;
             this.version='Js';
             this.calcback=calcback;//function, that is used for
         }
         calc_result(params) {
             //returns predicted result for that action being done
+            this.calcback(params)
 
         }
-        description(){
+        get_description(){
             return 'this is an action. No more results available'
         }
         learn_predict(){
             //log... process, see results. expected ones and actual ones
+        }
+        act(){
+            // console.log('act', )
+            this.action();
         }
     }
     var trusted_loop_flag=true;
@@ -46,25 +76,52 @@ trusted_loop_flag=!trusted_loop_flag; test_loop_flag=!test_loop_flag;">
     function trusted_loop(){//things that are being done unconditionaly
     setTimeout(function(){
         if(trusted_loop_flag){
-            console.log('trusted loop')
+            // console.log('trusted loop')
         }
             trusted_loop();},700);
 }
 trusted_loop();
+
     
     function untrusted(){//iterated manually with confirmation
 
 
     }
     function test_loop(){//modified version. runs until abort condition is triggered
-
+        setTimeout(function(){
+        if(test_loop_flag){
+            try {
+            // console.log('test loop')
+            console.log(actions[0].action.calc_result());
+            // console.log(actions[0].action.get_description());
+            ask_for_lever.act();
+            } catch(e){}
+        }
+            test_loop();},1400);
     }
+    test_loop();
     var state={source:{local_gun_soul:'key/gun/soul/for_example'},
     trust: 0.9, confidence: 0.9,
     value_: 'high', is_a: 'todo'};
     var var_validate;                                                                                                            
     var var_validate_source;
     
+// var lights_off=new Action(
+//     function () {
+//         return {lights:false,e_time:200};
+//         //e_time - action execution time. req for state to become
+//     },
+//     {lights:false}//ctxt
+//     //
+// )
+class Sequence{
+    //or is it just an action
+    //actions have activation energy, stops propagating/executing once below threshold
+}
+
+var actions=[];
+//error margin - criteria for the algorithm to lose the trust
+
 </script>
 <script>
 var system={};
@@ -90,58 +147,7 @@ class Solution{
  * do A N times, where A solves part (action, times)
  * 
 */
-
-
-
-    /*
-100k gems spent on 6* chests: (80 skip +20 bread per)
-1000 chests
-60 seals
-120 orange shards
-8000 gems
-120 hss
-600 slots
-240 caps
-180 5* elite
-140x8 5* shards (22.4 sets)
-56m juice
-35m gold
-48k chisels
-48k plateau repas
-1500 serv cristals
-4000 flash drives
-240 scrolls
-*/
-/*
-1000 5*chests:
-1000 5* shards (20 sets)
-40k chisels
-40k plateau repas
-50m juice
-30m gold
-360 slots 
-240 scrolls
-240 red ant
-120 elite
-120 caps
-120 hss
-5000 gems
-1000 serv cristals
-3000 flashes
-*/
-/*
-1000 4* chests:
-40 elite                    1200
-60 scrolls                  600
-240 slots                   6000
-2400 gems                   2400
-25200 plateau repas         1260        1000=2m gold = 50 gems
-25200 chisels               0
-50m gold                    1250
-50m juice                   1250
-3000 4* shards (100 sets)   4000
-800 5*shards(16 sets)       6400
-cookies = 0                 
-total                       24360
-*/
 </script>
+<script src="dev.js"></script>
+</body>
+</html>
