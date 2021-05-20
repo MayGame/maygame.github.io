@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <script src="../../../js/cdn/ejs.min.js"></script>
+
+    </head>
+    <body>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; background-color: hotpink; width: 100%; height: 100%;">
+        <div style="background-color: deeppink; width: 100%; height: 100%;">
+        
+<div id="left">   <ul id="myUL">
+    <li><span class="caret">Be happy</span>
+        <p onclick="state_render(be_happy);">Target state: >0.9</p>
+        <p>Actual state: 0.7</p>
+      <ul class="nested">
+        <li><span class="caret">Occupied</span>
+            <ul class="nested"><li></li></ul></li>
+        <li><span class="caret">Healthy</span>
+          <ul class="nested">
+            <li>Pulse is ok</li>
+            <li>Well fed</li>
+            <li><span class="caret">Exercises</span>
+              <ul class="nested">
+                <li>Back</li>
+                <li>Legs</li>
+                <li>Matcha</li>
+                <li>Pi Lo Chun</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+<button onclick="left.innerHTML=node_render(unicorn_s);">Unicorn sausage</button>
+</div>
+        </div>
+        <div style="background-color: deepskyblue; width: 100%; height: 100%;" id="right"></div>
+
+        </div>
+        <script>
+            var template='a';
+            var node_template=`
+           <p>Var: <%= node.meta.name %></p>
+           <p>Tags: <% node?.tags.forEach(tag=>{ %>
+            <%= tag %>, 
+           <% }); %>
+
+           <% if(node?.state?.value){ %>
+            <p>State: <%= node.state.value %> </p>
+                <% } else { %>
+                    <p>State: undefined</p>
+                    <% };%>
+            `;
+            //tag skill[]
+            var happy_text=`<p>Be happy</p>
+            <p>Related context:</p>
+            <button>Add</button>
+            
+            `;
+            //tags belong to projects (or UI/logical groups?)
+            var test_node = {meta:{name:'health', text:'asdas',tags:['state','hud']},
+            state:{value:0.7,target_value:1,exact_match:true},related_context:{}};
+            var unicorn_s = {meta:{name:'Eat unicorn sausage'},tags:['quest', 'task', 'problem']};
+            var unicorn_ride;//desire for a unicorn to ride you
+
+            var get_unicorn_meat = {} //generic solution, "get meat", where animal is a unicorn 
+            var find_unicorn;
+            var raise_unicorn;
+            var get_unicorn_sequence;//small research project. for this example we assume you need to find/become a 
+            //specialist with some specific skills (context)
+            var find_laboratory;
+            var laboratory={}//traits, state, context for lab to fit in 
+
+
+            var be_happy={meta:{text: happy_text},
+            confidence:0.7};
+            function state_render(state){
+                let r = ejs.render(state.meta.text);
+                right.innerHTML=r;
+            }
+            function node_render(node){
+                let text = ejs.render(node_template,{node: node})
+                return text;
+            }
+            right.innerHTML=node_render(test_node)
+        </script>
+        <style>
+            /* Remove default bullets */
+    ul, #myUL {
+      list-style-type: none;
+    }
+    
+    /* Remove margins and padding from the parent ul */
+    #myUL {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Style the caret/arrow */
+    .caret {
+      cursor: pointer;
+      user-select: none; /* Prevent text selection */
+    }
+    
+    /* Create the caret/arrow with a unicode, and style it */
+    .caret::before {
+      content: "\25B6";
+      color: black;
+      display: inline-block;
+      margin-right: 6px;
+    }
+    
+    /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+    .caret-down::before {
+      transform: rotate(90deg);
+    }
+    
+    /* Hide the nested list */
+    .nested {
+      display: none;
+    }
+    
+    /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+    .active {
+      display: block;
+    }
+        </style>
+        <script>
+              var toggler = document.getElementsByClassName("caret");
+var i;
+            for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+        </script>
+
+    </body>
+</html>

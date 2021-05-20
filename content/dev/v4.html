@@ -1,0 +1,161 @@
+<html>
+<head>
+        <!-- <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+        <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script> -->
+        <script src="../../js/cdn/ejs.min.js"></script>
+        <script src="../../js/MayDo.js"></script>
+
+</head>
+<body>
+<div style="display: grid; grid-template-areas: 'a b' 'menu menu'; height: 100%; width: 100%; grid-template-columns: 1fr 1fr;"> 
+    <div id="sys" style="grid-area: a; background-color: hotpink;">
+        <p>system</p>
+        <button onclick="a+=1;">A++</button><button onclick="    observe(['a','b'], nothing, 4000);
+">+observe</button>
+<br><button onclick="nothing.print_log();">Log</button>
+<br><button onclick="perform('quest', ctxt);">Quest</button>
+<div id="sys_todo">
+    <p>Todo:</p>
+    <textarea></textarea>
+</div>
+        </div>
+    <div id="plr" style="background-color: deeppink; grid-area: b;">
+    <h3>Player</h3>
+<h4>Goals:</h4>
+<textarea id="pgoals">Build a spaceship</textarea>
+<br>
+<button onclick="perform('build a spaceship',{});">Build a spaceship</button>
+</div>
+<div id="menu_div" style="grid-area: menu;">
+<button onclick="quests()">Quests</button>
+</div>
+    </div>
+
+<script>
+    class Action{
+        constructor(callback,context, opts){
+            this.callback=callback;
+            this.logs=[];
+            this.version='1.js';
+            this.preds={};
+            if(opts&&opts?.external_learning_alg){
+            this.learn=opts.external_learning_alg;
+            this.allow_multiple=opts?.allow_multiple||false;//can mess up the logs
+            }
+        }
+        do(){
+            this.callback();
+        }
+        print_log(){
+            // this.logs.forEach(e=>console.log(e))
+            console.log(this.logs)
+        }
+        log(obj){
+            this.logs.push({time: Date.now(),value: obj})
+        }
+        predict(state,deltatime){
+
+        }
+
+        learn(last_n){
+            if(last_n){
+
+            }
+            else logs.forEach(entry={
+
+            })
+        }
+    }
+    class Agent{
+    }
+    var system=new Agent();
+    var user=new Agent();
+    var agents={}
+</script>
+<script>
+    var a =0;
+    var b=23;
+    var old_state={};
+    var new_state={};
+    function observe(context, action, ms) {
+        old_state={};
+        context.forEach(element => {
+            old_state[element]=window[element];//todo: deepcopy/clone
+        });
+        console.log(old_state);
+        action.log({old_state:old_state});
+        action.do();
+        new_state={};
+        setTimeout(function()
+                        {context.forEach(element => 
+                            {new_state[element]=window[element];});
+                            console.log(new_state);
+                            action.log({new_state: new_state});
+                        },ms);
+    }
+    function do_nothing() {
+        console.log('here goes nothing');
+    }
+    var nothing = new Action(do_nothing);
+    observe(['a','b'], nothing, 4000);
+    function predict(context,action) {
+        
+    }
+    function learn_nothing(action,last_n) {
+        if(last_n)//logs
+        {}
+        else action.logs.forEach(entry=>
+        entry.time
+        )
+        //state, action, result
+    }
+</script>
+<script>
+    var quest_description='Bring it on';
+    var ctxt = {description: {global:'quest_description'},it:{external:true,source:'user'}};
+    var actions={quest: {global: 'do_quest'},};
+    function do_quest(context) {
+        let desc = window[context.description.global];
+        console.log('Please, do: '+desc);
+    }
+    function get_external(name,source) {
+        if(source=='user')
+        perform(ask_user,name)
+    }
+    function perform(action,context) {
+        let a = actions[action];
+        if(a?.global)
+        window[a.global](context);
+        else {console.log('Not found:', action);
+        console.log('how do we actually do that?')
+
+    }
+    }
+    function perform_external(action, context, who) {
+        if(who=='player'||who=='user'){
+            try{
+                ask_player();
+            }catch(e){ if(e instanceof ReferenceError)
+  console.log('not found: ',e.message.split(' ',1)[0])  }
+        console.log('Dear player, please do ', action, 'with context: ', context);
+        console.log('If you can not for some reason, contact me in console.')
+        //set expect
+        }
+    }
+    function show_state(agent) {
+        //calculated utility, wishes, known vars, contacts..
+    }
+    window.onerror=(a,b, line, col, e)=>{console.log(a);
+        let name = a.split(' ');
+
+    if(e instanceof ReferenceError){
+        name = name.slice(2,(name.length-3));
+        console.log(name);}
+    else if(e instanceof TypeError)
+    {
+    name = name.slice(2,(name.length-4));
+        console.log(name)
+    }}
+</script>
+</body>
+</html>
