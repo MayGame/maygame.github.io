@@ -1,0 +1,19 @@
+Group functions:
+Problems can be shared to groups (clans?, guilds?), with group policy for visibility/whatever applied
+You do it like...
+
+Hence, problem is:
+set of variables, and their desired state, where variable is
+well, a variable, with some meta, like description, rules for data source, known related vars (on the agent level)
+
+Agents: The agents are objects that take an action in response to the system's inputs. They can be simple objects, like a button that can be on or off, or they can be more complex objects, like a car 
+that can have a position and velocity. The agents can use parameters to determine their behavior.
+
+
+
+Inputs:
+When system state changes, 
+lookup for the most prioritized related task that these vars are affecting, 
+if its importance is bellow threshold, do nothing. else, recalc.
+"Let's just store every variable change and then sort them by importance and execute from there."
+(GPT bro)

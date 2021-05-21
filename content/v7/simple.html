@@ -1,0 +1,31 @@
+<html>
+    <body>
+        <script>
+            var vars=[['pulse',3],['lights',0],['sugar',2]];//name, importance
+            var something_else='?';//fixme. special marker, that we should add here
+            var tasks_priorities=[['stay healthy',0.9],['be happy', 0]]//be happy isn't here, task add 
+            var tasks={'stay healthy':{context:{vars:['pulse','sugar']
+            //vars - top level context. not counting needed for subs. usually reports from subs go there
+            ,tasks:['pulse_is_ok',something_else],}},
+    }//context - names
+    var frame=[];//changed vars. update sets those. ones above threshold are subscribed to
+function process_frame(){
+    const t0 = performance.now();
+    frame.forEach(e=>{})
+    const took = performance.now()-t0;
+    return took;
+}
+            var recalc_importance_threshold=2;
+            function compare_priorities(a,b){
+                return b[1]-a[1];
+            }
+            //urgent task - raise the priority, maybe change threshold.
+            //idling - lower threshold (lower - verb)
+            vars=vars.sort(compare_priorities);
+            function show_important(){
+            }
+            console.table(vars)
+            console.table(tasks_priorities)
+        </script>
+    </body>
+</html>

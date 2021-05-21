@@ -1,0 +1,49 @@
+<html>
+    <head>
+                <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+        <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+<!-- 
+        <script src="../../js/cdn/gun.js"></script>
+        <script src="../../js/cdn/sea.js"></script> -->
+        <script src="../../js/cdn/ejs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js" integrity="sha512-ZuOjyqq409+q6uc49UiBF3fTeyRyP8Qs0Jf/7FxH5LfhqBMzrR5cwbpDA4BgzSo884w6q/+oNdIeHenOqhISGw==" crossorigin="anonymous"></script>
+        <script id="wsjs_innerscript" src="../../js/core/wsjs.js"></script>
+        <link id="css_styles_core" rel="stylesheet" href="../../css/styles.css" />
+    </head>
+    <body>
+
+
+<script>
+    var gun = Gun();
+    var sea = Gun.SEA;
+    class Var{
+        constructor(value, meta){
+            this.value=value;
+            this.meta=meta;
+        }
+    }
+    class Task{
+        constructor(context){
+            this.context=context;
+        }
+    }
+</script>
+<script>
+    var state;
+    var vars={};
+
+    var test_ctxt = {}
+    var task1 = new Task(test_ctxt);
+    var task2 = new Task(test_ctxt);
+    function ctxt(){
+        task1.context.a=2;
+    }
+    function merge_contexts(target, source){
+        //deepclone + resolve;
+
+    }
+</script>
+<button onclick="ctxt()">ctxt</button>
+<button onclick="console.log(task2)">log2</button>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>MayGame</title>
+  <meta name="description" content="No description">
+  <meta name="author" content="Some dude">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- #region -->
+<script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js" integrity="sha512-ZuOjyqq409+q6uc49UiBF3fTeyRyP8Qs0Jf/7FxH5LfhqBMzrR5cwbpDA4BgzSo884w6q/+oNdIeHenOqhISGw==" crossorigin="anonymous"></script>
+  <script id="wsjs_innerscript" src="../../js/core/wsjs.js"></script>
+  <link id="css_styles_core" rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body >
+<style>
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+iframe{
+        /* position: fixed; */
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    pointer-events: all;
+}
+        /* html 
+{
+ overflow: auto;
+} */
+ 
+html, body, iframe 
+{
+    height: 100vh; 
+    width: 100vw;
+    border: none;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto minmax(auto, 10vh) max-content;
+    grid-template-columns: 1fr 1fr auto;
+    grid-template-areas: 
+    "a b map"
+    "footer footer footer_b"
+    "menu_bar menu_bar menu_bar_right"
+    ;
+    margin-left: calc(-50vw + 50%);
+    }
+.header{
+    grid-area: header;
+    background-color: pink;
+}
+.menu_bar{
+    grid-area: menu_bar;
+}
+.menu_bar_right{
+    grid-area: menu_bar_right;
+}
+.a{
+    grid-area: a;
+    /* background-color: lightcoral; */
+}
+.b{
+    grid-area: b;
+    /* background-color: violet; */
+}
+.map{
+    grid-area: map;
+    /* background-color: palevioletred; */
+}
+.footer{
+    grid-area: footer;
+    /* background-color: pink; */
+}
+.footer_b{
+    /* background-color: rgb(172, 77, 172); */
+    grid-area: footer_b;
+}
+</style>
+<!-- <div class="layer" id="bg_layer">
+    <iframe src="<%= background_url %>" allow="xr-spatial-tracking;"></iframe>
+</div> -->
+    <div class="layer container" id="top_layer" style="position: absolute; z-index: 2147483212; bottom: 0;" >
+        <div class="menu_bar">
+            <input type="text" id="text_pair" placeholder="paste your key here or log in with default">
+            <br>
+            <button style="background-color: grey; border-radius: 8px;" 
+            onclick="toggle(top_layer); toggle(main_layer); default_sign_in();">Quick sign in</button>
+            <button onclick="toggle(top_layer); toggle(main_layer); force_create_new_user();">Force new user</button>
+        </div>
+</div>
+<div class="layer" id="main_layer" style="display: none;">
+<div class="container">
+<div id="menu" class="menu_bar" style="position: absolute; z-index: 2147483210; bottom: 0; pointer-events: all;">
+    <!-- <button onclick="default_sign_in();" style="color: seagreen;">Quick sign in</button> -->
+    <!-- <br> -->
+    <button onclick="toggle(top_layer); toggle(main_layer);">Login menu</button>
+</div>
+<div class="menu_bar_right"><button onclick="toggle(hotbar)" style="float: right;">*</button></div>
+<!-- #region -->
+<div class="footer">
+    <!-- <p>some footer stuff</p> -->
+</div>
+<div class="footer_b" style="display: none;" id="hotbar">
+    <button>hotbar key 1</button>
+    <button>hotbar key 2</button>
+</div>
+</div>
+</div>
+</div> 
+<!-- #endregion -->
+
+<script>
+    var peers = []//["<%= peers %>"];//exactly one peer for now.
+    var gun = Gun({peers:peers});
+    var sea = Gun.SEA;
+    const store_dir="nouveau_dossier"
+    var user = gun.user().recall({ sessionStorage: true }, () => {
+      logIn()
+    });
+    var keyring = {};//todo
+    
+    gun.on('auth', () => {
+        logIn();
+    })
+    function frame_pub(frame, e, topic){
+        frame.postMessage({'your_topic_pub':{e},'soul': topic});
+        console.log('from frame pub: ',frame, e)
+    }
+    var user_pub;
+    window.onmessage=async(e)=>{
+        // if(e.data.gun_put_sub){
+        //     user.get(store_dir).get(e.data.soul).get(e.data.subdir).put(JSON.parse(e.data.gun_put_sub))}
+        // else
+        // if(e.data.frame_click){
+        //     console.log('click on', e.source, e.data)
+        // }
+        // else
+        if(e.data.open_window){
+            toggle(document.getElementById(e.data.open_window));
+        }
+        else
+        if(e.data.gun_put){
+            // console.log("gun_put: ", e.data.gun_put);
+            if(validate_access(e.source,e.data.soul))//todo: memoize
+            user.get(store_dir).get(e.data.soul).put(JSON.parse(e.data.gun_put))
+        }
+        else
+        if(e.data.sign_add){
+            if(validate_access(e.source,e.data.soul))//todo: memoize
+            {
+                let data= await sea.sign(JSON.parse(e.data.sign_add),user._.sea)
+                console.log('signed: ',data)
+                user.get(store_dir).get(e.data.soul).put(data)
+            }
+        }
+        else
+        if(e.data.gun_sub)
+        {
+            let frame_subscriber = e.source;
+            let soul = e.data.gun_sub;
+            if(!validate_access(frame_subscriber,soul))
+            return false;
+            console.log(frame_subscriber, "subscribed to ", soul, "topic")
+            user.get(store_dir).get(soul).on((e)=>{//fixme? e persists as e in storage objects :-(
+                frame_pub(frame_subscriber,gun_filter(e), soul);
+                // frame_subscriber.postMessage({'your_topic_pub':{e}});
+                // console.log('items/bookmarks fires pub: ',e)
+            },{change: true});
+        }else if(e.data.get_id){
+            if(e.data.get_id=='user')
+            e.source.postMessage({user_id: user.is.pub})
+        }
+        else if(e.data.gun_map_once){
+            let frame = e.source;
+            let soul = e.data.gun_map_once;
+            if(!validate_access(frame,soul))
+            return false;
+            var result=[]
+            await user.get(store_dir).get(soul).map().once((e)=>
+            {
+                result.push(e);
+            })
+            frame.postMessage({data: result,map_once_reply: soul});
+        }
+        else
+        if(e.data.frame_resize){
+            let fname = e.source.name;
+            // console.log('resize',fname,e.data.frame_resize,document.getElementsByName(fname)[0].parentElement.style)
+            if(e.data.frame_resize.width)
+            document.getElementsByName(fname)[0].style.width=e.data.frame_resize.width;
+            if(e.data.frame_resize.height)
+            document.getElementsByName(fname)[0].style.height=e.data.frame_resize.height;
+        }
+        else
+        if(e.data.topic=='pair_request'){
+            if(pairs[e.source.name])
+            e.source.postMessage({'topic':'your_pair','pair':pairs[e.source.name]})
+            else(console.log('No pair found for '+e.source.name))
+        }
+    }
+    function validate_access(source,soul){
+        let fname = source.name;//fixme, in case it's not an iframe
+        if(pubres[soul]){console.log('access to', soul, "granted to frame: ", fname); return true;}
+        //starts with for directory access?
+        else if(access_list[soul]?.frames.includes(fname)){
+            {console.log('access to', soul, "granted to frame: ", fname, "in white list"); return true;}
+        }
+        else
+        {console.log('access to', soul, "denied to frame: ", source.name); return false;};
+        //todo: better access management
+        //wip
+        //fixme
+    }
+   let pubres={'map/gps_map_click':true,
+    'map/last_bookmark':true,
+    'map/show':true,
+    'items/edit':true,
+    'items/list':true,
+}
+    let access_levels={
+
+    }
+    let access_list={
+    //     'map/gps_my_pos':{frames:['map',//frame name, not an id
+    // 'items']},
+    // 'item/add':{frames:['items','item_add']},
+    // 'agents':{frames:[agents]},
+    // 'agents/friends':{frames:['agents','item_add']},
+    // 'item_add/last_meta':{frames:['item_add']},
+    // // 'items/list':{frames:['item_add', 'items']}
+    }
+    function add_agent(){
+        user.get('nouveau_dossier').get('agents').put()
+    }
+    //todo: manage access in runtime, validation access deny fallback to request
+    const default_ti=0.0;//trust index for anyone
+    const default_access_level=1.0;//ti required to get access
+    //#region Sign in
+async function default_sign_in(){
+    let text_pair = document.getElementById('text_pair').value;
+    let pair = localStorage.getItem('user_pair');
+    if(text_pair){console.log('Logging in with a pasted key', pair);
+    pair=JSON.parse(text_pair);//fixme: validation
+    }
+    else{
+    if(!pair){console.log('No pair stored. Creating.');
+    pair = await sea.pair();
+    localStorage.setItem('user_pair', JSON.stringify(pair));
+    console.log('Logged in as a new user.', pair);
+    }
+    else { pair = JSON.parse(pair); console.log('logged in using saved key: ',pair);}}
+    user.auth(pair);
+}
+async function force_create_new_user(){
+    let pair = await sea.pair();
+    localStorage.setItem('user_pair', JSON.stringify(pair));
+    user.auth(pair);
+}
+    function logIn(){console.info('Logged in as ', user.is);
+    user_pub=user.is.pub;
+    let userN= user.get(store_dir);
+    var frames = window.frames; // or // var frames = window.parent.frames;
+
+    // ---------------------------------
+    let content = `${user_pub}@${peers[0]}`;
+    frames['profile'].postMessage({'innerHTML':{id:'iam', content: content}},'https://maygame.xxx')
+    // ---------------------------------
+    // userN.get('items/bookmarks').on((e)=>{console.log('core bookmarks gunfire',e)},{change: true});
+    userN.get('map/last_bookmark').on((msg)=>{console.log('core map bm: ', _.omit(msg,'_'))});
+    userN.get('map/show').on((msg)=>{console.log('core map show gunfire ', _.omit(msg,'_'))});
+    userN.get('map/gps_my_pos').on((crd)=>{console.log('core got user/gps pos, ',_.omit(crd,'_'))});//tmp, fixme
+    userN.get('map/gps_map_click').on((crd)=>{console.log('core got user/map_click, ',_.omit(crd,'_'))});//rmmmber, then off on relog
+    for (var i = 0; i < frames.length; i++) {
+        frames[i].postMessage({login: user.is.pub}, 'https://maygame.xxx');//todo track frame domains
+    }
+}
+function gun_filter(obj){//todo (attention marker!) might need those nulls sometimes. 
+    //swapping whole objects is a chosen strategy for now
+    if(_.isObject(obj)){
+    let result = {}
+    _.keys(obj).forEach(key=>{
+        if(obj[key])
+            if(key != '_')
+                result[key]=obj[key];
+    })
+    return result;
+} else return obj;}
+
+    async function create_key() {
+temp_key =  await sea.pair();
+document.getElementById("current_key").value=JSON.stringify(temp_key);
+}
+</script> 
+<script>
+    function toggle_pevents(target){
+        if(target.style.pointerEvents=='none')
+        target.style.pointerEvents='all'
+        else target.style.pointerEvents = 'none'
+    }
+</script>
+<script>
+    var vars=[['pulse',3],['lights',0],['sugar',2]];//name, importance
+
+    var tasks_priorities=[['stay healthy',0.9],['be happy', 0]]//be happy isn't here, task add 
+    var tasks={'stay healthy':{context:['pulse','sugar']}}//context - names
+    var recalc_importance_threshold=2;
+
+    function compare_priorities(a,b){
+        return b[1]-a[1];
+    }
+    console.table(vars.sort(compare_priorities))
+</script>
+</body>
+</html>

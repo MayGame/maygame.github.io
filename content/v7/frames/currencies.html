@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>MayGame</title>
+  <meta name="description" content="No description">
+  <meta name="author" content="Some dude">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="margin: 0; background-color: mediumpurple;">
+    <div id="edit_currency_div">
+    <div style="background-color: aquamarine; position: absolute; top: 50; bottom: 50; right: 50; left: 50;">
+        <p onclick="close_parent(this.parentNode);">(x)</p>
+        <p>Edit <a id="ecd_id"></a></p>
+        <label>Description</label>
+        <input type="text" id="ecd_description"><br>
+        <label>Icon base64</label>
+        <input type="text" id="ecd_img_base64" placeholder="paste your image's base64 here"><br>
+        <label>Hint text</label>
+        <input type="text" id="ecd_hint_text"><br>
+        <button onclick="ecd_submit()">Submit</button>
+    </div></div>
+<!--  -->
+<div id="currencies_page">
+    <div id="currencies_inner">
+        <!-- <p>Currencies <button onclick="if(user.is)load_currencies();else alert('Sign in')">Load</button></p> -->
+        <div id="currencies_container" style="display: block;">
+            <p id="tmpvar0_div"></p>
+            <table id="currencies_table">
+                <tr><th>Icon</th><th>Name</th><th>Description</th><th>More</th></tr>
+            </table>
+        
+            <input type="text" id="add_curr_name_input" placeholder="Name">
+            <button onclick="mock_add_cur()">Add</button>
+        </div></div></div>
+
+<!--  -->
+    <script>
+        let grid2=''
+        /*1 2
+          3 4 
+        */
+    </script>
+    <style>
+        .container{
+            display: grid;
+            height: 100vh;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: 
+            'grid1 grid2'
+            'grid3 grid4';
+            gap: 0,2rem;
+        }
+        @media only screen and (max-width:550px){
+            .container{
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            grid-template-areas: 
+            'grid1'
+            'grid2'
+            'grid3'
+            'grid4';
+            }
+        }
+    </style>
+</body>
+</html>

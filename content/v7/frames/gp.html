@@ -1,0 +1,19 @@
+<!-- General purpose frame -->
+<html>
+<head></head>
+<body>
+
+<script>
+    window.onmessage=(m)=>
+    {
+        let data = m.data.markup;
+        document.body.innerHTML=data;
+        //new node script, blah blah.. don't need it for now.
+        //supposed to receive its inner contents via http/websocket/inner message/you name it
+        //gp api for trusted (relatively) sources, like your own server. 
+        //Should be served from another domain, just in case   (iframe scope)
+    }
+</script>
+
+</body>
+</html>

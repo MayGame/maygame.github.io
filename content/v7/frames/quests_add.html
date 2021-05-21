@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>MayGame</title>
+  <meta name="description" content="No description">
+  <meta name="author" content="Some dude">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+  <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+</head>
+<body style="margin: 0; background-color: mediumturquoise;">
+    <style>
+        .q_cont{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 0.2fr 5fr 0.2fr 0.2fr;
+            gap: 10px;
+            grid-template: 
+            "header header"
+            "left_content right_content"
+            "footer footer"
+            "menu_bar menu_bar";          
+        }
+    </style>
+    <div class="q_cont">
+        <div class="header"><p>Quest Edit</p></div>
+<div class="left_content ">
+    <p>Quest edit entry 1</p>
+    <p>Quest edit entry 2</p>
+</div>
+<div class="footer">
+    <button onclick="ask_for_data('Cookies',function(text){console.log('Response for cookies:'+text);});">Footer</button>
+</div>
+<div class="right_content">
+    <p>Objective:</p>
+    <p>Reward:</p>
+</div>
+<div class="menu_bar">
+    <button onclick="for_me();">For me</button>
+    <button>For others</button>
+    <button>Log</button>
+</div>
+</div>
+<script>
+var pending_requests={}
+function generateUID() {
+    // I generate the UID from two parts here 
+    // to ensure the random number provide enough bits.
+    var firstPart = (Math.random() * 46656) | 0;
+    var secondPart = (Math.random() * 46656) | 0;
+    firstPart = ("000" + firstPart.toString(36)).slice(-3);
+    secondPart = ("000" + secondPart.toString(36)).slice(-3);
+    return firstPart + secondPart;
+}
+
+function ask_for_data(data,cb){
+let req = {};
+req.topic='data_request';
+req.body=data;
+let rid=generateUID();
+req.req_id=rid;
+send_message(req);
+pending_requests.rid.cb=cb;
+return rid;
+}
+function onResponse(rid, data){
+    console.log(pending_requests);
+pending_requests[rid].cb(data);
+delete pending_requests[rid];
+}
+var pair;
+window.onmessage=(e)=>{
+    if(e.origin!=="https://maygame.xxx"){console.log("access violated, this incedent will be reported");
+    call_officer();
+return;
+}
+let topic = e.data.topic;
+if(topic=='req_response'){
+    onResponse(e.data.rid, e.data.body)
+}
+if(topic=='your_pair')
+pair=e.data.pair;
+console.log(pair);
+    // event.source.postMessage('Reply from test')
+    // else send_message("Reply from test.");
+    // tarea.value=e.data;
+    // console.log(e.datas)
+}
+
+        function send_message(text){
+            window.parent.postMessage(text,"https://maygame.xxx")
+        }
+
+
+        function call_officer(){
+            send_message('911');
+        }
+        function sub(topic){
+            let text = {'topic':topic,'action':'sub','me':'test'}
+            //me => fixme. Should be identifier. This one's given as a url param to iframe
+            send_message(text)
+        }
+    </script>
+</body>
+</html>

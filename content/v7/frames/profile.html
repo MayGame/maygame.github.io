@@ -1,0 +1,38 @@
+<style>
+    .container{
+        background-color: pink;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: "header";
+    }
+    .header{
+        grid-area: "header";
+    }
+</style>
+<div class="container">
+    <div class="header">
+        <p>My id (click to copy): <a id="iam" onclick="copyToClipboard(this.innerHTML);"></a></p>
+    </div>
+</div>
+
+<script>
+        window.onmessage=(e)=>{
+    if(e.origin!=="https://maygame.xxx"){console.log("access violated, this incedent will be reported");
+    return;}
+    else if(e.data['innerHTML']){
+        let id = e.data['innerHTML'].id;
+        let content = e.data['innerHTML'].content;
+        document.getElementById(id).innerHTML=content;//very dirty and unsafe. I am dangerous. Assuming we trust the core
+        // console.log('profile innerHTML: ', id, content)
+    }
+}
+function copyToClipboard(text) {
+    var dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    dummy.setSelectionRange(0,99999);
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+}
+</script>

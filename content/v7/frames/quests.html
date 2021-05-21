@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>MayGame</title>
+  <meta name="description" content="No description">
+  <meta name="author" content="Some dude">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="margin: 0; background-color: mediumturquoise;">
+    <style>
+        .q_cont{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 0.2fr 5fr 0.2fr 0.2fr;
+            gap: 10px;
+            grid-template: 
+            "header header"
+            "left_content right_content"
+            "footer footer"
+            "menu_bar menu_bar";          
+        }
+    </style>
+    <div class="q_cont">
+        <div class="header log"><p>Quest Log</p></div>
+    <div class="footer">
+    </div>
+<div class="left_content log">
+    <p>Quest log entry 1</p>
+    <p>Quest log entry 2</p>
+</div>
+<div class="footer log">
+    <p>Log footer</p>
+</div>
+<div class="right_content log">
+    <p>Objective:</p>
+    <p>Reward:</p>
+</div>
+<div class="menu_bar">
+    <button onclick="for_me();">For me</button>
+    <button>For others</button>
+    <button>Log</button>
+</div>
+</div>
+    <script>
+var current_tab="log"
+        function switch_tab(new_tab){
+            let old=document.getElementsByClassName(current_tab)
+        }
+        function send_message(text){
+            window.parent.postMessage(text,"https://maygame.xxx")
+        }
+        window.onmessage=(e)=>{
+            if(e.origin!=="https://maygame.xxx"){console.log("access violated, this incedent will be reported");
+            call_officer();
+            return;
+        }
+        event.source.postMessage('Reply from test')
+        // else send_message("Reply from test.");
+        tarea.value=e.data;
+        console.log(e.datas)
+        }
+        function call_officer(){
+            send_message('911');
+        }
+        function sub(topic){
+            let text = {'topic':topic,'action':'sub','me':'test'}
+            //me => fixme. Should be identifier. This one's given as a url param to iframe
+            send_message(text)
+        }
+    </script>
+</body>
+</html>

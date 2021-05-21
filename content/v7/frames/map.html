@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MayGame</title>
+
+    <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+ integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+ crossorigin=""></script>
+ </head>
+<body style="opacity: 90%; right: 0; float: right;">
+  <style>
+    html, body { overflow: hidden; }
+  </style>
+  <div id="container" style="display: block; height: 100%; width: 100%;">
+<div id="mapid" style="height: 140px; width: 140px;"> </div>
+<button onclick="mapid.style.height='300px';mapid.style.width='300px';
+window.parent.postMessage({frame_resize:{width: '320px'}},'https://maygame.xxx')
+">+</button>
+<button onclick="mapid.style.height='140px';mapid.style.width='140px';
+window.parent.postMessage({frame_resize:{width: '160px'}},'https://maygame.xxx')
+">-</button>
+<button onclick="ask_geopos();goto_pos(parseFloat(gps_lat.innerHTML),parseFloat(gps_long.innerHTML));">^</button>
+<!-- <a id='my_coords'></a> -->
+<!-- <button onclick="get_coords()">Get coords</button><input type="text"> -->
+<button onclick="if(map_hint.style.display=='none')map_hint.style.display='block'; else map_hint.style.display='none';">Pos hint</button>
+<div id="map_hint">
+    <p>Last action: <a id="gps_last_action"></a></p>
+    <p>Latitude: <a id="gps_lat"></a></p>
+    <p>Longitude: <a id="gps_long"></a></p>
+    <p>Altitude: <a id="gps_alt"></a></p>
+    <p>Error margin: <a id="gps_error"></a></p>
+    <button onclick="create_gps_bookmark()">Create a bookmark</button>
+</div>
+  </div>
+<script>
+    var lastClick;
+    // function get_coords(){
+    //     mymap.on('click', cb_once());
+
+    // }
+</script>
+<script>
+const gun = Gun();
+// Gun.on('opt', context)
+// function context(context){
+//     context.on('out', handleMessage);
+//     this.to.next(context);
+// }
+// async function handleMessage(msg){
+//     console.log("map gun catcher: ",msg);
+//     window.parent.postMessage({gunrelay: JSON.stringify(msg)}, 'https://maygame.xxx');
+// }
+gun._.on('out',(msg)=>
+{window.parent.postMessage({gunrelay: JSON.stringify(msg)},'https://maygame.xxx');
+})
+// function parent_put_sub(soul, obj, child){
+//   window.parent.postMessage({gun_put_sub: JSON.stringify(obj),soul: soul, subdir: child},'https://maygame.xxx');
+// }
+
+function parent_put(soul, obj){
+    // gun.get('map').get('gps_map_click').put({lat: e.latlng.lat, long: e.latlng.lng});
+    window.parent.postMessage({gun_put: JSON.stringify(obj),soul: soul},'https://maygame.xxx');
+
+}
+</script>
+<script id="Js_map" type="text/javascript">
+    var map_radius = 13;
+  var mymap = L.map('mapid').setView([51.505, -0.09], map_radius);
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+maxZoom: 18,
+// attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+//   'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+id: 'mapbox/streets-v11',
+tileSize: 512,
+zoomOffset: -1
+}).addTo(mymap);
+function onMapClick(e) {
+//   alert("You clicked the map at " + e.latlng);
+  gps_last_action.innerHTML='map click:';
+gps_lat.innerHTML=e.latlng.lat;
+gps_long.innerHTML=e.latlng.lng;
+gps_alt.innerHTML='';
+gps_error.innerHTML="";
+parent_put('map/gps_map_click',{lat: e.latlng.lat, long: e.latlng.lng});
+}
+mymap.on('click', onMapClick);
+var last_coord = undefined;
+var circle = undefined;
+var marker = undefined;
+function show_position(pos){
+console.log("from show_position, last_coord:")
+  console.log(last_coord)
+mymap.setView([last_coord.latitude, last_coord.longitude],map_radius)
+if(circle != undefined)
+mymap.removeLayer(circle)//todo: trycatch
+  circle = L.circle([last_coord.latitude, last_coord.longitude], {
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5,
+  radius: last_coord.accuracy
+}).addTo(mymap);
+if(marker != undefined)
+mymap.removeLayer(marker)
+marker=L.marker([last_coord.latitude, last_coord.longitude]).addTo(mymap)
+// let accuracy = crd.accuracy
+
+}
+function ask_geopos(){
+// alert(Geolocation.getCurrentPosition())
+function success(pos) {
+  var crd = pos.coords;
+  last_coord = crd;
+  console.log("from ask geopos, last_coord:")
+  console.log(last_coord)
+//   var text = "Current pos:\nLat:"+crd.latitude+"\nLng:"+crd.longitude+"\n+- " + crd.accuracy +" meters";
+// alert(text);
+console.log('Current pos:');
+console.log(`Lat: ${crd.latitude}`);
+console.log(`Long: ${crd.longitude}`);
+console.log(`+- ${crd.accuracy} meters.`);
+// document.getElementById("my_coords").innerHTML=text;
+gps_last_action.innerHTML='my pos:';
+gps_lat.innerHTML=crd.latitude;
+gps_long.innerHTML=crd.longitude;
+gps_alt.innerHTML=crd.altitude;
+gps_error.innerHTML=crd.accuracy;
+parent_put('map/gps_my_pos',{lat: crd.latitude,long: crd.longitude, error: crd.accuracy})
+};
+
+function error(err) {
+console.warn(`ERROR(${err.code}): ${err.message}`);
+};
+var options = {
+enableHighAccuracy: true,
+timeout: 5000,
+maximumAge: 0
+};
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+}
+function create_gps_bookmark(){
+    let timestamp=Date.now().toString();
+    let msg = {lat: gps_lat.innerText,long: gps_long.innerText, time: timestamp, alt: gps_alt.innerText, map_type: 'gps'};
+    parent_put('map/last_bookmark', msg);
+}
+function goto_pos(lat, long){
+mymap.setView([lat, long], map_radius);
+}
+//#region common part?
+window.onmessage=(e)=>{
+    console.log(e.data);
+    if(e.data['your_topic_pub']){
+        if(e.data.soul=='map/show'){
+          console.log('show on map request',e.data);
+          goto_pos(e.data['your_topic_pub'].e.lat, e.data['your_topic_pub'].e.long);
+        }
+        else console.log('wrong topic (map sub)', e);
+    }
+    else if(e.data.login){
+        parent_sub_on('map/show');//dev   
+        // let wdt = window.getComputedStyle(container).getPropertyValue('width');
+        // let ht = window.getComputedStyle(container).getPropertyValue('height');
+        // let fr={frame_resize:{width: wdt, height: ht}};
+        // window.parent.postMessage(fr,'https://maygame.xxx');
+        console.log('map got login')
+    }
+    else console.log('map, got meaningless message: ', e)
+}
+function parent_sub_on(soul){
+    let msg={gun_sub: soul};
+    my_subs[soul]=true;
+    window.parent.postMessage(msg, "https://maygame.xxx");
+    //extra code to remember it on this page
+}
+var my_subs={};
+window.onclick=(e)=>window.parent.postMessage({frame_click: {x: e.clientX, y: e.clientY}},'https://maygame.xxx');
+//#endregion
+
+</script>
+
+</body>
+</html>

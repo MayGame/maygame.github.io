@@ -1,0 +1,25 @@
+<button onclick="console.log(whois('me'))">Whoami</button>
+<script>
+    var pub_list={}
+    var whos={me: 'mypub'}
+    var top_level_discover_peers={}
+    function discover(id){
+        Object.entries().forEach(entry => {
+            let key=entry[0];
+            let value=entry[1];
+        });
+    }
+    function whois(who){
+        let result = whos[who];
+        return result;
+    }
+    function mock_remote(){
+
+    }
+    function id_get_related_data(id){
+        return {
+            discovered: {uri: "protocol:address///something. MayBE steal one from ipfs?", pub: "additional info. perhaps the pub of a user"},
+            data:{name: 'JOY', }
+        }
+    }
+</script>

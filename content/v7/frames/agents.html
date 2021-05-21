@@ -1,0 +1,150 @@
+<html>
+<head>
+    <script src="../../../js/cdn/ejs.min.js"></script>
+</head>
+<body style="background-color: snow;">
+<style>
+    .container{
+        display: grid;
+        /* background-color: slategray; */
+        grid-template-columns: 1fr;
+        grid-template-rows: max-content auto max-content;
+        grid-template-areas: 
+        "header"
+        "body"
+        "footer";
+        gap: 2px;
+        width: 100vw;
+        height: 100vh;
+    }
+    .header{
+        grid-area: header;
+        display: grid;
+    }
+    .body{
+        grid-area: body;
+        display: grid;
+        grid-template-areas: "body1 body2";
+    }
+    .footer{
+        height: 100%;
+        grid-area: footer;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas: 
+        "footer1 footer2 footer3";
+    }
+    .bg{
+        background-color: steelblue;
+    }
+    *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+</style>
+<div class="container">
+    <div class="header bg">
+<p id="header_p"></p>
+
+    </div>
+    <div class="body bg" id="body_">
+
+
+    </div>
+    <div class="footer bg">
+        <div style="grid-area: footer1;"><button style="width: 100%; height: 100%;" onclick="
+            btn_all();
+            ">All</button></div>
+        <div style="grid-area: footer2;"><button style="width: 100%; height: 100%;" onclick="button_friends();">Friends</button></div>
+        <div style="grid-area: footer3;"><button onclick="render_add();" style="width: 100%; height: 100%;">Add</button></div>
+    </div>
+</div>
+<script>
+function btn_all(){
+    console.log('agents, all. not supported, falling back to friends')
+//     var all={}
+//     all.list=[{id: 2}]//fixme
+//     let text = `
+//     <table>
+//         <% Object.keys(all.list).forEach(key=> { %>
+//             <tr><td><%= all.list[key].id %></td><td><%= key %></td></tr>  
+// <% }) %>
+  
+//     </table>
+//     `
+//     body_.innerHTML=ejs.render(text,{all:all});
+tab='all';
+button_friends()
+}
+var tab = 'friends';
+function button_friends(){
+    // let obj={"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw":{pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'}}
+
+    let text=`
+    <table>
+    <tr><th> Name </th><th>Pub</th><th></th></tr>  
+    <% Object.keys(friends).forEach(key=> { %>
+            <tr><td><%= friends[key].name %>  </td><td><%= key %></td><td></td></tr>  
+<% }) %>
+</table>
+    `
+    // let friends = {}
+    tab='friends';
+    body_.innerHTML=ejs.render(text, {friends: friends})
+}
+var friends={};
+// friends = {"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw":{pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'}}
+function render_add(){
+    var text=`
+    <div style="display: grid; grid-template-columns: 0.3fr 1fr; grid-template-areas: 'h h' 'a b' 'c d' 'f f'">
+        <p style="grid-area: h;">Friend add</p>
+    <label for="add_pub">Pub</label><textarea id="add_pub"></textarea>
+    <label for="add_name">Name</label><textarea id="add_name"></textarea>
+    <button onclick="
+    let obj={[add_pub.value.trim()]:JSON.stringify({pub: add_pub.value.trim(),name: add_name.value.trim()})};
+    console.log('f add: ', obj)
+    window.parent.postMessage({gun_put: JSON.stringify(obj), soul:'agents/friends'},'https://maygame.xxx');
+    " style="grid-area: f;">Submit</button>
+</div>
+    `//fixme: validate
+    body_.innerHTML=ejs.render(text,{})
+    tab='add'
+}
+let agent = {u: {me:0,//calculated utility
+pub1:0.2,//utility of it to pub1. declared or calculated
+},
+ t:0,//trust level. Normalized (0..1) on each level. different policies are applied using these two
+ pub:'gun.is.pub(epub?)',
+ discovery:[{source1: {channelname1:{obj:'stuff used by channel'}}}]
+
+}
+let node={data:{},access_level:{},access_fallback_function: {}}
+// function test_populate(){
+//     let obj={"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw":{pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'}}
+
+//     window.parent.postMessage({gun_put: obj,soul:'agents/friends'},'https://maygame.xxx');
+// }
+window.onmessage=(e)=>{
+    if(e.data['your_topic_pub']){
+                if(e.data.soul=='agents/friends'){
+                    console.log('agents friends pub: ', e.data['your_topic_pub'])
+                    friends=e.data['your_topic_pub'].e;
+                    Object.keys(friends).forEach((key)=>{friends[key]=JSON.parse(friends[key])});//fixme: fix gun
+                    if(tab=='friends')button_friends();
+                }}
+    else if(e.data.user_id){
+    user_id=e.data.user_id;
+            }
+            else if(e.data.login){
+        onlogin(e.data.login);
+    }}
+let user_id=0;
+function onlogin(pub){
+    user_id=pub;
+    window.parent.postMessage({gun_sub: 'agents/friends' },'https://maygame.xxx');
+    }
+</script>
+
+</body>
+</html>

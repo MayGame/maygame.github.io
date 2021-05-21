@@ -1,0 +1,168 @@
+<html>
+    <head>
+    <script src="../../../js/cdn/ejs.min.js"></script>
+
+    </head>
+    <body>
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        .container{
+            border: 2px ridge white;
+            display: grid;
+            grid-template-rows: 1fr 5fr 2fr;
+            gap: 2px ;
+            grid-template-areas: 
+            "header"
+            "body"
+            "footer";
+        }
+        .footer{
+            grid-area: footer;
+            background-color: rebeccapurple;
+        }
+        .body{
+            grid-area: body;
+            background-color: hotpink;
+        }
+        .header{
+            grid-area: header;
+            background-color: burlywood;
+        }
+        </style>
+        <div class="container" style="background-color: silver; height: 100vh; width: 100vw;">
+            <p class="header">Item add</p>
+            <div class="body">
+                <label for="item_name">Name: </label>
+                <input type="text" id="item_name" value="Wish ticket, small"><br>
+                <label for="user_pub">User_id: </label><input type="text" disabled id="user_pub"><button
+                onclick="window.parent.postMessage({get_id: 'user'},'https://maygame.xxx');
+                user_pub.value=user_id;
+                "
+                >get</button>
+                <br><label for="item_description">Description: </label>
+                <textarea id="item_description">Can be exchanged for a small wish granted.</textarea><br>
+                <label for="img_url">Icon url</label><input type="text" id='img_url' value="../resources/tickets-ticket-pngrepo-com.png" onchange="img_preview.src=this.value;">
+                <img id="img_preview" src="../resources/tickets-ticket-pngrepo-com.png" style="width:100px;height:100px;"><br>
+                <label for="issue_to">To:</label><input type="text" placeholder="issued to" list="issue_to_list" id="issue_to" onchange="
+                // for(i=0;i<agents.length;i++)if(agents[i].pub==this.value)
+                // friend_name.value=agents[i].name;
+                friend_name.value = friends[this.value].name;
+                ">
+                <datalist id="issue_to_list">
+                </datalist><br>
+                <label for="friend_name">Friend name:</label><input type="text" id='friend_name' disabled>
+            </div>
+            <button class="footer" onclick="item_add()" style="border-radius: 2em; background-color: darkslategray;">Create</button>
+        </div>
+        <script>
+            var user_id=0;
+            var friends;
+            window.onmessage=(e)=>{
+            if(e.data['your_topic_pub']){
+                if(e.data.soul=='item_add/last_meta'){
+                    console.log('i_add pub i_meta: ', e.data['your_topic_pub'])
+                    item_meta=e.data['your_topic_pub'].e;}
+                else if(e.data.soul=='agents/friends'){
+                    console.log('i_add friends: ', e.data['your_topic_pub']);
+                    // agents=e.data['your_topic_pub'].e;
+                    friends=e.data['your_topic_pub'].e;
+                    Object.keys(friends).forEach((key)=>{friends[key]=JSON.parse(friends[key])});//fixme: fix gun
+                    // if(tab=='friends')button_friends();
+                    agents=friends;
+                    update_f_list();
+                }
+            }
+            else if(e.data.user_id){
+            user_id=e.data.user_id;
+            user_pub.value=user_id;
+            }
+            else if(e.data.login){
+        onlogin(e.data.login);
+            }
+            else console.log('item_add got weird msg: ', e)
+        }
+function update_f_list(){
+    let template=
+`<optgroup label="Friends">
+<% Object.keys(friends).forEach(key=> { %>
+    <option value='<%= friends[key].pub %>'></option>
+<% }) %>
+</optgroup>`
+    issue_to_list.innerHTML=ejs.render(template,{friends: agents});//fixme
+}
+var item_valid_time = 100000
+        function item_add(){
+            if(user_id){
+            var result = {}
+            result.issuer=user_id;
+            result.description = item_description.value;
+            result.name=item_name.value;
+            result.for=issue_to.value;
+            let timestamp = Date.now();
+            result.timestamp=timestamp;
+            result.expires=timestamp+item_valid_time;
+            result.meta=item_meta;
+            result.img_url=img_url.value;//todo/fixme: resize + to base64
+            result.state_sot='fixme';//source of truth. one that confirms the actual state of an object
+            console.log(result)
+            window.parent.postMessage({sign_add: JSON.stringify(result),soul:'items/list'},'https://maygame.xxx');
+            // window.parent.postMessage({sign_add: JSON.stringify(result),soul:'item/add'},'https://maygame.xxx');
+        } else console.log('Need user id first.')
+    }
+let Item1={
+version:'1',//protocol/object version
+id:'initial hash',
+object:{},
+current_owner:[],
+log:[],//tranfer letters, edits and so on.
+state_keeper:'pub',//
+keeper_meta:{contacts:[]}
+}
+/**
+ * 
+ */
+let Item2={
+version:'2',//protocol/object version
+id:'initial hash',
+object:{},
+current_owner:[],
+state_keeper:'pub',//keeper is the only one keeping logs
+keeper_meta:{contacts:[]}
+}
+
+
+
+function onlogin(pub){
+    user_id=pub;
+//     let template=
+// `<optgroup label="Friends">
+//     <% agents.forEach(agent=> { %>
+// <option value='<%= agent.pub %>'></option>
+// <% }) %>
+// </optgroup>`
+//     issue_to_list.innerHTML=ejs.render(template,agents);
+    parent_sub_on('item_add/last_meta');
+    parent_sub_on('agents/friends');
+
+}
+var agents;
+// agents=[
+//     {pub:"MJdK2BgFbjU-gKQdiu79I7GySpWGxAnfHW8m-qxyo68.t_tllRdfynaf-h6_VClvJR5LaSyexsi12t_OjEsBgIw",address:"https://vine-mature-morocco.glitch.me/gun",name: 'MJ'},
+//     {pub:"OLIjWXUOdoYV6ydVqTFfun_Bf2kWMKG0jp1FicNYZZY.qJkP-ZAGiMGyvEm1jk0N0Mmg9CyyueKbHDTz2gw-_zE",address:"https://vine-mature-morocco.glitch.me/gun",name: 'OL'}
+// ]
+function parent_sub_on(soul){
+    let msg={gun_sub: soul};
+    my_subs[soul]=true;
+    window.parent.postMessage(msg, "https://maygame.xxx");
+    //extra code to remember it on this page
+}
+var my_subs={};
+var item_meta={};
+        </script>
+        <!-- <button onclick="onlogin('lEUnB6jIz3CJpa_oNFJeSDs5wkBHwb4cl0WtE6TV3K0.taG9Srbil-wUx9LQUoZ8hDhiP6Eia39UOy9lehZesmg')">dev</button> -->
+    </body>
+</html>
