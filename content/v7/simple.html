@@ -15,6 +15,10 @@ function process_frame(){
     const took = performance.now()-t0;
     return took;
 }
+function force_frame(threshold){
+//manually loads (once) vars we ignored.. maybe second threshold for delayed?
+//like remember but do nothing fo now
+}
             var recalc_importance_threshold=2;
             function compare_priorities(a,b){
                 return b[1]-a[1];
