@@ -1,17 +1,121 @@
 <html>
+    <head>
+
+<script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js" integrity="sha512-ZuOjyqq409+q6uc49UiBF3fTeyRyP8Qs0Jf/7FxH5LfhqBMzrR5cwbpDA4BgzSo884w6q/+oNdIeHenOqhISGw==" crossorigin="anonymous"></script>
+
+    </head>
     <body>
+        <div style="display: grid; grid-template-columns: 50vw 50vw;">
+            <div>
+
+                <button onclick="console.table(vars);">Show vars</button><br>
+                <textarea id="var_name_area"></textarea><button onclick="add_var(var_name_area.value);" >Add</button>
+            <p>---------------------------------</p>
+        </div>
+        <div>   <p>todo: tags, agents</p>
+                <button onclick="console.clear(); console.table(tasks_priorities);">Show tasks</button><br>
+                <textarea id="task_name_area"></textarea><button onclick="create_task(task_name_area.value);" >Create</button>
+<p>Task: context needed, sub tasks, performer.</p>
+<p>context map</p>
+<p>For task in tasks where importance is above threshold</p>
+<p></p>
+<label>#task</label><input type="number" onchange="
+console.clear();console.table(tasks_priorities);
+let a=tasks_priorities[this.value];
+console.log(a);
+if(!a)console.log('!a')
+else{
+if(tasks[a[0]])
+console.log(tasks[a[0]]);
+else console.log('no such task, add?');}
+"><br>
+<div id="add_task_div" style="display: none;">
+<button>Add</button>
+</div>
+<button onclick="manage_subs(0);">manage subs</button>
+<button onclick="sub_on('pulse');">Sub pulse</button>
+<button onclick="sub_off('pulse');">Unsub pulse</button>
+<button onclick="process_frame();">Tick</button>
+<p>---------------------------------</p>
+            </div>
+        </div>
         <script>
-            var vars=[['pulse',3],['lights',0],['sugar',2]];//name, importance
+var gun = Gun();
+var subbed={};
+var gun_vars=gun.get('vars');
+
+function gun_filter(obj){//todo (attention marker!) might need those nulls sometimes. 
+    //swapping whole objects is a chosen strategy for now
+    if(_.isObject(obj)){
+    let result = {}
+    _.keys(obj).forEach(key=>{
+        // if(obj[key])//a:0 would be ignored too
+            if(key != '_')
+                result[key]=obj[key];
+    })
+    return result;
+} else return obj;}
+function sub_(gun_obj,callback){
+                ev = 2;//placeholder. if it's 2, then node we are subscribing to never existed. .off whole event
+                gun_obj.on((data,key,msg,eve)=>{
+                    ev=eve;
+                    console.log(eve);
+                    callback(data,key);
+                })
+                return ev;
+            }
+function sub_on(name){
+    //fixme, map resolve for complex objects (a is b thing)
+    function cb(data,key){
+        // if(!isValid(data)){ return }//validity check, maybe schema, when needed
+        // console.log(name,data,key)
+        frame[key]=gun_filter(data);
+    }
+    if(!subbed[name])
+subbed[name]=sub_(gun_vars.get(name),cb);
+else console.log('already subscrbed',subbed)
+}
+function sub_off(name){
+    if(!subbed[name])
+    console.log('not subbed', name);
+    else {
+        if(subbed[name!=2])
+        subbed[name].off();
+        else 
+        gun_vars.get(name).off();//removes all, but we don't use multiple anyways. prob fixme
+    delete subbed[name];}
+}
+var init=false;
+            function manage_subs(threshold){
+                vars.forEach(e=>{
+                    if(e[1]>=threshold){
+
+                        subbed[e[0]]=true;
+                        gun.get('vars').get(e[0]).on(//fixme:user
+                        console.log(e))
+                    }
+                    else if(subbed[e[0]])subbed[e[0]]=false;
+                })
+                console.log('subbed',subbed)
+            }
+            var vars=[['pulse',3],['lights',0],['sugar',2],['task_submit',0]];//name, importance
             var something_else='?';//fixme. special marker, that we should add here
             var tasks_priorities=[['stay healthy',0.9],['be happy', 0]]//be happy isn't here, task add 
             var tasks={'stay healthy':{context:{vars:['pulse','sugar']
             //vars - top level context. not counting needed for subs. usually reports from subs go there
             ,tasks:['pulse_is_ok',something_else],}},
     }//context - names
-    var frame=[];//changed vars. update sets those. ones above threshold are subscribed to
+    var ui_frame=[];
+    var frame={};//changed vars. update sets those. ones above threshold are subscribed to
+function ui_do(){}
 function process_frame(){
+    console.log('process frame', frame)
     const t0 = performance.now();
-    frame.forEach(e=>{})
+    Object.keys(frame).forEach(key=>{
+
+    })
     const took = performance.now()-t0;
     return took;
 }
@@ -30,6 +134,22 @@ function force_frame(threshold){
             }
             console.table(vars)
             console.table(tasks_priorities)
+        </script>
+        <script>
+            function add_var(name,priority){
+                if(priority)
+                vars.push([name, priority]);
+                //arr.splice(getindex(priority), 0, [name, priority]);
+                else
+                vars.push([name, 0]);
+            }
+            function create_task(name,priority){
+                // if(priority)
+                // tasks.push([name, priority]);
+                // //arr.splice(getindex(priority), 0, [name, priority]);
+                // else
+                tasks[name]={};
+            }
         </script>
     </body>
 </html>

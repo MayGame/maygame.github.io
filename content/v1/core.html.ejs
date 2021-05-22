@@ -379,7 +379,7 @@ function gun_filter(obj){//todo (attention marker!) might need those nulls somet
     if(_.isObject(obj)){
     let result = {}
     _.keys(obj).forEach(key=>{
-        if(obj[key])
+        // if(obj[key])
             if(key != '_')
                 result[key]=obj[key];
     })
