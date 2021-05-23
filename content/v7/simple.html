@@ -4,12 +4,25 @@
 <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js" integrity="sha512-ZuOjyqq409+q6uc49UiBF3fTeyRyP8Qs0Jf/7FxH5LfhqBMzrR5cwbpDA4BgzSo884w6q/+oNdIeHenOqhISGw==" crossorigin="anonymous"></script>
+<script id="wsjs_innerscript" src="../../js/core/wsjs.js"></script>
+<link id="css_styles_core" rel="stylesheet" href="../../css/styles.css" />
 
     </head>
     <body>
+        <!-- <div class="layer" style="display: none; z-index: 200;background-color: deeppink;" id="tasks_layer"> -->
+            <div class="layer" style="display: grid; z-index: 200;background-color: deeppink; visibility: hidden;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-areas: 'top top top' 'midleft mid midright' 'bot bot bot';
+            " id="tasks_layer">
+           <div style="height: 100%; grid-area: mid;">
+               <button style="height: 100%;width: 100%;">button</button>    
+            </div>
+            </div>
         <div style="display: grid; grid-template-columns: 50vw 50vw;">
             <div>
-
+                <!-- <button onclick="toggle(tasks_layer);setTimeout(()=>toggle(tasks_layer),4000)">tasks</button> -->
+                <button onclick="vtoggle(tasks_layer);setTimeout(()=>vtoggle(tasks_layer),4000)">tasks</button>
                 <button onclick="console.table(vars);">Show vars</button><br>
                 <textarea id="var_name_area"></textarea><button onclick="add_var(var_name_area.value);" >Add</button>
             <p>---------------------------------</p>
@@ -45,7 +58,8 @@ else console.log('no such task, add?');}
 var gun = Gun();
 var subbed={};
 var gun_vars=gun.get('vars');
-
+var state={}
+//#region utils
 function gun_filter(obj){//todo (attention marker!) might need those nulls sometimes. 
     //swapping whole objects is a chosen strategy for now
     if(_.isObject(obj)){
@@ -61,7 +75,7 @@ function sub_(gun_obj,callback){
                 ev = 2;//placeholder. if it's 2, then node we are subscribing to never existed. .off whole event
                 gun_obj.on((data,key,msg,eve)=>{
                     ev=eve;
-                    console.log(eve);
+                    // console.log(eve);
                     callback(data,key);
                 })
                 return ev;
@@ -82,41 +96,46 @@ function sub_off(name){
     console.log('not subbed', name);
     else {
         if(subbed[name!=2])
-        subbed[name].off();
-        else 
+        subbed[name].off();        else 
         gun_vars.get(name).off();//removes all, but we don't use multiple anyways. prob fixme
     delete subbed[name];}
 }
-var init=false;
-            function manage_subs(threshold){
+function manage_subs(threshold){
                 vars.forEach(e=>{
                     if(e[1]>=threshold){
-
-                        subbed[e[0]]=true;
-                        gun.get('vars').get(e[0]).on(//fixme:user
-                        console.log(e))
+                        sub_on(e[0])
                     }
-                    else if(subbed[e[0]])subbed[e[0]]=false;
+                    else sub_off(e[0]);
                 })
                 console.log('subbed',subbed)
             }
-            var vars=[['pulse',3],['lights',0],['sugar',2],['task_submit',0]];//name, importance
+            var vars=[['pulse',3],['lights',0],['sugar',2],['task_submit',0],['test',2],['brain_works',5]];//name, importance
             var something_else='?';//fixme. special marker, that we should add here
-            var tasks_priorities=[['stay healthy',0.9],['be happy', 0]]//be happy isn't here, task add 
+            var tasks_priorities=[['stay healthy',0.9],['be happy', 0],['become',0]]//be happy isn't here, task add 
             var tasks={'stay healthy':{context:{vars:['pulse','sugar']
             //vars - top level context. not counting needed for subs. usually reports from subs go there
             ,tasks:['pulse_is_ok',something_else],}},
     }//context - names
     var ui_frame=[];
+    var reactions={test_alert:function(){alert('test')}};
     var frame={};//changed vars. update sets those. ones above threshold are subscribed to
-function ui_do(){}
+    var reverse_index={'test':'test_alert'}//name to callbacks (react) react as in reaction
+function resolve(name){
+    // sees what to recalculate for updated state
+    // Object.keys(tasks_priorities)
+    // for(i=0;i<tasks_priorities.length;i++)
+    // tasks_priorities
+}
 function process_frame(){
     console.log('process frame', frame)
     const t0 = performance.now();
     Object.keys(frame).forEach(key=>{
-
+state[key]=frame[key];
+resolve(key)
     })
+    frame={}
     const took = performance.now()-t0;
+    console.log('took, ms:',took)
     return took;
 }
 function force_frame(threshold){

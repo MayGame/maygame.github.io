@@ -12,6 +12,12 @@ var hide = function (elem) {
 };
 var toggled = [];
 // Toggle element visibility
+var vtoggle=function (elem) {
+	let old_style=window.getComputedStyle(elem).visibility; 
+	if(old_style != 'hidden')
+	elem.style.visibility='hidden';
+	else elem.style.visibility='visible';
+}
 var toggle = function (elem) {
 	let old_style=window.getComputedStyle(elem).display 
 	if(old_style != 'none')

@@ -374,7 +374,7 @@ async function force_create_new_user(){
         frames[i].postMessage({login: user.is.pub}, 'https://maygame.xxx');//todo track frame domains
     }
 }
-function gun_filter(obj){//todo (attention marker!) might need those nulls sometimes. 
+function gun_filter(obj){
     //swapping whole objects is a chosen strategy for now
     if(_.isObject(obj)){
     let result = {}
