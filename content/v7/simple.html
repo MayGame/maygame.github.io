@@ -5,27 +5,76 @@
 <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js" integrity="sha512-ZuOjyqq409+q6uc49UiBF3fTeyRyP8Qs0Jf/7FxH5LfhqBMzrR5cwbpDA4BgzSo884w6q/+oNdIeHenOqhISGw==" crossorigin="anonymous"></script>
 <script id="wsjs_innerscript" src="../../js/core/wsjs.js"></script>
+<script src="../../js/cdn/ejs.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link id="css_styles_core" rel="stylesheet" href="../../css/styles.css" />
 
     </head>
     <body>
-        <!-- <div class="layer" style="display: none; z-index: 200;background-color: deeppink;" id="tasks_layer"> -->
-            <div class="layer" style="display: grid; z-index: 200;background-color: deeppink; visibility: hidden;
+        <style>
+            .fa-check{color:forestgreen}
+            .fa-check-square{color:forestgreen}
+            .fa-question{color: midnightblue; }
+            .fa-ban{color: red; background-color: black; opacity: 0.7;}
+            .cont3x3{
+                display: grid; visibility: visible;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: 1fr 1fr 1fr;
-            grid-template-areas: 'top top top' 'midleft mid midright' 'bot bot bot';
-            " id="tasks_layer">
+            grid-template-areas: 'top top top' 'midleft mid midright' 'botleft bot botright';
+            }
+        </style>
+        <!-- <div class="layer" style="display: none; z-index: 200;background-color: deeppink;" id="tasks_layer"> -->
+            <!-- <div class="layer" style="display: grid; z-index: 200;background-color: deeppink; visibility: hidden; -->
+                <div class="cont3x3 layer"  id="add_task_layer" style="visibility: hidden; z-index: 201;">
+                    <div style="grid-area: mid; background-color: midnightblue; height: 100%;">
+                    <button onclick="vtoggle(add_task_layer)"><i class="fa fa-times-circle"></i></button>
+                    </div>
+                </div>
+            <div class="cont3x3 layer"  id="tasks_layer" style="visibility: visible; z-index: 200;">
+           <div style="height: 100%; grid-area: botright;">
+        <h3>Be a good person</h3>
+        <p>Objectives</p>
+        <ul class="fa-ul">
+            <li><i class="fa-li fa fa-check-square"></i>Stay healthy</li>
+            <li><i class="fa-li fa fa-paperclip"></i>Collect paperclips</li>
+            <li><i class="fa-li fa fa-question"></i><button>Add objective</button></li>
+            <li><i class="fa-li fa fa-space-shuttle"></i><button>Finalize</button></li>
+        </ul>
+        </div>
+           <div style="height: 100%; grid-area: botleft;">
+        <p>Legend:</p>
+        <p><i class="fa fa-check-square"></i>All variables are known and fit</p>
+        <p><i class="fa fa-question"></i>Somehing is missing/incomplete</p>
+        <p><i class="fa fa-ban"></i>Some vars are off</p>
+        <p>▰▰▱▱▱▱▱ progress bar (when applicable)</p>
+    </div>
            <div style="height: 100%; grid-area: mid;">
-               <button style="height: 100%;width: 100%;">button</button>    
+            <!-- Importance threshold - optodo -->
+            <div id="task_list_div"></div>
+   
+            </div>
+           <div style="height: 100%; grid-area: midleft;">
+            <p>System</p>
+            <table>
+                <tr><th>Task</th><th>Status</th></tr>
+                <tr><td>Find check icon</td><td><i class="fas fa-check" ></i></td></tr>
+                <tr><td>Add task</td><td><i class="fa fa-spin fa-ban"></i></td></tr>
+                <tr><td>Modify task</td><td><i class="fa fa-ban"></i></td></tr>
+                <tr><td>Add (re?)action</td><td><i class="fa fa-ban"></i></td></tr>
+                <tr><td>?</td></tr>
+                <tr></tr>
+                <tr></tr>
+            </table>
             </div>
             </div>
         <div style="display: grid; grid-template-columns: 50vw 50vw;">
             <div>
                 <!-- <button onclick="toggle(tasks_layer);setTimeout(()=>toggle(tasks_layer),4000)">tasks</button> -->
-                <button onclick="vtoggle(tasks_layer);setTimeout(()=>vtoggle(tasks_layer),4000)">tasks</button>
+                <button onclick="vtoggle(tasks_layer);//setTimeout(()=>vtoggle(tasks_layer),4000)">tasks</button>
                 <button onclick="console.table(vars);">Show vars</button><br>
                 <textarea id="var_name_area"></textarea><button onclick="add_var(var_name_area.value);" >Add</button>
             <p>---------------------------------</p>
+            <button onclick="render_tasks();">render tasks</button>
         </div>
         <div>   <p>todo: tags, agents</p>
                 <button onclick="console.clear(); console.table(tasks_priorities);">Show tasks</button><br>
@@ -44,9 +93,6 @@ if(tasks[a[0]])
 console.log(tasks[a[0]]);
 else console.log('no such task, add?');}
 "><br>
-<div id="add_task_div" style="display: none;">
-<button>Add</button>
-</div>
 <button onclick="manage_subs(0);">manage subs</button>
 <button onclick="sub_on('pulse');">Sub pulse</button>
 <button onclick="sub_off('pulse');">Unsub pulse</button>
@@ -71,6 +117,20 @@ function gun_filter(obj){//todo (attention marker!) might need those nulls somet
     })
     return result;
 } else return obj;}
+function render_tasks(){
+    let div = task_list_div;
+    let text = `         <table>
+                <tr><th>Task</th><th>Status</th></tr>
+                <tr><td><button onclick="vtoggle(add_task_layer);">Add new task</button></td></tr>
+                <% _.keys(tasks).forEach(key=>{ %>
+                    <tr><td><%= key %></td></tr>
+                <% }) %>
+                <tr><td>Be a good person</td><td><i class="fa fa-question"></i></td></tr>
+                <tr><td>?</td></tr>
+                <tr></tr>
+            </table>`
+    div.innerHTML=ejs.render(text,{tasks:tasks})
+}
 function sub_(gun_obj,callback){
                 ev = 2;//placeholder. if it's 2, then node we are subscribing to never existed. .off whole event
                 gun_obj.on((data,key,msg,eve)=>{
@@ -109,6 +169,7 @@ function manage_subs(threshold){
                 })
                 console.log('subbed',subbed)
             }
+            var tasks_status={}
             var vars=[['pulse',3],['lights',0],['sugar',2],['task_submit',0],['test',2],['brain_works',5]];//name, importance
             var something_else='?';//fixme. special marker, that we should add here
             var tasks_priorities=[['stay healthy',0.9],['be happy', 0],['become',0]]//be happy isn't here, task add 
@@ -116,6 +177,13 @@ function manage_subs(threshold){
             //vars - top level context. not counting needed for subs. usually reports from subs go there
             ,tasks:['pulse_is_ok',something_else],}},
     }//context - names
+    function load_tasks_status(){//fixme: clear old
+        _.keys(tasks).forEach(key=>{
+            console.log('update_status',key);
+            tasks_status[key]='?'
+        })
+    }
+    load_tasks_status();
     var ui_frame=[];
     var reactions={test_alert:function(){alert('test')}};
     var frame={};//changed vars. update sets those. ones above threshold are subscribed to
