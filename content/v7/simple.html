@@ -31,6 +31,7 @@
                     </div>
                 </div>
             <div class="cont3x3 layer"  id="tasks_layer" style="visibility: visible; z-index: 200;">
+           <div style="height: 100%; grid-area: midright; background-color: mistyrose; opacity: 0.5;"><div id="show_task_div"></div></div>
            <div style="height: 100%; grid-area: botright;">
         <h3>Be a good person</h3>
         <p>Objectives</p>
@@ -117,13 +118,21 @@ function gun_filter(obj){//todo (attention marker!) might need those nulls somet
     })
     return result;
 } else return obj;}
+function show_task(key){
+    let div = show_task_div;
+    console.log(tasks[key].context.tasks[0])
+    // console.log(tasks[key][tasks][0])
+    let text = `<p><%= tasks[key].context.tasks[0] %></p>`;
+    div.innerHTML=ejs.render(text, {tasks: tasks,key: key});
+    
+};
 function render_tasks(){
     let div = task_list_div;
     let text = `         <table>
                 <tr><th>Task</th><th>Status</th></tr>
                 <tr><td><button onclick="vtoggle(add_task_layer);">Add new task</button></td></tr>
                 <% _.keys(tasks).forEach(key=>{ %>
-                    <tr><td><%= key %></td></tr>
+                    <tr><td onclick="show_task('<%= key %>')"><%= key %></td></tr>
                 <% }) %>
                 <tr><td>Be a good person</td><td><i class="fa fa-question"></i></td></tr>
                 <tr><td>?</td></tr>
