@@ -1,0 +1,39 @@
+<html>
+    <head>
+
+<script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js" integrity="sha512-ZuOjyqq409+q6uc49UiBF3fTeyRyP8Qs0Jf/7FxH5LfhqBMzrR5cwbpDA4BgzSo884w6q/+oNdIeHenOqhISGw==" crossorigin="anonymous"></script>
+<script id="wsjs_innerscript" src="../../js/core/wsjs.js"></script>
+<script src="../../js/cdn/ejs.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link id="css_styles_core" rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body>
+<style>
+.fa-check{color:forestgreen}
+.fa-check-square{color:forestgreen}
+.fa-question{color: midnightblue; }
+.fa-ban{color: red; background-color: black; opacity: 0.7;}
+.cont3x3{
+display: grid; visibility: visible;
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows: 1fr 1fr 1fr;
+grid-template-areas: 'top top top' 'midleft mid midright' 'botleft bot botright';
+}
+</style>
+<script>
+    var user = {important_vars:{}}//top level agent. How happy the system is about the user's state
+    var system = {}//^, how happy the system is about their own state
+    user.calculated_state={value:1.0, confidence:0.1};
+    function learn_happiness(){//just a fancy name
+        //find a similar neuron, ask if it's happy and the recipe for it :C
+        //social network for happy neurons
+        //discover by var name
+
+    }
+    //agents are guys that do tasks
+    //tasks raise when they are unhappy about specific part of the context
+</script>
+</body>
+</html>

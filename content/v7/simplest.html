@@ -1,0 +1,97 @@
+<html>
+    <head>
+
+<script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js" integrity="sha512-ZuOjyqq409+q6uc49UiBF3fTeyRyP8Qs0Jf/7FxH5LfhqBMzrR5cwbpDA4BgzSo884w6q/+oNdIeHenOqhISGw==" crossorigin="anonymous"></script>
+<script id="wsjs_innerscript" src="../../js/core/wsjs.js"></script>
+<script src="../../js/cdn/ejs.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link id="css_styles_core" rel="stylesheet" href="../../css/styles.css" />
+
+</head>
+<body>
+<style>
+.fa-check{color:forestgreen}
+.fa-check-square{color:forestgreen}
+.fa-question{color: midnightblue; }
+.fa-ban{color: red; background-color: black; opacity: 0.7;}
+.cont3x3{
+display: grid; visibility: visible;
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows: 1fr 1fr 1fr;
+grid-template-areas: 'topleft top topright' 'midleft mid midright' 'botleft bot botright';
+}
+</style>
+</div> 
+<div class="layer cont3x3" id="top_layer" style="position: absolute; z-index: 2147483212;" >
+    <div class="menu_bar" style="grid-area: botleft;">
+        <input type="text" id="text_pair" placeholder="paste your key here or log in with default">
+        <br>
+        <button style="background-color: grey; border-radius: 8px;" 
+        onclick="vtoggle(top_layer); vtoggle(menu_layer); default_sign_in();">Quick sign in</button>
+        <button onclick="vtoggle(top_layer); vtoggle(menu_layer); force_create_new_user();">Force new user</button>
+    </div>
+</div>
+<div class="layer cont3x3" id="menu_layer" style="position: absolute; z-index: 500; opacity:0.8; background: hotpink; visibility: hidden;" >
+   <div style="grid-area: bot;">
+    <button onclick="vtoggle(quest_layer)">Quests</button>
+   </div> 
+</div>
+<div class="layer cont3x3" id="hud_layer" style="position: absolute; z-index: 500; opacity:0.8; visibility: hidden;" >
+</div>
+<div class="layer cont3x3" id="quest_layer" style="position: absolute; z-index: 500; opacity:0.8; visibility: hidden;" >
+<div style="grid-area: mid;">
+    <button>Add</button>
+<div id="my_quests"></div>
+</div>
+</div>
+<script id="agents_logic">
+    var agents={player:{}}
+    var access_list={'happy_hud':{allowed_to_act:true}}
+</script>
+<script id="autoquest">
+    var context;
+    var autodo;
+if(context?.meets_criteria)
+{}
+
+</script>
+<script id="gunscripts">
+    var user_pub;
+    var gun = Gun();
+    var sea = Gun.SEA;
+    var ustate;
+    var user = gun.user().recall({ sessionStorage: true }, () => {
+      logIn()
+    });
+async function default_sign_in(){
+    let text_pair = document.getElementById('text_pair').value;
+    let pair = localStorage.getItem('user_pair');
+    if(text_pair){console.log('Logging in with a pasted key', pair);
+    pair=JSON.parse(text_pair);//fixme: validation
+    }
+    else{
+    if(!pair){console.log('No pair stored. Creating.');
+    pair = await sea.pair();
+    localStorage.setItem('user_pair', JSON.stringify(pair));
+    console.log('Logged in as a new user.', pair);
+    }
+    else { pair = JSON.parse(pair); console.log('logged in using saved key: ',pair);}}
+    user.auth(pair);
+}
+async function force_create_new_user(){
+    let pair = await sea.pair();
+    localStorage.setItem('user_pair', JSON.stringify(pair));
+    user.auth(pair);
+}
+    function logIn(){console.info('Logged in as ', user.is);
+    user_pub=user.is.pub;
+    ustate=user.get('state');
+    }
+    gun.on('auth', () => {
+        logIn();
+    })
+</script>
+</body>
+</html>

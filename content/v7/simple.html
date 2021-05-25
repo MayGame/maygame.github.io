@@ -20,11 +20,25 @@
                 display: grid; visibility: visible;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: 1fr 1fr 1fr;
-            grid-template-areas: 'top top top' 'midleft mid midright' 'botleft bot botright';
+            grid-template-areas: 'topleft top topright' 'midleft mid midright' 'botleft bot botright';
             }
         </style>
         <!-- <div class="layer" style="display: none; z-index: 200;background-color: deeppink;" id="tasks_layer"> -->
             <!-- <div class="layer" style="display: grid; z-index: 200;background-color: deeppink; visibility: hidden; -->
+                <div class="cont3x3 layer"  id="hud_layer" style="visibility: visible; z-index: 202;">
+                <div style="grid-area: topright; background: chartreuse;">
+                <div id="happy_hud"></div>
+                </div>    
+                </div>
+                <script>
+                    var happiness;
+                    var happy_prompt=`
+                    <p>How happy are you, %</p>
+                    <input type="number" id='happy_input'>
+                    <button onclick="user.get('state').get('own_happiness').put(happy_input.value);"></button>`
+                    if(happiness==undefined)
+                    happy_hud.innerHTML=ejs.render(happy_prompt,{})
+                </script>
                 <div class="cont3x3 layer"  id="add_task_layer" style="visibility: hidden; z-index: 201;">
                     <div style="grid-area: mid; background-color: midnightblue; height: 100%;">
                     <button onclick="vtoggle(add_task_layer)"><i class="fa fa-times-circle"></i></button>
@@ -104,9 +118,30 @@ else console.log('no such task, add?');}
         <script>
 var gun = Gun();
 var subbed={};
-var gun_vars=gun.get('vars');
+var gun_vars;
+var user = gun.user().recall({ sessionStorage: true }, () => {
+      logIn()
+    });
 var state={}
+function logIn(){console.info('Logged in as ', user.is);
+gun_vars=user.get('vars');
+}
 //#region utils
+async function default_sign_in(){
+    let text_pair = document.getElementById('text_pair').value;
+    let pair = localStorage.getItem('user_pair');
+    if(text_pair){console.log('Logging in with a pasted key', pair);
+    pair=JSON.parse(text_pair);//fixme: validation
+    }
+    else{
+    if(!pair){console.log('No pair stored. Creating.');
+    pair = await sea.pair();
+    localStorage.setItem('user_pair', JSON.stringify(pair));
+    console.log('Logged in as a new user.', pair);
+    }
+    else { pair = JSON.parse(pair); console.log('logged in using saved key: ',pair);}}
+    user.auth(pair);
+}
 function gun_filter(obj){//todo (attention marker!) might need those nulls sometimes. 
     //swapping whole objects is a chosen strategy for now
     if(_.isObject(obj)){
