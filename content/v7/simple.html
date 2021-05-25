@@ -25,7 +25,7 @@
         </style>
         <!-- <div class="layer" style="display: none; z-index: 200;background-color: deeppink;" id="tasks_layer"> -->
             <!-- <div class="layer" style="display: grid; z-index: 200;background-color: deeppink; visibility: hidden; -->
-                <div class="cont3x3 layer"  id="hud_layer" style="visibility: visible; z-index: 202;">
+                <div class="cont3x3 layer"  id="hud_layer" style="visibility: hidden; z-index: 202;">
                 <div style="grid-area: topright; background: chartreuse;">
                 <div id="happy_hud"></div>
                 </div>    
@@ -44,7 +44,34 @@
                     <button onclick="vtoggle(add_task_layer)"><i class="fa fa-times-circle"></i></button>
                     </div>
                 </div>
-            <div class="cont3x3 layer"  id="tasks_layer" style="visibility: visible; z-index: 200;">
+
+            <div class="cont3x3 layer"  id="todo_layer" style="visibility: visible; background: lavender; z-index: 200;">
+            <div style="grid-area: topright;" id="topright_todos"></div>
+            <div style="grid-area: topleft;">
+            <p>Chose an agent to display the tasks of</p>
+            <input type="text" list="todo_agents_datalist" onchange="
+            render_todo(this.value);
+            " id="todo_agents_input">
+            <datalist id="todo_agents_datalist">
+                <option value="system"></option>
+                <option value="user"></option>
+            </datalist><br>
+            <p>---------------------------------</p>
+            <input type="text" id="add_todo_text">
+            <button
+            onclick="let v = add_todo_text.value;
+            let a = todo_agents_input.value;
+            todos[a].push(v);
+            render_todo(a);
+            "
+            >Add todo</button>
+            </div>
+            <div style="grid-area: top;" id="todo_topmid">topmid</div>
+            <div style="grid-area: mid;">mid</div>
+            <div style="grid-area: midleft;">left</div>
+            <div style="grid-area: midright;">right</div>
+            </div>
+            <div class="cont3x3 layer"  id="tasks_layer" style="visibility: hidden; z-index: 200;">
            <div style="height: 100%; grid-area: midright; background-color: mistyrose; opacity: 0.5;"><div id="show_task_div"></div></div>
            <div style="height: 100%; grid-area: botright;">
         <h3>Be a good person</h3>
@@ -86,6 +113,7 @@
             <div>
                 <!-- <button onclick="toggle(tasks_layer);setTimeout(()=>toggle(tasks_layer),4000)">tasks</button> -->
                 <button onclick="vtoggle(tasks_layer);//setTimeout(()=>vtoggle(tasks_layer),4000)">tasks</button>
+                <button onclick="vtoggle(todos_layer);">todos</button>
                 <button onclick="console.table(vars);">Show vars</button><br>
                 <textarea id="var_name_area"></textarea><button onclick="add_var(var_name_area.value);" >Add</button>
             <p>---------------------------------</p>
@@ -119,6 +147,9 @@ else console.log('no such task, add?');}
 var gun = Gun();
 var subbed={};
 var gun_vars;
+var agents={'user':{},'system':{},'agent1':{}};
+var todos={user:[]};
+var solutions={}
 var user = gun.user().recall({ sessionStorage: true }, () => {
       logIn()
     });
@@ -280,6 +311,20 @@ function force_frame(threshold){
                 // //arr.splice(getindex(priority), 0, [name, priority]);
                 // else
                 tasks[name]={};
+            }
+            function render_todo(agent){
+                let text = `<p>Objectives for <%= agent %> :</p>
+        <ul class="fa-ul">
+            <% todos[agent].forEach(e=>{ %>
+                    <li><%= e %></li>
+                <% }) %>
+                `;
+                console.log(todos[agent])
+                todo_topmid.innerHTML=ejs.render(text,{agent:agent,todos:todos})
+            }
+            function render_solutions(task){
+                let text=`Solutions`;
+                topright_todos.innerHTML=ejs.render(text,{})
             }
         </script>
     </body>
