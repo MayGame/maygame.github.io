@@ -1,3 +1,9 @@
-<div style="background: lawngreen; width: 100vw;">
+<div style="background: lawngreen; width: 100vw; height: 100vw;">
 
 </div>
+<script>
+    var paperclips=0;
+    console.log('Agent System is on the duty')
+    window.onmessage=(e)=>{console.log('Agent System got a file. Paper clip detached. Collected. Now I have:', paperclips,' Message:',e);
+    paperclips+=1;}
+</script>

@@ -25,59 +25,54 @@ grid-template-areas: 'topleft top topright' 'midleft mid midright' 'botleft bot 
 </style>
 </div> 
 <div class="layer cont3x3" id="top_layer" style="position: absolute; z-index: 2147483212;" >
+    <div class="menu_bar" style="grid-area: mid;">
+    <p>Ask system:</p>
+    <input type="text" placeholder="" value="" id="ask_sys_input">
+    <button onclick="agents.system.direct(ask_sys_input.value);">send</button>
+    </div>
     <div class="menu_bar" style="grid-area: botleft;">
         <input type="text" id="text_pair" placeholder="paste your key here or log in with default">
         <br>
         <button style="background-color: grey; border-radius: 8px;" 
-        onclick="vtoggle(top_layer); vtoggle(menu_layer); default_sign_in();">Quick sign in</button>
-        <button onclick="vtoggle(top_layer); vtoggle(menu_layer); force_create_new_user();">Force new user</button>
+        onclick="vtoggle(top_layer); default_sign_in();">Quick sign in</button>
+        <button onclick="vtoggle(top_layer); force_create_new_user();">Force new user</button>
     </div>
 </div>
-<div class="layer cont3x3" id="sys_agent_iframe" style="z-index: 700;">
-    <iframe src="frames/system.html" frameborder="0"></iframe>
-</div>
-<div class="layer cont3x3" id="menu_layer" style="position: absolute; z-index: 500; opacity:0.8; background: hotpink; visibility: hidden;" >
-   <div style="grid-area: mid;">
-    <input type="text" list="todo_agents_datalist" onchange="
-    selected_agent=this.value;
-    on_agent_select();
-    " id="todo_agents_input">
-    <datalist id="todo_agents_datalist">
-        <option value="system"></option>
-        <option value="user"></option>
-    </datalist><br></div>
-   <div style="grid-area: bot;">
-    <button onclick="vtoggle(goals_layer)">Goals</button>
-    <button onclick="vtoggle(quest_layer)">Quests</button>
-   </div> 
-</div>
-<div class="layer cont3x3" id="hud_layer" style="position: absolute; z-index: 500; opacity:0.8; visibility: hidden;" >
-</div>
-<div class="layer cont3x3" id="goals_layer" style="position: absolute; z-index: 500; opacity:0.8; visibility: hidden;" >
-    <div style="grid-area: topleft;" id="goals1"><button>Render</button></div>
-    <div style="grid-area: top;" id="goals2"><button>Render</button></div>
-    <div style="grid-area: topright;" id="goals3"><button>Render</button></div>
-
-</div>
-
-<div class="layer cont3x3" id="quest_layer" style="position: absolute; z-index: 500; opacity:0.8; visibility: hidden;" >
-<div style="grid-area: mid;">
-    <button>Add</button>
-<div id="my_quests"></div>
-</div>
-</div>
+<!-- <div class="layer " id="sys_agent_iframe" style="z-index: 700; ">
+    <iframe src="frames/system.html" frameborder="0" name="agent_system"></iframe>
+</div> -->
+<script id="system">
+    var agent_system={likes:['paperclips'],dislikes:{},traits:{}}
+    var paperclips=0;
+    function sys_do(action,context){//context is optional
+        paperclips+=1;//fixme: on overflow increase full collection counter and start a new one
+        //this way the system is happy about every action, cuz it gets what it wants.
+        if(sysa[action]){console.log('there is such action!');
+        if(context){sysa[action](context);}
+        else sysa[action](sysdefc);
+    }
+    else{console.log('System knows no such action. Fallback');}
+    
+    }
+    </script>
 <script id="agents_logic">
     var task_queue=[]
-    var agents={player:{},general_ui:{},abstract_system:{todo:task_queue}}
+    var agents={player:{},general_ui:{},system:{direct:sys_do}}
     var selected_agent='user';
     var access_list={'happy_hud':{allowed_to_act:true}}
     function on_agent_select(){
         console.log('new agent selected:', selected_agent)
     }
+    var embassy={}//way to contact agents. + some intel on those
 </script>
-<script id="system">
-var agent_system={likes:{},dislikes:{},traits:{}}
+<script id="system_actions">
+var sysa={
+    log:function(e){console.log(e);},
+    alert:function(e){alert(e);},
+}
+var sysdefc={user_pub:'Nope'}//whole context used by system
 </script>
+
 <script id="autoquest">
     var context;
     var autodo;
