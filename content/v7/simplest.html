@@ -33,13 +33,33 @@ grid-template-areas: 'topleft top topright' 'midleft mid midright' 'botleft bot 
         <button onclick="vtoggle(top_layer); vtoggle(menu_layer); force_create_new_user();">Force new user</button>
     </div>
 </div>
+<div class="layer cont3x3" id="sys_agent_iframe" style="z-index: 700;">
+    <iframe src="frames/system.html" frameborder="0"></iframe>
+</div>
 <div class="layer cont3x3" id="menu_layer" style="position: absolute; z-index: 500; opacity:0.8; background: hotpink; visibility: hidden;" >
+   <div style="grid-area: mid;">
+    <input type="text" list="todo_agents_datalist" onchange="
+    selected_agent=this.value;
+    on_agent_select();
+    " id="todo_agents_input">
+    <datalist id="todo_agents_datalist">
+        <option value="system"></option>
+        <option value="user"></option>
+    </datalist><br></div>
    <div style="grid-area: bot;">
+    <button onclick="vtoggle(goals_layer)">Goals</button>
     <button onclick="vtoggle(quest_layer)">Quests</button>
    </div> 
 </div>
 <div class="layer cont3x3" id="hud_layer" style="position: absolute; z-index: 500; opacity:0.8; visibility: hidden;" >
 </div>
+<div class="layer cont3x3" id="goals_layer" style="position: absolute; z-index: 500; opacity:0.8; visibility: hidden;" >
+    <div style="grid-area: topleft;" id="goals1"><button>Render</button></div>
+    <div style="grid-area: top;" id="goals2"><button>Render</button></div>
+    <div style="grid-area: topright;" id="goals3"><button>Render</button></div>
+
+</div>
+
 <div class="layer cont3x3" id="quest_layer" style="position: absolute; z-index: 500; opacity:0.8; visibility: hidden;" >
 <div style="grid-area: mid;">
     <button>Add</button>
@@ -47,8 +67,16 @@ grid-template-areas: 'topleft top topright' 'midleft mid midright' 'botleft bot 
 </div>
 </div>
 <script id="agents_logic">
-    var agents={player:{}}
+    var task_queue=[]
+    var agents={player:{},general_ui:{},abstract_system:{todo:task_queue}}
+    var selected_agent='user';
     var access_list={'happy_hud':{allowed_to_act:true}}
+    function on_agent_select(){
+        console.log('new agent selected:', selected_agent)
+    }
+</script>
+<script id="system">
+var agent_system={likes:{},dislikes:{},traits:{}}
 </script>
 <script id="autoquest">
     var context;

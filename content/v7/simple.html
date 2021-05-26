@@ -44,7 +44,12 @@
                     <button onclick="vtoggle(add_task_layer)"><i class="fa fa-times-circle"></i></button>
                     </div>
                 </div>
-
+                <div class="layer cont3x3" id="menu_layer" style="position: absolute; z-index: 1000; visibility: visible;" >
+                    <div style="grid-area: bot;">
+                     <button onclick="vtoggle(todo_layer)">todo</button>
+                     <!-- <button onclick="vtoggle(quest_layer)">Quests</button> -->
+                    </div> 
+                 </div>
             <div class="cont3x3 layer"  id="todo_layer" style="visibility: visible; background: lavender; z-index: 200;">
             <div style="grid-area: topright;" id="topright_todos"></div>
             <div style="grid-area: topleft;">
