@@ -70,6 +70,9 @@
             <div style="grid-area: mid;">mid</div>
             <div style="grid-area: midleft;">left</div>
             <div style="grid-area: midright;">right</div>
+            <div style="grid-area: botright;">
+            <button>B</button>
+            </div>
             </div>
             <div class="cont3x3 layer"  id="tasks_layer" style="visibility: hidden; z-index: 200;">
            <div style="height: 100%; grid-area: midright; background-color: mistyrose; opacity: 0.5;"><div id="show_task_div"></div></div>
@@ -156,23 +159,30 @@ var user = gun.user().recall({ sessionStorage: true }, () => {
 var state={}
 function logIn(){console.info('Logged in as ', user.is);
 gun_vars=user.get('vars');
+user.get('todos').map().on(e=>{console.log('todo map:',e)})
 }
 //#region utils
 async function default_sign_in(){
-    let text_pair = document.getElementById('text_pair').value;
+    // let text_pair = document.getElementById('text_pair').value;
     let pair = localStorage.getItem('user_pair');
-    if(text_pair){console.log('Logging in with a pasted key', pair);
-    pair=JSON.parse(text_pair);//fixme: validation
-    }
-    else{
+    // if(text_pair){console.log('Logging in with a pasted key', pair);
+    // pair=JSON.parse(text_pair);//fixme: validation
+    // }
+    // else{
     if(!pair){console.log('No pair stored. Creating.');
     pair = await sea.pair();
     localStorage.setItem('user_pair', JSON.stringify(pair));
     console.log('Logged in as a new user.', pair);
     }
-    else { pair = JSON.parse(pair); console.log('logged in using saved key: ',pair);}}
+    else { pair = JSON.parse(pair); console.log('logged in using saved key: ',pair);}
+// }
     user.auth(pair);
 }
+gun.on('auth', () => {
+        logIn();
+    })
+default_sign_in();
+
 function gun_filter(obj){//todo (attention marker!) might need those nulls sometimes. 
     //swapping whole objects is a chosen strategy for now
     if(_.isObject(obj)){
@@ -313,18 +323,27 @@ function force_frame(threshold){
                 tasks[name]={};
             }
             function render_todo(agent){
-                let text = `<p>Objectives for <%= agent %> :</p>
+                let text = `<p>Todo for <%= agent %> :</p>
         <ul class="fa-ul">
             <% todos[agent].forEach(e=>{ %>
-                    <li><%= e %></li>
+                    <li onclick='render_solutions("<%= e %>")'><%= e %></li>
                 <% }) %>
                 `;
                 console.log(todos[agent])
                 todo_topmid.innerHTML=ejs.render(text,{agent:agent,todos:todos})
             }
             function render_solutions(task){
-                let text=`Solutions`;
-                topright_todos.innerHTML=ejs.render(text,{})
+                let text=`Solutions for <%= task %>:
+                <% if(solutions[task]){ %>
+                <p>solutions[task]</p>
+                <% } else {%>
+                    <p>There's no solution for <%= task %> yet.</p>
+                    <% } %>
+                <br><button onclick="let name= <%= task %>;console.log(name);">Add</button>
+                <br><button>Discover</button>
+
+                `;
+                topright_todos.innerHTML=ejs.render(text,{task:task, solutions:solutions})
             }
         </script>
     </body>

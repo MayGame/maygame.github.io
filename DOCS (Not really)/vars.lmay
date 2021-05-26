@@ -6,3 +6,9 @@ contexts:
 agents:
 
 autoquest:
+
+
+flow:
+   - select agent (user)
+   - add todo entry
+   - completion var, 
