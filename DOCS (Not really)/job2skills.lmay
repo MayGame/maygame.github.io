@@ -1,0 +1,5 @@
+
+You paste required skills
+Check which ones you have
+////
+rules: if(state,state,state) do action()

@@ -1,0 +1,46 @@
+Solution:
+  subtask
+  agent, that can do it (ref or criteria),
+  what is needed (resources, for example)
+
+
+
+  task ontology
+
+# execution:
+  # state keeper: agent. creates a var, representing the state
+    # fix_the_world: 0.0
+    sets done criteria - target state for that var: 1.0
+    then runs fix_the_world subroutine.
+
+
+example:
+  version: '1.0'
+  fix the world:
+# ok, a bit simpler one...
+
+version: '1.0'
+learn korean:
+  knows korean: #goal var
+    mean of: #aggregation function. actually, you put solution-specific ones here. 
+       - level 1:
+          solution for: #and we run it ourselves
+            knows hangul:
+              knows wovels:
+                knowsㅏ:
+                  confidence:
+                  way to check:
+                  way to improve: #applicable to any "knows" entry within the solution
+
+
+       - level 2:
+          source: lvl2 korean teacher #source of truth for the state - another agent
+       - ...
+      
+
+
+vars.
+want to change one - do it.
+or make others want to do it
+
+solution - thing to execute to make a specific variable look better

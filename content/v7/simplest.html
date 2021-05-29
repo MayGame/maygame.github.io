@@ -24,12 +24,15 @@ grid-template-areas: 'topleft top topright' 'midleft mid midright' 'botleft bot 
 }
 </style>
 </div> 
-<div class="layer cont3x3" id="top_layer" style="position: absolute; z-index: 2147483212;" >
+<div class="layer cont3x3" id="sys_layer" style="position: absolute; z-index: 2147483212;" >
     <div class="menu_bar" style="grid-area: mid;">
-    <p>Ask system:</p>
-    <input type="text" placeholder="" value="" id="ask_sys_input">
-    <button onclick="agents.system.direct(ask_sys_input.value);">send</button>
-    </div>
+        <p>Ask system:</p>
+        <input type="text" placeholder="" value="" id="ask_sys_input">
+        <button onclick="agents.system.direct(ask_sys_input.value);">send</button>
+        </div>
+</div>
+    <div class="layer cont3x3" id="top_layer" style="position: absolute; z-index: 2147483212;" >
+
     <div class="menu_bar" style="grid-area: botleft;">
         <input type="text" id="text_pair" placeholder="paste your key here or log in with default">
         <br>
@@ -38,6 +41,7 @@ grid-template-areas: 'topleft top topright' 'midleft mid midright' 'botleft bot 
         <button onclick="vtoggle(top_layer); force_create_new_user();">Force new user</button>
     </div>
 </div>
+
 <!-- <div class="layer " id="sys_agent_iframe" style="z-index: 700; ">
     <iframe src="frames/system.html" frameborder="0" name="agent_system"></iframe>
 </div> -->
@@ -105,8 +109,10 @@ else {systolearn[action]=true;
         ask:function(action,context,id){
             console.log(frames['ui']);
             frames['ui'].postMessage({action:action,context:JSON.stringify(context),id:id})
-        }
+        },
+        cv:{/*tasks, they can perform. problems they can solve*/}
     }}}//way to contact agents. + some intel on those
+
 </script>
 <script id="system_actions">
 var sysa={
@@ -123,6 +129,7 @@ var sysa={
 }
 var sysout={render:{whos:['ui']}}//outsource. interact with other agents, in order to do these
 //Negotiate...
+//the end result of a negotiation might be a new task/protocol formed
 var systolearn={};
 var sysacost={}//costs of actions, performed by one or another agents. resources or utility points
 //^ is utilised for complex decisions. todo, fixme
@@ -172,6 +179,9 @@ async function force_create_new_user(){
     gun.on('auth', () => {
         logIn();
     })
+</script>
+<script id="dev_" defer>
+    vtoggle(top_layer); default_sign_in();
 </script>
 </body>
 </html>
