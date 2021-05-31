@@ -140,10 +140,11 @@ var sysa={
     spawn_ui:function(ct){embassy.agents.ui.summon();},
     mine_key:async function(ct){let i=0;for(;i<20000;i++){let a=await sea.pair();if (a.pub.startsWith(ct.pub_criteria))console.log(a);}},
     // show_quests:function(ct){ct.whom}
-    show_user_quests:function(ct){console.table()},
+    goals: async function(ct){gun_goal_index.map().once()},
     nothing:function(ct){},
     
-    
+    //todo: actions are entities too. their result is stored in vars like any other.
+    //(user.get(new_id()).put(result)->action context)
     // :function(e){alert(e);},
 }
 var sysout={render:{whos:['ui']}}//outsource. interact with other agents, in order to do these
@@ -168,9 +169,27 @@ if(context?.meets_criteria)
     var gun = Gun();
     var sea = Gun.SEA;
     var ustate;
+    var gun_agent_index;//classifiers telling that var is an agent/whatever
+    var gun_goal_index;
+    var gun_problem_index;
+    var gun_solution_index;
     var user = gun.user().recall({ sessionStorage: true }, () => {
       logIn()
     });
+function instance_of(a,b){
+    //todo: neuronize (id for the name, number, implementation..)
+
+
+}
+function similar_to(a,b){
+    //or same_as?
+}//also, might come as additinal meta, that a is an instance of the same type, that B is 
+function new_id(){return Date.now()+''+Math.random();}
+async function uput(what){
+    let id = new_id();
+    user.get(id).put(what);
+    return id;
+}
 async function default_sign_in(){
     let text_pair = document.getElementById('text_pair').value;
     let pair = localStorage.getItem('user_pair');
@@ -194,6 +213,10 @@ async function force_create_new_user(){
     function logIn(){console.info('Logged in as ', user.is);
     user_pub=user.is.pub;
     ustate=user.get('state');
+    gun_agent_index=user.get('agent_index');
+    gun_solution_index=user.get('solution_index');
+    gun_goal_index=user.get('goal_index');
+    gun_problem_index=user.get('problem_index');
     }
     gun.on('auth', () => {
         logIn();
