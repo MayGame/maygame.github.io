@@ -1,0 +1,32 @@
+MayGame is ready:
+  problem id 1 solved:
+    problem keeper reports that:
+      all variables are known and fit:
+        solution applied:
+          solution is determined:
+          ...and more! #marker, that it's incomplete
+
+proof of utility:
+  # getting these is a subgoal for agents. Kind of money?
+  # get as a reward for solving the problem. amount, signed with the issuer's key
+  #
+
+I have a problem -> notify
+unknown problem -> learn which
+(ask for context, classify)
+if fits some pattern -> instance of a specific problem (or composition)
+else -> instance of some new unknown problem -> research
+if solving is worth it -> solve.
+
+
+
+Scheduled events:
+  #Description: some vars need to be checked periodically
+  #those with known timers..
+#region bs
+share solutions:
+  define the format:
+
+
+#endregion
+
