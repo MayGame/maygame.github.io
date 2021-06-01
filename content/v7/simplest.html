@@ -217,7 +217,21 @@ async function force_create_new_user(){
     gun_solution_index=user.get('solution_index');
     gun_goal_index=user.get('goal_index');
     gun_problem_index=user.get('problem_index');
-    user.get("1622519980405clairdlwlrMayJesCA").put(true)
+    user.get("1622519980405clairdlwlrMayJesCA").put(true);
+    user.get("1622522141960relation:is_a-----").put({});
+    user.get("1622522868231type:goal---------").put({})
+    user.get("1622523081525type:problem------").put({});
+    user.get("1622527872862type:player-------").put({});
+    user.get("1622527872862type:agent--------").put({});
+    user.get("1622527872862type:user---------").put({});
+    user.get("1622527872862type:human--------").put({});
+    user.get("1622527872862type:keeper-------").put({});
+    user.get("1622527872862type:solution-----").put({});//main goal for timestamped id 
+    //is a disambiguation
+    user.get("1622527872862type:pubkey-------").put({});
+    user.get("1622527872862type:description--").put({});
+
+
     }
     gun.on('auth', () => {
         logIn();
