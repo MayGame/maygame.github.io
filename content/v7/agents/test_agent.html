@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <script src="../../../js/core/agent.js"></script>
+        <script src="../../../js/cdn/ejs.min.js"></script>
+
+    </head>
+    <body>
+        <div>
+            <input type="text" onchange="M1622789628907on_message_______(this.value)">
+            <input type="text" onchange="M1622812525709simple_execute___(this.value)" placeholder="execute"><br>
+            <input type="text" onchange="M1622814961483executeForgetJson(this.value)" placeholder="execute_forget"
+            value='{"M1622810297706render_specific__":"M1622812212297sample_render_ctx"}'
+            >
+        </div>
+        <div id="M1622810924861render_div_______"></div>
+        <script>
+            M1622789806530vars_____________={}
+            M1622789997876description_for__={M1622789997876description_for__:'some object, containing descriptions'}
+            M1622807371448type_of__________={}
+            
+            
+            M1622789806530vars_____________['M1622789806530vars_____________']=M1622789806530vars_____________
+            M1622789806530vars_____________['M1622807579513argument_request_']=true;
+            M1622789806530vars_____________['M1622807676505implementation_of']={};
+            M1622789806530vars_____________['M1622808248522json_schema______']={};
+            M1622789806530vars_____________['M1622811374358remember_execute_']=function(){}
+            M1622789806530vars_____________['M1622812326990parse_execute____']=function(){}
+            M1622789806530vars_____________['M1622814961483execute_forget___']=function(){}
+            M1622789806530vars_____________['M1622814961483executeForgetJson']=function(json){
+                let a=JSON.parse(json);
+                let key0=Object.keys(a)[0]
+                M1622789806530vars_____________[key0](M1622789806530vars_____________[a[key0]]);
+            }
+            M1622789806530vars_____________['M1622810297706render_specific__']=function(context){
+                M1622810924861render_div_______.innerHTML=ejs.render(context.what,context.replace)
+            };
+            M1622789806530vars_____________['M1622810423961show_goals_of____']=function(){
+                //key:value. func key gets executed with value context
+            };
+            M1622789806530vars_____________['M1622812212297sample_render_ctx']={what:"test render",replace:{}}
+            M1622789806530vars_____________['M1622812721270sample_render____']=function(){
+            M1622789806530vars_____________['M1622810297706render_specific__'](M1622789806530vars_____________['M1622812212297sample_render_ctx'])
+            }
+
+            function M1622812525709simple_execute___(val){M1622789806530vars_____________[val]();}
+            var M1622814961483executeForgetJson=function(json){
+                let a=JSON.parse(json);
+                let key0=Object.keys(a)[0]
+                M1622789806530vars_____________[key0](M1622789806530vars_____________[a[key0]]);
+            
+            }
+            function M1622789628907on_message_______(val)
+            {
+                if(M1622789806530vars_____________[val])
+                console.log('here',val)
+                else console.log('no such var:', val)
+                if(M1622789997876description_for__[val]){
+                console.log('description for',val," :");
+                console.log(M1622789997876description_for__[val])
+            }
+                else console.log('no description')
+        }
+        </script>
+    </body>
+</html>

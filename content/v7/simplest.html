@@ -1,5 +1,6 @@
 <html>
     <head>
+<!-- <script src="https://unpkg.com/json5@^2.0.0/dist/index.min.js"></script> -->
 
 <script id="gun_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 <script id="sea_cdn_script" src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
@@ -37,7 +38,11 @@ grid-template-areas: 'topleft top topright' 'midleft mid midright' 'botleft bot 
         <label>Prefix</label><input type="text" id="mine_pub_prefix">
         <button onclick="agents.system.direct('mine_key',{pub_criteria:mine_pub_prefix.value})">Mine key</button>
         <button onclick="agents.system.direct('goals');">Show goals</button>
-    
+        <br>
+    <label >ID</label><input type="text" onchange="
+    let a=('M'+Date.now()+this.value+'_________________________').slice(0,31);
+    id_result.value=a.replaceAll(' ','_');">
+    <textarea id="id_result" style="height: 50px;"></textarea>
     </div>
     </div>
     <div class="layer cont3x3" id="top_layer" style="position: absolute; z-index: 2147483212;" >
@@ -184,7 +189,15 @@ function instance_of(a,b){
 function similar_to(a,b){
     //or same_as?
 }//also, might come as additinal meta, that a is an instance of the same type, that B is 
-function new_id(){return Date.now()+''+Math.random();}
+function new_id(){
+    let rnd = Math.random().toString();//.length varies. 16-21. doesn't really matter
+    let id=('M'+Date.now()+rnd.replace('.','J')+"BB00BB").substr(0,32);
+    //starts with a number, contains dot -> not a valid ID for C-like languages
+    //31-35 symbols. 
+    return id;}
+function new_fast_id(){
+    return Date.now()+''+Math.random();
+}
 async function uput(what){
     let id = new_id();
     user.get(id).put(what);
@@ -230,7 +243,10 @@ async function force_create_new_user(){
     //is a disambiguation
     user.get("1622527872862type:pubkey-------").put({});
     user.get("1622527872862type:description--").put({});
-
+    user.get("1622531512928type:instance_of--").put({});
+    user.get("1622642771784type:url:static_js").put({});
+    user.get("1622715746815cache_it----------").put({});
+    
 
     }
     gun.on('auth', () => {

@@ -1,0 +1,69 @@
+<html id="M1622889582081system_html______">
+    <head id="M1622889484351system_head______">
+<!-- <script src="https://maygame.xxx/js/cdn/ejs.min.js" id="M1622890919466id_for_ejs_cdn___"></script> -->
+    </head>
+    <body id="M1622889549002system_body______">
+        <div id="M1622888583555main_div_________">
+        </div>
+        <button onclick="M1622888744120ask_user_is_happy()">?</button>
+        <button onclick="M1622890040876render_complex_st()">ejs Render</button>
+        <br><label>Problem</label><input type="text" id="M1622997619671problem_textarea_">
+        <button onclick="M1622997124916problem_try_solve(M1622997619671problem_textarea_.value)">try solve</button>
+        
+        <script>
+            var M1622905854863friend_list______ =['M1622519980405clairdlwlrMayJesCA']
+            var M1622975127109sys_self_________;
+            var M1622978058009my_problems_list_=[]
+            var M1622978110303type_list________=[]
+            var M1622997218784solution_list____={
+                M1622997724702no_ejs_error_____:'M1622997813383no_ejs_solution__'
+            }
+            var M1622975088325abstract_me______ = M1622975127109sys_self_________
+            var M1622975022906problems_list_for={M1622975088325abstract_me______:M1622978058009my_problems_list_}
+            var M1622892466075assumption_syscor=true;
+            var M1622892489331desc_____________=`Description for M1622892466075assumption_syscor:
+            I assume, that user is happier, when the system works properly
+            `
+            var M1622888417905greet_text_______ = "Hi, I'm system. You can just call me sys, or sis. I don't mind it. I am happy, when you are happy."
+            var M1622888505809target_div_______=M1622888583555main_div_________
+            function M1622997124916problem_try_solve(id){
+                if(M1622997218784solution_list____[id]){
+
+                    console.log(id,"has a solution");
+                }
+                else console.log("there is no solution for ", id)
+            }
+            function M1622888134271greet____________(){
+                let text=M1622888417905greet_text_______
+                M1622888505809target_div_______.innerHTML=text;
+            }
+            M1622888134271greet____________();
+            function M1622888744120ask_user_is_happy(){
+                let text=M1622888417905greet_text_______
+                M1622888505809target_div_______.innerHTML=text+' Are you happy?';
+            }
+            function M1622890365382error_channel____(text){console.log("error:",text);}
+            function M1622891955508check_sys_hd_cdn____(ctxt){
+                let id=ctxt.id;
+                if(M1622889484351system_head______.querySelector('#'+id)!=null){
+                return true;}
+                else return false
+            }
+            function M1622978585265handle_error_____(){}
+            function M1622890260630head_check_ejs___(){
+                let id='M1622890919466id_for_ejs_cdn___';
+                return M1622891955508check_sys_hd_cdn____({id:id})}
+            function M1622890040876render_complex_st(){
+                if(M1622890260630head_check_ejs___())//head has ejs
+                M1622888505809target_div_______.innerHTML=ejs.render(M1622888417905greet_text_______,{});
+                else M1622890365382error_channel____("M1622997724702no_ejs_error_____")
+            }
+            function M1622978396274func_handle_probl(problem){
+
+            }
+            function M1622997813383no_ejs_solution__(){
+                
+            } 
+        </script>
+    </body>
+</html>
