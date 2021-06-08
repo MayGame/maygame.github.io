@@ -13,10 +13,20 @@
         <script>
             var M1622905854863friend_list______ =['M1622519980405clairdlwlrMayJesCA']
             var M1622975127109sys_self_________;
-            var M1622978058009my_problems_list_=[]
-            var M1622978110303type_list________=[]
+            var M1622978058009my_problems_list_=["M1623153278488ui_render_buttons"]
+            var M1622978110303type_list________={'M1623149150224complete_solution':true}
+            var M1623149096904type_description_={M1623149150224complete_solution:
+                "Complete solution, with all the steps and vars known.",
+                M1623149272792partial_solution_:"Partial solutions, some steps are known, WIP. This one can be modified",
+                M1623152242975solver___________:"Agent, that is known to have a solution for the problem.",
+                M1623152365026abstract_solver__:"A set of criterias to fit for an agent, so they can solve that problem",
+                M1623152573931agent_feature____:"",
+                M1623152639558solution_step____:""
+            }
+
             var M1622997218784solution_list____={
-                M1622997724702no_ejs_error_____:'M1622997813383no_ejs_solution__'
+                M1622997724702no_ejs_error_____:'M1622997813383no_ejs_solution__',
+                M1623153278488ui_render_buttons:''
             }
             var M1622975088325abstract_me______ = M1622975127109sys_self_________
             var M1622975022906problems_list_for={M1622975088325abstract_me______:M1622978058009my_problems_list_}
@@ -25,11 +35,15 @@
             I assume, that user is happier, when the system works properly
             `
             var M1622888417905greet_text_______ = "Hi, I'm system. You can just call me sys, or sis. I don't mind it. I am happy, when you are happy."
+            var M1623147865819type_of__________=function(id){return }
             var M1622888505809target_div_______=M1622888583555main_div_________
             function M1622997124916problem_try_solve(id){
                 if(M1622997218784solution_list____[id]){
 
                     console.log(id,"has a solution");
+                    // if(M1623147865819type_of__________(M1622997218784solution_list____[id]))
+                    // console.log("type of solution is",M1622997218784solution_list____[id])
+                    window[M1622997218784solution_list____[id]]();
                 }
                 else console.log("there is no solution for ", id)
             }
@@ -55,15 +69,51 @@
                 return M1622891955508check_sys_hd_cdn____({id:id})}
             function M1622890040876render_complex_st(){
                 if(M1622890260630head_check_ejs___())//head has ejs
-                M1622888505809target_div_______.innerHTML=ejs.render(M1622888417905greet_text_______,{});
+                M1622888505809target_div_______.innerHTML=ejs.render(M1622888417905greet_text_______+"ejs",{});
                 else M1622890365382error_channel____("M1622997724702no_ejs_error_____")
             }
             function M1622978396274func_handle_probl(problem){
 
             }
             function M1622997813383no_ejs_solution__(){
-                
+                let script=document.createElement('script');
+                script.src="https://maygame.xxx/js/cdn/ejs.min.js";
+                script.id="M1622890919466id_for_ejs_cdn___";
+                M1622889484351system_head______.appendChild(script);
+                console.log("ejs added")
             } 
+            //#region comments
+            var M1623149497098flow_text_entry__=`
+            Problem arises, solution/no solution
+            if no solution -> rise a problem, asking to find one.
+            
+            `
+            var M1623149697980user_flow_text_en=`
+            Share problems as quests
+            Solution 
+            `
+            var M1623150865120system_problems__=`
+            System fails to execute something ->
+            thing goes to the solving pipeline ->
+            thing is added to problems.
+            Problem:
+            solution exists?
+            is it complete?
+            is it valid?(policies and stuff)
+
+            `
+            var M1623150138232solving_pipeline_=`
+            try request solutiion: some alg
+            problem type is known?
+            generic solution exists?
+
+            `
+            var M1623151503808message_example__=`
+        {"M1623151595377random_id_here___":
+        {"M1623151478111self_reported_typ":"M1623151548545ui_notify________",
+        "M1623151818335text_content_____":"Let's play it right!"
+        }
+        }`
         </script>
     </body>
 </html>
