@@ -41,7 +41,7 @@ grid-template-areas: 'topleft top topright' 'midleft mid midright' 'botleft bot 
         <br>
     <label >ID</label><input type="text" onchange="
     let a=('M'+Date.now()+this.value+'_________________________').slice(0,31);
-    id_result.value=a.replaceAll(' ','_');">
+    id_result.value=a.replaceAll(' ','_');"><button onclick="id_result.value=new_id();">Rand</button>
     <textarea id="id_result" style="height: 50px;"></textarea>
     </div>
     </div>

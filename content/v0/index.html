@@ -21,9 +21,15 @@
                 M1623152242975solver___________:"Agent, that is known to have a solution for the problem.",
                 M1623152365026abstract_solver__:"A set of criterias to fit for an agent, so they can solve that problem",
                 M1623152573931agent_feature____:"",
-                M1623152639558solution_step____:""
+                M1623152639558solution_step____:"",
+                M1623168858016delayed_action___:"",
+                M1623168874628self_triggered___:"",
+                M1623168893092action_wrapper___:"Abstract",
+                M1623219511738ui_element_______:"Html markup",
+
             }
 
+            var M1623171309761needed_elements__=[];//things that have/need a solution as UI
             var M1622997218784solution_list____={
                 M1622997724702no_ejs_error_____:'M1622997813383no_ejs_solution__',
                 M1623153278488ui_render_buttons:''
@@ -51,6 +57,10 @@
                 let text=M1622888417905greet_text_______
                 M1622888505809target_div_______.innerHTML=text;
             }
+            function M1623171269919build_ui_________(){
+                //todo
+                M1623171309761needed_elements__;
+            }
             M1622888134271greet____________();
             function M1622888744120ask_user_is_happy(){
                 let text=M1622888417905greet_text_______
@@ -70,8 +80,15 @@
             function M1622890040876render_complex_st(){
                 if(M1622890260630head_check_ejs___())//head has ejs
                 M1622888505809target_div_______.innerHTML=ejs.render(M1622888417905greet_text_______+"ejs",{});
-                else M1622890365382error_channel____("M1622997724702no_ejs_error_____")
+                else {
+                    M1622890365382error_channel____("M1622997724702no_ejs_error_____");
+                    M1623170393806solving_pipe_____("M1622997724702no_ejs_error_____");
+                }
             }
+            var M16232197550130J7849616951545693={
+                M1623151478111self_reported_typ:"M1623219511738ui_element_______",
+                markup:`<button onclick="">`
+        }
             function M1622978396274func_handle_probl(problem){
 
             }
@@ -82,6 +99,14 @@
                 M1622889484351system_head______.appendChild(script);
                 console.log("ejs added")
             } 
+            function M1623170393806solving_pipe_____(problem){
+                if(M1622997218784solution_list____[problem]){
+                    // console.log(id,"has a solution");
+                    window[M1622997218784solution_list____[problem]]();
+                }
+                else M1623170800540_________________();
+            }
+            function M1623170800540_________________(){}
             //#region comments
             var M1623149497098flow_text_entry__=`
             Problem arises, solution/no solution
@@ -114,6 +139,7 @@
         "M1623151818335text_content_____":"Let's play it right!"
         }
         }`
+
         </script>
     </body>
 </html>
