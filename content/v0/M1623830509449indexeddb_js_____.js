@@ -16,7 +16,9 @@ async function M1623830709556indexeddb_init___(){
   
     // Create an objectStore for this database
     M1623832698492idb_sample_store_ = M1623831893386db_______________.createObjectStore("name", { keyPath: "myKey" });
-  };
+    M1623831893386db_______________.createObjectStore("M1623831451834idb_descript_stor");
+    
+};
 //    M1623830819132first_idb_connect.onerror = function(e){console.log(e)}
    M1623830819132first_idb_connect.onsuccess = function() {
     M1623831893386db_______________ = M1623830819132first_idb_connect.result;
