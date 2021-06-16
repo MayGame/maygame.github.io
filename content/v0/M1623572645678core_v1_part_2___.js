@@ -23,6 +23,7 @@ function M1623750624938gundb_cdn_batch__(){
     M1623749357408add_cdn__________({"id":"M1623755639615gun_cdn_sea______","src":"https://cdn.jsdelivr.net/npm/gun/sea.js"})
 }
 var M1623678706428vars_related_to__={}
+
 function M1623657327779window_add_var___(M16236573572500J4877350196267607){
     let key=Object.keys(M16236573572500J4877350196267607)[0]
     if(window[key]!=undefined)Object.assign(window[key],M16236573572500J4877350196267607[key]);
@@ -62,3 +63,4 @@ function M1623683341601render_problems__(M16236833613440J0487747733900221){
    document.getElementById(M16236833613440J0487747733900221.target_div).innerHTML=text;
 }
 //recipe, sequence, solution
+)
