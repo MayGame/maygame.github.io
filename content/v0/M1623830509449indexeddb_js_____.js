@@ -12,7 +12,7 @@ async function M1623830709556indexeddb_init___(){
    await M1623821216754indexeddb_opendb_(["M1623830819132first_idb_connect","M16238307510080J7194791896383828",1]);
    M1623830819132first_idb_connect.onupgradeneeded = function(event) {
     // Save the IDBDatabase interface
-    var M1623831893386db_______________ = event.target.result;
+    M1623831893386db_______________ = event.target.result;
   
     // Create an objectStore for this database
     M1623832698492idb_sample_store_ = M1623831893386db_______________.createObjectStore("name", { keyPath: "myKey" });
