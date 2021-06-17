@@ -8,7 +8,7 @@ async function M1623821216754indexeddb_opendb_(M16238212857720J4238014379729269)
 var M1623830819132first_idb_connect;
 var M1623832698492idb_sample_store_;
 var M1623831893386db_______________;
-async function M1623830709556indexeddb_init___(){
+async function M1623830709556indexeddb_init___(){//M16238307510080J7194791896383828 - name for db
    await M1623821216754indexeddb_opendb_(["M1623830819132first_idb_connect","M16238307510080J7194791896383828",1]);
    M1623830819132first_idb_connect.onupgradeneeded = function(event) {
     //      if (event.oldVersion < 1) {
@@ -16,7 +16,7 @@ async function M1623830709556indexeddb_init___(){
     M1623831893386db_______________ = event.target.result;
   
     // Create an objectStore for this database
-    M1623832698492idb_sample_store_ = M1623831893386db_______________.createObjectStore("name", { keyPath: "myKey" });
+    // M1623832698492idb_sample_store_ = M1623831893386db_______________.createObjectStore("name", { keyPath: "myKey" });
     M1623831893386db_______________.createObjectStore("M1623831451834idb_descript_stor");
     
 };
@@ -48,3 +48,37 @@ async function M1623836116952get_desc_example_(){
     M1623834654341get_desc_for_____({"id":"M1623834654341get_desc_for_____","where_put":"M1623836072764get_desc_result__"})
     
 }
+var M1623896454990idb_requires_for_;
+function M1623896476334learn_requires___(){}
+function M1623899718317export_adata_json(){}
+var M1623900089097indxeddb_goals_db;
+var M1623900223190idb_list_to_init_=[M1623830709556indexeddb_init___,M1623941545551idb_Mayn_db_init_]
+async function M1623900180431idb_init_batch___(){
+    M1623900223190idb_list_to_init_.forEach(e=>e());
+}
+var M1623941001884idb_stores_list__=['M1623945792684idb_thesaurus____',//all vars go here
+    'M1623940897095idb_func_arg_stor',//map arg name tofunc name. arg - key, func - value
+'M1623831451834idb_descript_stor',//description for key
+'M1623940635385idb_type_map_____',//type of given variable
+'M1623945927273idb_related_vars_',
+]
+var M1623941499181idb_Mayn_db______;
+var M1623943250216idb_Mayn_db_cnct_;
+var M1623942055880idb_Mayn_db_name_="J"
+async function M1623941545551idb_Mayn_db_init_(){
+    await M1623821216754indexeddb_opendb_(["M1623943250216idb_Mayn_db_cnct_",M1623942055880idb_Mayn_db_name_,1]);
+    M1623943250216idb_Mayn_db_cnct_.onupgradeneeded = function(event) {
+        M1623941499181idb_Mayn_db______ = event.target.result;
+        M1623941001884idb_stores_list__.forEach(e=>{
+            M1623941499181idb_Mayn_db______.createObjectStore(e);
+        })
+    
+    };
+    
+    M1623943250216idb_Mayn_db_cnct_.onsuccess = function() {
+        M1623943250216idb_Mayn_db_cnct_.result;
+
+        M1623941499181idb_Mayn_db______.onversionchange = function() {
+            M1623941499181idb_Mayn_db______.close();
+          alert("Database is outdated, please reload the page.")
+}}}
