@@ -77,7 +77,7 @@ async function M1623941545551idb_Mayn_db_init_(){
     };
     
     M1623943250216idb_Mayn_db_cnct_.onsuccess = function() {
-        M1623943250216idb_Mayn_db_cnct_.result;
+        M1623941499181idb_Mayn_db______=M1623943250216idb_Mayn_db_cnct_.result;
 
         M1623941499181idb_Mayn_db______.onversionchange = function() {
             M1623941499181idb_Mayn_db______.close();
