@@ -89,9 +89,13 @@ function M1623947220823idb_thesaurus_put(M16239472551580J1795597627150527){
 function M1623946933570wndw_to_idb_thesa(){
     Object.keys(window).forEach(key=>{if(key.length>30&key.startsWith('M')){
     //{key:el,value:window[key].toString()},type: typeof window[key]}})
+    let type=typeof window[key];
+    let word;
+    if(type=="function")word=window[key];
+    else word=JSON.stringify(window[key]);
     let transaction=M1623941499181idb_Mayn_db______.transaction(["M1623945792684idb_thesaurus____","M1623948002128idb_dom_typeof_st"],"readwrite");
-    transaction.objectStore('M1623945792684idb_thesaurus____').put(window[key].toString(),key);
-    transaction.objectStore('M1623948002128idb_dom_typeof_st').put(typeof window[key],key);
+    transaction.objectStore('M1623945792684idb_thesaurus____').put(word,key);
+    transaction.objectStore('M1623948002128idb_dom_typeof_st').put(type,key);
     }})
 
 }//memet
