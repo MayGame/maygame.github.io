@@ -91,7 +91,7 @@ function M1623946933570wndw_to_idb_thesa(){
     //{key:el,value:window[key].toString()},type: typeof window[key]}})
     let type=typeof window[key];
     let word;
-    if(type=="function")word=window[key];
+    if(type=="function")word=window[key].toString();
     else word=JSON.stringify(window[key]);
     let transaction=M1623941499181idb_Mayn_db______.transaction(["M1623945792684idb_thesaurus____","M1623948002128idb_dom_typeof_st"],"readwrite");
     transaction.objectStore('M1623945792684idb_thesaurus____').put(word,key);
