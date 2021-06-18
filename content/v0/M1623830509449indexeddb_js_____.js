@@ -65,7 +65,7 @@ var M1623941001884idb_stores_list__=['M1623945792684idb_thesaurus____',//all var
 ]
 var M1623941499181idb_Mayn_db______;
 var M1623943250216idb_Mayn_db_cnct_;
-var M1623942055880idb_Mayn_db_name_="J"
+var M1623942055880idb_Mayn_db_name_="memoires_eternels"
 async function M1623941545551idb_Mayn_db_init_(){
     await M1623821216754indexeddb_opendb_(["M1623943250216idb_Mayn_db_cnct_",M1623942055880idb_Mayn_db_name_,2]);
     M1623943250216idb_Mayn_db_cnct_.onupgradeneeded = function(event) {
@@ -94,4 +94,4 @@ function M1623946933570wndw_to_idb_thesa(){
     transaction.objectStore('M1623948002128idb_dom_typeof_st').put(typeof window[key],key);
     }})
 
-}
+}//memet
