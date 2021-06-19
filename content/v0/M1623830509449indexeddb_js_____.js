@@ -139,3 +139,22 @@ function M1624077010981export_idb_json__(M16240767058400J8182149514192616){
           };
     })
 }
+function M1624081527326idbExportFileJSON(M16240815455540J2087249504105126){
+    let db=window[M16240815455540J2087249504105126.db];
+    var res_obj={};
+    Array.from(new Set( db.objectStoreNames)).forEach(store=>{
+        res_obj[store]={}
+        var objectStore = db.transaction(store).objectStore(store);
+        objectStore.openCursor().onsuccess = function(event) {
+            var cursor = event.target.result;
+            if (cursor) {
+                let value=JSON.stringify(cursor.value);
+                res_obj[store][cursor.key]=value;
+              cursor.continue();
+            }
+            else {
+              console.log("res obj json",JSON.stringify(res_obj));
+            }
+            
+          };
+    })
