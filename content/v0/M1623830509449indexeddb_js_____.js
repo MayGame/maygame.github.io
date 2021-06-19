@@ -155,7 +155,7 @@ function M1624081527326idbExportFileJSON(M16240815455540J2087249504105126){
             else {
                 let res_json=JSON.stringify(res_obj[store])
             //   console.log("res obj json",res_json);
-              M1624081967865downloadAsFile___({name:store+".json",text:res_json})
+                M1624083195642downloadAsJSON___({name:store+".json",text:res_json})
             }
             
           };
@@ -166,6 +166,17 @@ function M1624081967865downloadAsFile___(M16240819877260J8877865110371159){
     let text= M16240819877260J8877865110371159.text;
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+function M1624083195642downloadAsJSON___(M16240832038540J3959681631336438){
+    let filename = M16240832038540J3959681631336438.name;
+    let text = M16240832038540J3959681631336438.text;
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
     element.style.display = 'none';
     document.body.appendChild(element);
