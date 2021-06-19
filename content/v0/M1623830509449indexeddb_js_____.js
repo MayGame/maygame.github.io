@@ -122,7 +122,7 @@ function M1624077010981export_idb_json__(M16240767058400J8182149514192616){
             let result_json=`{"${store}":{`;
             if (cursor) {
                 let value=JSON.stringify(cursor.value);
-                res_obj[cursor.key]=value;
+                res_obj[store][cursor.key]=value;
                 let cursor_it=`"${cursor.key}":"${value}",`
                 
                 result_json+=cursor_it;
