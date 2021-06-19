@@ -101,10 +101,10 @@ function M1624036276382wndw_to_idb_thesa(){
 e=error.toString().split(" ");
 if(e[0]=='DataCloneError:'){
     type="not_clonable";
-    word=e[6]
+    word=e[6];
+    transaction.objectStore('M1623945792684idb_thesaurus____').add(word,key);
+    transaction.objectStore('M1623948002128idb_dom_typeof_st').add(type,key);   
 }
-// transaction.objectStore('M1623945792684idb_thesaurus____').put(word,key);
-// transaction.objectStore('M1623948002128idb_dom_typeof_st').put(type,key);   
 }
     }})
 
