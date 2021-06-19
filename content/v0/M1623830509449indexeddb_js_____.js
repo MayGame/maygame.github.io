@@ -93,12 +93,15 @@ function M1624036276382wndw_to_idb_thesa(){
     let word;
     if(type=="function")word=window[key].toString();
     else word=window[key];
-    try {
     let transaction=M1623941499181idb_Mayn_db______.transaction(["M1623945792684idb_thesaurus____","M1623948002128idb_dom_typeof_st"],"readwrite");
+    try {
     transaction.objectStore('M1623945792684idb_thesaurus____').put(word,key);
     transaction.objectStore('M1623948002128idb_dom_typeof_st').put(type,key);   
     } catch (error) {
-console.log(error);    }
+console.log(error.toString().split(" "));
+// transaction.objectStore('M1623945792684idb_thesaurus____').put(word,key);
+// transaction.objectStore('M1623948002128idb_dom_typeof_st').put(type,key);   
+}
     }})
 
 }//memet
