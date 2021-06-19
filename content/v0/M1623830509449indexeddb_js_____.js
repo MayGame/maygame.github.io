@@ -105,6 +105,7 @@ if(e[0]=='DataCloneError:'){
     transaction.objectStore('M1623945792684idb_thesaurus____').add(word,key);
     transaction.objectStore('M1623948002128idb_dom_typeof_st').add(type,key);   
 }
+else console.log("M1624036276382wndw_to_idb_thesa err: ",error);
 }
     }})
 
