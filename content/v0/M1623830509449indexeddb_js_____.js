@@ -110,3 +110,19 @@ else console.log("M1624036276382wndw_to_idb_thesa err: ",error);
     }})
 
 }
+function M1624077010981export_idb_json__(M16240767058400J8182149514192616){
+    let db=window[M16240767058400J8182149514192616.db]
+    Array.from(new Set( db.objectStoreNames)).forEach(store=>{
+        var objectStore = db.transaction(store).objectStore(store);
+        objectStore.openCursor().onsuccess = function(event) {
+            var cursor = event.target.result;
+            if (cursor) {
+              console.log("Key" + cursor.key + "JSON" + JSON.stringify(cursor.value));
+              cursor.continue();
+            }
+            else {
+              console.log("No more entries!");
+            }
+          };
+    })
+}
