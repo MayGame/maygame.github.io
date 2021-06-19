@@ -113,14 +113,16 @@ else console.log("M1624036276382wndw_to_idb_thesa err: ",error);
 var M1624078206159idb_export_result={}
 function M1624077010981export_idb_json__(M16240767058400J8182149514192616){
     let db=window[M16240767058400J8182149514192616.db];
+    let res_obj;
     Array.from(new Set( db.objectStoreNames)).forEach(store=>{
-
+        res_obj[store]={}
         var objectStore = db.transaction(store).objectStore(store);
         objectStore.openCursor().onsuccess = function(event) {
             var cursor = event.target.result;
             let result_json=`{"${store}":{`;
             if (cursor) {
                 let value=JSON.stringify(cursor.value);
+                res_obj[cursor.key]=value;
                 let cursor_it=`"${cursor.key}":"${value}",`
                 
                 result_json+=cursor_it;
@@ -130,6 +132,8 @@ function M1624077010981export_idb_json__(M16240767058400J8182149514192616){
             else {
               result_json+=`}},`;
               console.log(result_json);
+              console.log(res_obj);
+              console.log("res obj json",JSON.stringify(res_obj));
             }
             
           };
