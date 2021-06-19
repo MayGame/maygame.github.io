@@ -153,8 +153,8 @@ function M1624081527326idbExportFileJSON(M16240815455540J2087249504105126){
               cursor.continue();
             }
             else {
-                let res_json=JSON.stringify(res_obj)
-              console.log("res obj json",res_json);
+                let res_json=JSON.stringify(res_obj[store])
+            //   console.log("res obj json",res_json);
               M1624081967865downloadAsFile___({name:store+".json",text:res_json})
             }
             
