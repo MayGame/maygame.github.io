@@ -98,8 +98,7 @@ function M1624036276382wndw_to_idb_thesa(){
     transaction.objectStore('M1623945792684idb_thesaurus____').put(word,key);
     transaction.objectStore('M1623948002128idb_dom_typeof_st').put(type,key);   
     } catch (error) {
-        
-    }
+console.log(error);    }
     }})
 
 }//memet
