@@ -111,18 +111,24 @@ else console.log("M1624036276382wndw_to_idb_thesa err: ",error);
 
 }
 function M1624077010981export_idb_json__(M16240767058400J8182149514192616){
-    let db=window[M16240767058400J8182149514192616.db]
+    let db=window[M16240767058400J8182149514192616.db];
+    let result_json="{"
     Array.from(new Set( db.objectStoreNames)).forEach(store=>{
+        result_json+=`"${store}":{`;
         var objectStore = db.transaction(store).objectStore(store);
         objectStore.openCursor().onsuccess = function(event) {
             var cursor = event.target.result;
             if (cursor) {
-              console.log("Key" + cursor.key + "JSON" + JSON.stringify(cursor.value));
+                result_json+=`"${cursor.key}":"${JSON.stringify(cursor.value)}",`
+            //   console.log("Key" + cursor.key + "JSON" + );
               cursor.continue();
             }
             else {
-              console.log("No more entries!");
+              result_json+=`},`;
             }
+            
           };
     })
+    result_json+="}";
+    console.log(result_json);
 }
