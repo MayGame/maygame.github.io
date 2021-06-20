@@ -183,3 +183,22 @@ function M1624083195642downloadAsJSON___(M16240832038540J3959681631336438){
     element.click();
     document.body.removeChild(element);
 }
+function M1624168337430IDB_bulk_import__(M16241683595790J9098192767985931){
+    let obj = M16241683595790J9098192767985931.obj;//put values to keys
+    let entries=Object.entries(obj)
+    let db = M16241683595790J9098192767985931.db||'M1623941499181idb_Mayn_db______';
+    let transaction=M1623941499181idb_Mayn_db______.transaction([M16241683595790J9098192767985931.store],"readwrite");
+    entries.forEach(e=>{
+        try {
+            transaction.objectStore(M16241683595790J9098192767985931.store).put(e.value,e.key);
+            } catch (error) {
+                console.log('M1624168337430IDB_bulk_import__',error);
+            }
+    })
+}
+M1624168337430IDB_bulk_import__({obj:{M1624168337430IDB_bulk_import__:"Imports obj's top level entries to the selected store. db object can be provided as an optional argument"},"store":"M1623831451834idb_descript_stor"})
+function M1624168178171IDB_import_json__(M16241681915240J8055564501035015)
+{
+    let obj = JSON.parse(M16241681915240J8055564501035015.text);
+    M1624168337430IDB_bulk_import__({obj:obj,store:M16241681915240J8055564501035015.store})
+}
