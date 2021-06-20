@@ -190,7 +190,7 @@ function M1624168337430IDB_bulk_import__(M16241683595790J9098192767985931){
     let transaction=M1623941499181idb_Mayn_db______.transaction([M16241683595790J9098192767985931.store],"readwrite");
     entries.forEach(e=>{
         try {
-            transaction.objectStore(M16241683595790J9098192767985931.store).put(e.value,e.key);
+            transaction.objectStore(M16241683595790J9098192767985931.store).put(e[1],e[0]);
             } catch (error) {
                 console.log('M1624168337430IDB_bulk_import__',error);
             }
