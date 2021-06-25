@@ -34,7 +34,7 @@ console.log(M1624262971875UITopLevelZindex_)
     // idiv.style.backgroundColor="hotpink";
     idiv.style.height="100%";
     idiv.innerHTML=innerContent;
-    idiv.setAttribute("id",divid);
+    idiv.setAttribute("id",idivid);
     idiv.className="M1624270899914w_style_innercont";
     div.appendChild(idiv);
     let win_title=M16242627750700J7017439316036245.title||idivid;
@@ -48,3 +48,148 @@ console.log(M1624262971875UITopLevelZindex_)
     return [divid,idivid];
 }
 
+/**
+ * ask question (tuple) - window, acepts two
+ * reply. 
+ * msg source 
+ */
+function M1624332799887spawn_var_inner__(){
+    let id=M1624265066524rand_id__________();
+
+return `
+<input type="text" placeholder="name to IDfy:" onchange="
+let a=('M'+Date.now()+this.value+'_________________________').slice(0,31);
+${id}.value=a.replaceAll(' ','_');" ><br>
+<textarea id="${id}" placeholder="Result goes here" style="height: 70px;"></textarea><br>
+<button onclick="${id}.value=M1624265066524rand_id__________();">Rand</button>
+`;}
+function M1624334890220descr_inner_conte(){
+    return ``
+}
+function M1624332231472spawn_var_window_(){
+    M1624610193562UISpawnGeneric___({content:M1624332799887spawn_var_inner__(),title:"Gen vars"});
+}
+function M1624334170131see_descr_window_(){
+    M1624610193562UISpawnGeneric___({content:"", title:"lf description"})
+}
+function M1624334963037add_var_window___(){
+    M1624610193562UISpawnGeneric___({content:"", title:"add var"})
+
+}
+var M1624345499225UI_Active_Panels_=["M1624345617658UI_Panel_One_____",
+"M1624437076316UI_Panel_Panels__","M1624446909830windows_bar______",
+"M1624607435991panel_friends____"
+]
+function M1624441963184panelIdToTheTop__(M16244420098710J3601299825064457){
+    M1624262971875UITopLevelZindex_+=1;
+    M16244420098710J3601299825064457.id.style.zIndex=M1624262971875UITopLevelZindex_;
+}
+var M1624444193816active_panels____=[]
+var M1624440710074panels_array_____=[
+    ["new empty","M1624349547805render_panel_new_","{}"],["a","b","c"],
+    // ["W"]
+];
+var M1624607619220friends_panel_arr=[["List","",""]]
+// var M1624446909830windows_bar______=M1624349547805render_panel_new_({content:""});//wip
+function M1624447274929windowsBarElClick(M16244472854070J3066446992501546){
+    console.log(window[M16244472854070J3066446992501546.id].parent.getComputedStyle("zIndex"));
+}
+var M1624607435991panel_friends____=M1624439266812ArrayToButtonNFA2(M1624607619220friends_panel_arr)
+var M1624437076316UI_Panel_Panels__=M1624439266812ArrayToButtonNFA2(M1624440710074panels_array_____);
+function M1624439116498ArrayToButtonNFA_(M16244390103150J5131402796215945){
+    let name = M16244390103150J5131402796215945[0];
+    let func = M16244390103150J5131402796215945[1];
+    let arg = M16244390103150J5131402796215945[2]||"";
+    return `<button onclick="${func}(${arg});">${name}</button>`
+}
+function  M1624439266812ArrayToButtonNFA2(M16244393230020J5704897383919565){
+    //name func arg 2d
+    let result="";
+    M16244393230020J5704897383919565.forEach(entry=>result+=M1624439116498ArrayToButtonNFA_(entry))
+    return result;
+}
+var M1624345617658UI_Panel_One_____=`
+<button onclick="M1624036276382wndw_to_idb_thesa();">Dump state to idb</button>
+<button onclick="M1624077010981export_idb_json__({'db':'M1623941499181idb_Mayn_db______'});">Export idb</button>
+<button onclick="M1624081527326idbExportFileJSON({'db':'M1623941499181idb_Mayn_db______'});">Export file</button>
+<button onclick="M1624610193562UISpawnGeneric___({'db':'M1623941499181idb_Mayn_db______'});">ui test</button>
+<button onclick="M1624332231472spawn_var_window_();">Var name</button>
+<button onclick="M1624334170131see_descr_window_();">seek  desc</button>
+<button onclick="M1624349547805render_panel_new_();">+ panel</button>
+`
+// function M1624349173998render_panels____(){
+//     M1624345499225UI_Active_Panels_.forEach(p=>{
+
+//     })
+// }
+function M1624444239595panel_render_add_(M16244442971900J817811984106799B){
+    let result=M1624349547805render_panel_new_(M16244442971900J817811984106799B);
+    M1624444193816active_panels____.push(result);
+    window.dispatchEvent(new CustomEvent("M1624445388750PanelAddedIDEvent",{detail:result}))
+}
+
+
+function M1624349547805render_panel_new_(M16243495667540J5321126795766193){
+    let content = M16243495667540J5321126795766193.content||'';
+    let title = M16243495667540J5321126795766193.title||'';
+    let panel = document.createElement("div");
+    panel.style.backgroundColor="hotpink";
+    panel.style.width="fit-content";
+    let panelI = document.createElement("span");
+    let controls = document.createElement("span");
+    let id=M1624265066524rand_id__________();
+    let cinner=`
+    <a onclick="
+    if (getComputedStyle(${id}).visibility=='hidden')
+    ${id}.style.visibility='visible';
+    else ${id}.style.visibility='hidden';
+    ">_</a>
+    <a onclick="document.body.removeChild(${id}.parentNode)">X</a>
+    `;
+    controls.innerHTML=cinner;
+    panelI.innerHTML=content;
+    panelI.id=id;
+    panelI.setAttribute("title",title)
+    panel.appendChild(panelI);
+    panel.appendChild(controls);
+    document.body.appendChild(panel);
+
+    return [id,title];
+}
+function M1624437484575UIRenderAllPanels(){
+    M1624345499225UI_Active_Panels_.forEach(
+        p=>{
+    // M1624349547805render_panel_new_({content:window[p]})
+    M1624444239595panel_render_add_({content:window[p],title:M1624608519068title_for________[p]})
+        }
+    )
+}
+function M1624609136938UPD_Panels_______(){
+    let text=``
+    M1624444193816active_panels____.forEach(e=>{
+        text+=M1624439116498ArrayToButtonNFA_([e[1]])
+    })
+    return text;
+}
+function M1624444850349UI_Init__________(){
+    window.addEventListener("M1624609653866windowAddedEvent_",e=>{console.log(e.detail);});
+
+    window.addEventListener("M1624445388750PanelAddedIDEvent",e=>{console.log(e.detail);
+    if(e.detail[1]=="Panels")M1624608952349Panels_panel_id__=e.detail[0];
+    document.getElementById(M1624608952349Panels_panel_id__).innerHTML=M1624609136938UPD_Panels_______();
+    })
+}
+var M1624608952349Panels_panel_id__;
+var M1624608519068title_for________={
+    "M1624345617658UI_Panel_One_____":"one",
+"M1624437076316UI_Panel_Panels__":"Panels","M1624446909830windows_bar______":"windows",
+"M1624607435991panel_friends____":"friends"
+}
+M1624444850349UI_Init__________();
+var M1624610691534windows__________=[];
+var M1624610193562UISpawnGeneric___=spawn_wrapped;//todo: arg for generic
+function spawn_wrapped(M16246102759600J7030733333836279){
+    let result=M1624262716713UISpawnNewWindow_(M16246102759600J7030733333836279);
+    M1624610691534windows__________.push(result);
+    window.dispatchEvent(new CustomEvent("M1624609653866windowAddedEvent_",{detail:result}))
+}
