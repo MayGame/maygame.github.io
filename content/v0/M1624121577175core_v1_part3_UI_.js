@@ -14,6 +14,20 @@ function M1624264785245value_to_id______(M16242647363800J5140259437325456){
     let a=('M'+Date.now()+M16242647363800J5140259437325456.value+'_________________________').slice(0,31);
     return a.replaceAll(' ','_');
 }
+function M1624612701171window_onclose___(M16246127127370J8951023459840319)
+{
+    let a = document.getElementById(M16246127127370J8951023459840319.id);
+    document.body.removeChild(a);
+}
+function M1624613138853W_OnClose2_______(M16246131519800J3148049621619713){
+    M1624612701171window_onclose___(M16246131519800J3148049621619713);
+    let id = M16246131519800J3148049621619713.id;
+    M1624610691534windows__________.forEach((e,index)=>{
+        if(e[0]==id)M1624610691534windows__________.splice(index,1)
+    })
+    M1624615815153updtWindwPanel___();
+}
+var M1624612680771GenericOnClose___=M1624613138853W_OnClose2_______;
 function M1624262716713UISpawnNewWindow_(M16242627750700J7017439316036245){
     M1624262971875UITopLevelZindex_+=1;
 console.log(M1624262971875UITopLevelZindex_)
@@ -24,7 +38,7 @@ console.log(M1624262971875UITopLevelZindex_)
     var closeX = document.createElement("a");
     let divid=M1624265066524rand_id__________();
     closeX.innerHTML="x";
-    closeX.setAttribute("onclick",`let a=document.getElementById('${divid}'); document.body.removeChild(a);`);
+    closeX.setAttribute("onclick",`M1624612680771GenericOnClose___({id:'${divid}'})`);
     closeX.className="M1624269672137w_style_controls_";
     div.appendChild(closeX)
     div.setAttribute("id",divid);
@@ -37,7 +51,7 @@ console.log(M1624262971875UITopLevelZindex_)
     idiv.setAttribute("id",idivid);
     idiv.className="M1624270899914w_style_innercont";
     div.appendChild(idiv);
-    let win_title=M16242627750700J7017439316036245.title||idivid;
+    let win_title=M16242627750700J7017439316036245.title||idivid.substr(29);
     let titleEl = document.createElement("p");
     titleEl.className="M1624269596707w_style_bar______"
     titleEl.innerHTML=win_title;
@@ -82,7 +96,7 @@ var M1624345499225UI_Active_Panels_=["M1624345617658UI_Panel_One_____",
 ]
 function M1624441963184panelIdToTheTop__(M16244420098710J3601299825064457){
     M1624262971875UITopLevelZindex_+=1;
-    M16244420098710J3601299825064457.id.style.zIndex=M1624262971875UITopLevelZindex_;
+    document.getElementById(M16244420098710J3601299825064457.id).style.zIndex=M1624262971875UITopLevelZindex_;
 }
 var M1624444193816active_panels____=[]
 var M1624440710074panels_array_____=[
@@ -125,10 +139,38 @@ var M1624345617658UI_Panel_One_____=`
 function M1624444239595panel_render_add_(M16244442971900J817811984106799B){
     let result=M1624349547805render_panel_new_(M16244442971900J817811984106799B);
     M1624444193816active_panels____.push(result);
-    window.dispatchEvent(new CustomEvent("M1624445388750PanelAddedIDEvent",{detail:result}))
+    M1624612037420SpawnEventGeneric(new CustomEvent("M1624445388750PanelAddedIDEvent",{detail:result}))
 }
+//////////////////////////
+var M1624635883699GenericToast_____= M1624635774325Toast____________;
+function M1624636345100Cook_toast_______(M16246363716160J5304635871646979){
+    M1624636725133end_toast________()
+    let a =document.createElement('div');
+    a.innerHTML=M16246363716160J5304635871646979;
+    a.style.position="absolute";
+    a.style.backgroundColor="deeppink";
+    a.style.fontSize="2em";
+    a.style.display="block";
+    a.style.opacity="0.6"
+    let id=M1624265066524rand_id__________();
+    a.id=id;
+    document.body.appendChild(a);
+    M1624636688748last_toast_______=id;
+    return id;
+}
+function M1624636725133end_toast________(){
+    if(M1624636688748last_toast_______)
+    document.body.removeChild(document.getElementById(M1624636688748last_toast_______))
+    M1624636688748last_toast_______=null;
+}
+var M1624636688748last_toast_______;
+function M1624635774325Toast____________(M16246359166560J5750862477732466){
+    let a =M16246359166560J5750862477732466.text||'Toast';
+    M1624636345100Cook_toast_______(a)
 
-
+    setTimeout(M1624636725133end_toast________,1500);
+}
+/////////////////////
 function M1624349547805render_panel_new_(M16243495667540J5321126795766193){
     let content = M16243495667540J5321126795766193.content||'';
     let title = M16243495667540J5321126795766193.title||'';
@@ -139,6 +181,7 @@ function M1624349547805render_panel_new_(M16243495667540J5321126795766193){
     let controls = document.createElement("span");
     let id=M1624265066524rand_id__________();
     let cinner=`
+    <a onmouseover="M1624635883699GenericToast_____({text:'${title}'});">?</a>
     <a onclick="
     if (getComputedStyle(${id}).visibility=='hidden')
     ${id}.style.visibility='visible';
@@ -171,13 +214,25 @@ function M1624609136938UPD_Panels_______(){
     })
     return text;
 }
-function M1624444850349UI_Init__________(){
-    window.addEventListener("M1624609653866windowAddedEvent_",e=>{console.log(e.detail);});
-
-    window.addEventListener("M1624445388750PanelAddedIDEvent",e=>{console.log(e.detail);
+var M1624614839264windows_panel____;
+var M1624615486151PanelAddedEreact_=e=>{console.log(e.detail);
     if(e.detail[1]=="Panels")M1624608952349Panels_panel_id__=e.detail[0];
+    else 
+    if(e.detail[1]=="windows"){M1624614839264windows_panel____=e.detail[0];}
     document.getElementById(M1624608952349Panels_panel_id__).innerHTML=M1624609136938UPD_Panels_______();
+    }
+var M1624615815153updtWindwPanel___=()=>{
+    let text="";
+    M1624610691534windows__________.forEach(e=>{
+        text+=M1624439116498ArrayToButtonNFA_([e[2],"M1624441963184panelIdToTheTop__",`{id:'${e[0]}'}`])
     })
+    document.getElementById(M1624614839264windows_panel____).innerHTML=text;
+}
+var M1624615216720windw_addedEreact=e=>{//console.log(e.detail);
+    M1624615815153updtWindwPanel___();}
+function M1624444850349UI_Init__________(){
+    window.addEventListener("M1624609653866windowAddedEvent_",M1624615216720windw_addedEreact)
+    window.addEventListener("M1624445388750PanelAddedIDEvent",M1624615486151PanelAddedEreact_)
 }
 var M1624608952349Panels_panel_id__;
 var M1624608519068title_for________={
@@ -187,9 +242,11 @@ var M1624608519068title_for________={
 }
 M1624444850349UI_Init__________();
 var M1624610691534windows__________=[];
-var M1624610193562UISpawnGeneric___=spawn_wrapped;//todo: arg for generic
-function spawn_wrapped(M16246102759600J7030733333836279){
+var M1624610193562UISpawnGeneric___=M1624612265185SpawnWindowWrappe;//todo: arg for generic
+function M1624612265185SpawnWindowWrappe(M16246102759600J7030733333836279){
     let result=M1624262716713UISpawnNewWindow_(M16246102759600J7030733333836279);
     M1624610691534windows__________.push(result);
-    window.dispatchEvent(new CustomEvent("M1624609653866windowAddedEvent_",{detail:result}))
+    result[2]=document.getElementById(result[0]).lastChild.innerText;
+    M1624612037420SpawnEventGeneric(new CustomEvent("M1624609653866windowAddedEvent_",{detail:result}));
 }
+var M1624612037420SpawnEventGeneric=window.dispatchEvent;//might be swapped for gun or something
