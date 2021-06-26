@@ -28,39 +28,7 @@ function M1624613138853W_OnClose2_______(M16246131519800J3148049621619713){
     M1624615815153updtWindwPanel___();
 }
 var M1624612680771GenericOnClose___=M1624613138853W_OnClose2_______;
-function M1624262716713UISpawnNewWindow_(M16242627750700J7017439316036245){
-    M1624262971875UITopLevelZindex_+=1;
-console.log(M1624262971875UITopLevelZindex_)
-    var div = document.createElement('div');
-    div.setAttribute("class","M1624268064555window_style_clas");
-    div.style.height="100%";
-    div.style.zIndex=M1624262971875UITopLevelZindex_;
-    var closeX = document.createElement("a");
-    let divid=M1624265066524rand_id__________();
-    closeX.innerHTML="x";
-    closeX.setAttribute("onclick",`M1624612680771GenericOnClose___({id:'${divid}'})`);
-    closeX.className="M1624269672137w_style_controls_";
-    div.appendChild(closeX)
-    div.setAttribute("id",divid);
-    var innerContent=M16242627750700J7017439316036245.content||divid.toString();
-    var idiv = document.createElement('div');
-    var idivid=M1624265066524rand_id__________();
-    // idiv.style.backgroundColor="hotpink";
-    idiv.style.height="100%";
-    idiv.innerHTML=innerContent;
-    idiv.setAttribute("id",idivid);
-    idiv.className="M1624270899914w_style_innercont";
-    div.appendChild(idiv);
-    let win_title=M16242627750700J7017439316036245.title||idivid.substr(29);
-    let titleEl = document.createElement("p");
-    titleEl.className="M1624269596707w_style_bar______"
-    titleEl.innerHTML=win_title;
-    div.appendChild(titleEl);
-    document.body.appendChild(div);
 
-    
-    return [divid,idivid];
-}
 
 /**
  * ask question (tuple) - window, acepts two

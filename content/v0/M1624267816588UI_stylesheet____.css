@@ -2,7 +2,7 @@
 .M1624268064555window_style_clas{
 display: grid;
 grid-template-areas: "a b b c d"
-"f e e e h";
+"f e e e d";
 grid-template-columns: 2px 3fr 15fr 3fr 2px;
 grid-template-rows: 1fr 20fr 2px ;
 gap:2px;
