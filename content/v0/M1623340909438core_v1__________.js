@@ -13,7 +13,7 @@ M1623420084638json_single_pair_:"Json object, containing one top level kv pair. 
 M1623423150372json_func_or_ctxt:"Json object, containing one top level kv pair. arg:value. Interpreted as no arg function or ctxt for arg one, depending on the key",
 M1623422752434String_ID________:"ID, as a string",
 M1623423915182sched_entry_type_:"Schedule entry. timestamp + json pair for callback ",
-
+M1624862040598MayJessty_Word___:"MayJessty Language word, abstract, non executable, for building relations. Undefined.",
 }
 var M1623423218810same_as__________={"M1623423150372json_func_or_ctxt":"M1623420084638json_single_pair_"}
 var M1623420626142func_context_map_={}

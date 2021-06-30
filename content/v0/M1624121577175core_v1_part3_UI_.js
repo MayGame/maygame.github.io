@@ -129,7 +129,7 @@ var M1624608519068title_for________={
 var M1624700685189utilsPanelArray__=[
     ["Utility stuff"],["raw tech"],["research"]
 ];
-var M1624701959150content_panel_arr=[["quests","M1624703189774QuestsPanelOnclic"],["map"],["social"]]
+var M1624701959150content_panel_arr=[["quests","M1624703189774QuestsPanelOnclic"],["map"],["social"],["skills","M1624814047237skills_menu_oncli"]]
 var M1624701918357content_panel____=M1624439266812ArrayToButtonNFA2(M1624701959150content_panel_arr)
 var M1624700656939utilities_panel__=M1624439266812ArrayToButtonNFA2(M1624700685189utilsPanelArray__);
 var M1624699365741GPanelAddRight___=function(a){

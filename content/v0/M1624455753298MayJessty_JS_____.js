@@ -13,6 +13,7 @@ function execute(contex){
 
     my_implementation_for_(contex.arg);
 }
+var M1624862040598MayJessty_Word___;//type: word 
 var dict=["M1624458003150IntroduceNewWord_",
 "M1624458629731WhatNextWordMeans",
 "M1624458686938DoYourVersionOf__",

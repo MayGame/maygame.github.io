@@ -1,9 +1,9 @@
-var M1623774638130idb_transaction__ = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction || { READ_WRITE: "readwrite" };
-var M1623820653095indexedb_________ = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-var M1623820745971idb_keyrange_____ = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+var M1623774638130idb_transaction__ = M1625044980303window_Proxy_____.IDBTransaction || M1625044980303window_Proxy_____.webkitIDBTransaction || M1625044980303window_Proxy_____.msIDBTransaction || { READ_WRITE: "readwrite" };
+var M1623820653095indexedb_________ = M1625044980303window_Proxy_____.indexedDB || M1625044980303window_Proxy_____.mozIndexedDB || M1625044980303window_Proxy_____.webkitIndexedDB || M1625044980303window_Proxy_____.msIndexedDB;
+var M1623820745971idb_keyrange_____ = M1625044980303window_Proxy_____.IDBKeyRange || M1625044980303window_Proxy_____.webkitIDBKeyRange || M1625044980303window_Proxy_____.msIDBKeyRange;
 async function M1623821216754indexeddb_opendb_(M16238212857720J4238014379729269){
     // M16238212857720J4238014379729269
-    window[M16238212857720J4238014379729269[0]] = M1623820653095indexedb_________.open(M16238212857720J4238014379729269[1],M16238212857720J4238014379729269[2])
+    M1625044980303window_Proxy_____[M16238212857720J4238014379729269[0]] = M1623820653095indexedb_________.open(M16238212857720J4238014379729269[1],M16238212857720J4238014379729269[2])
 }
 var M1623830819132first_idb_connect;
 var M1623832698492idb_sample_store_;
@@ -39,7 +39,7 @@ function M1623834654341get_desc_for_____(M16238346618430J0161460206740422)
 {
    M1623831893386db_______________.transaction("M1623831451834idb_descript_stor","readonly")
    .objectStore("M1623831451834idb_descript_stor").get(M16238346618430J0161460206740422.id).onsuccess=function(event){
-    window[M16238346618430J0161460206740422.where_put]=event.target.result;
+    M1625044980303window_Proxy_____[M16238346618430J0161460206740422.where_put]=event.target.result;
    }
 }
 var M1623836072764get_desc_result__;
@@ -84,15 +84,15 @@ async function M1623941545551idb_Mayn_db_init_(){
           alert("Database is outdated, please reload the page.")
 }}}
 function M1623947220823idb_thesaurus_put(M16239472551580J1795597627150527){
-    M16239472551580J1795597627150527;
+    M16239472551580J1795597627150527;//fixme
 }
 function M1624036276382wndw_to_idb_thesa(){
-    Object.keys(window).forEach(key=>{if(key.length>30&key.startsWith('M')){
-    //{key:el,value:window[key].toString()},type: typeof window[key]}})
-    let type=typeof window[key];
+    Object.keys(M1625044980303window_Proxy_____).forEach(key=>{if(key.length>30&key.startsWith('M')){
+    //{key:el,value:M1625044980303window_Proxy_____[key].toString()},type: typeof M1625044980303window_Proxy_____[key]}})
+    let type=typeof M1625044980303window_Proxy_____[key];
     let word;
-    if(type=="function")word=window[key].toString();
-    else word=window[key];
+    if(type=="function")word=M1625044980303window_Proxy_____[key].toString();
+    else word=M1625044980303window_Proxy_____[key];
     let transaction=M1623941499181idb_Mayn_db______.transaction(["M1623945792684idb_thesaurus____","M1623948002128idb_dom_typeof_st"],"readwrite");
     try {
     transaction.objectStore('M1623945792684idb_thesaurus____').put(word,key);
@@ -112,7 +112,7 @@ else console.log("M1624036276382wndw_to_idb_thesa err: ",error);
 }
 var M1624078206159idb_export_result={}
 function M1624077010981export_idb_json__(M16240767058400J8182149514192616){
-    let db=window[M16240767058400J8182149514192616.db];
+    let db=M1625044980303window_Proxy_____[M16240767058400J8182149514192616.db];
     var res_obj={};
     Array.from(new Set( db.objectStoreNames)).forEach(store=>{
         res_obj[store]={}
@@ -140,7 +140,7 @@ function M1624077010981export_idb_json__(M16240767058400J8182149514192616){
     })
 }
 function M1624081527326idbExportFileJSON(M16240815455540J2087249504105126){
-    let db=window[M16240815455540J2087249504105126.db];
+    let db=M1625044980303window_Proxy_____[M16240815455540J2087249504105126.db];
     var res_obj={};
     Array.from(new Set( db.objectStoreNames)).forEach(store=>{
         res_obj[store]={}
@@ -216,3 +216,124 @@ function M1624207300224idbBulkImportMerg(M16242073427760J6184140110879794)
             }
     })
 }
+
+function M1624880970437IDB_put__________(M16248810024230J3544808568008901){
+    let storage = M16248810024230J3544808568008901[0];
+    let key = M16248810024230J3544808568008901[1];
+    let value = M16248810024230J3544808568008901[2];
+    let db = M1624881345841IDB_store_index__[storage].db
+    if(!db){console.log("no entry for ",storage, "in M1624881345841IDB_store_index__"); return}
+    let transaction = db.transaction(storage,"readwrite");
+    transaction.objectStore(storage).put(value,key);
+}
+function M1624880981184IDB_add__________(M16248809879510J2760662569410157){
+    let storage = M16248809879510J2760662569410157[0];
+    let key = M16248809879510J2760662569410157[1];
+    let value = M16248809879510J2760662569410157[2];
+    let db = M1624881345841IDB_store_index__[storage].db
+    if(!db){console.log("no entry for ",storage, "in M1624881345841IDB_store_index__"); return}
+    let transaction = db.transaction(storage,"readwrite");
+    transaction.objectStore(storage).add(value,key);
+}
+function M1624881225032IDB_get__________(M16248812445460J1281169936397554){
+    let storage = M16248812445460J1281169936397554[0];
+    let key = M16248812445460J1281169936397554[1];
+    // let value = M16248812445460J1281169936397554[2];
+    let db = M1624881345841IDB_store_index__[storage].db
+    if(!db){console.log("no entry for ",storage, "in M1624881345841IDB_store_index__"); return}
+    let transaction = db.transaction(storage,"readonly");
+    let OSrequest = transaction.objectStore(storage).get(key);
+    OSrequest.onsuccess=function(event){
+        console.log("IDB get for ",key, "returned",OSrequest.result);
+    }
+}
+var M1624956383058generic_put______ = M1624956113501Write_var________;
+
+
+
+var M1625022724571idbNameToConnObj_={
+// db_name:connection_object_id
+}
+var M1624881345841IDB_store_index__={
+    // storage: db_name
+    'M1623945792684idb_thesaurus____':"memoires_eternels",
+    'M1623940897095idb_func_arg_stor':"memoires_eternels",
+'M1623831451834idb_descript_stor':"memoires_eternels",
+'M1623940635385idb_type_map_____':"memoires_eternels",
+'M1623945927273idb_related_vars_':"memoires_eternels",
+'M1623948002128idb_dom_typeof_st':"memoires_eternels",                                              
+
+}
+function M1625022318769idbIdxErrPrmptAdd(M16250223541600J7474095390848625){
+    //fixme
+    console.log("IDB: There's no entry for ",M16250223541600J7474095390848625," store")
+}
+var M1625022877330IDBConnIDFor_____=(store)=>{
+    let db_name = M1624881345841IDB_store_index__[store];
+    let connection_object = M1625022724571idbNameToConnObj_[db_name];//id
+    if(!connection_object){
+        M1625022318769idbIdxErrPrmptAdd(store);
+        return 
+    }
+    else return connection_object;
+}
+function M1624947905870IDB_map_store____(M16249479597410J5924147242460605){
+    let store = M16249479597410J5924147242460605.store;
+    let db_name = M16249479597410J5924147242460605.db_name;
+    M1624881345841IDB_store_index__[store]=db_name;
+}
+function M1625026869835IDBMergeUpdatePro(M16250268798680J8351418844886263){
+    //should be used for updating indices (never?)
+    // M16250268798680J8351418844886263 : {store: store, M.....: {field3:new_value}, M...:value}
+    let store = M16250268798680J8351418844886263.store;
+    let keys = Object.keys(M16250268798680J8351418844886263);
+    let dbc = M1625044980303window_Proxy_____[M1625022877330IDBConnIDFor_____(store)];
+    let rwtstor = dbc.transaction(store, "readwrite").objectStore(store);
+    // let req = rwtstor.get(obj);
+    // let 
+    keys.forEach(key=>{
+        //foreach object merge it
+        if(key!="store"){
+            let req = rwtstor.get(key);
+            req.onsuccess=()=>{
+            const data = req.result;
+            Object.assign(data, M16250268798680J8351418844886263[key]) ;
+            const updReq = rwtstor.put(data,key);
+        }
+        }
+    })
+}
+function M1624861960052add_var__________(M16248624352900J3616530429038678){
+    let id = M16248624352900J3616530429038678.id;
+    let source = M16248624352900J3616530429038678.source||"M1624864048559Source_undefined_";
+    let value = M16248624352900J3616530429038678.value;
+    M1624861880949source___________[id]=source;
+    M1625044980303window_Proxy_____[id]=value;
+    M1624864687777StateLastUpdated_[id]=Date.now()
+}
+function M1624956113501Write_var________(M16249480424750J4388463756040546){
+    var key = M16249480424750J4388463756040546.key;
+    var value = M16249480424750J4388463756040546.value;
+    M1625044980303window_Proxy_____[key]=value;
+    M1624880970437IDB_put__________(["storage",key,value])
+}
+/**
+ * store -> db name -> conn for -> 
+ * 
+ */
+var M1625045274944windowProxyHadler={
+    get(target, name, receiver) {
+        let rv = Reflect.get(target, name, receiver);
+        console.log(target,name,receiver)
+        // if (typeof rv === "string") {
+        //     rv = rv.toUpperCase();
+        // }
+        return rv;
+    }
+}
+var M1625044980303window_Proxy_____ = M1625045240464window_Proxy_idb_;
+// var M1625044980303window_Proxy_____ = window;
+var M1625045240464window_Proxy_idb_=new Proxy(window, M1625045274944windowProxyHadler)
+// playground
+
+// M1625026869835IDBMergeUpdatePro({store:"",});
