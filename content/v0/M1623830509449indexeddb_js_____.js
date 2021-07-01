@@ -1,14 +1,11 @@
-var M1623774638130idb_transaction__ = M1625044980303window_Proxy_____.IDBTransaction || M1625044980303window_Proxy_____.webkitIDBTransaction || M1625044980303window_Proxy_____.msIDBTransaction || { READ_WRITE: "readwrite" };
-var M1623820653095indexedb_________ = M1625044980303window_Proxy_____.indexedDB || M1625044980303window_Proxy_____.mozIndexedDB || M1625044980303window_Proxy_____.webkitIndexedDB || M1625044980303window_Proxy_____.msIndexedDB;
-var M1623820745971idb_keyrange_____ = M1625044980303window_Proxy_____.IDBKeyRange || M1625044980303window_Proxy_____.webkitIDBKeyRange || M1625044980303window_Proxy_____.msIDBKeyRange;
-async function M1623821216754indexeddb_opendb_(M16238212857720J4238014379729269){
-    // M16238212857720J4238014379729269
-    M1625044980303window_Proxy_____[M16238212857720J4238014379729269[0]] = M1623820653095indexedb_________.open(M16238212857720J4238014379729269[1],M16238212857720J4238014379729269[2])
-}
+var M1623774638130idb_transaction__ = M1625068079944JesSWindowProxXxy.IDBTransaction || M1625068079944JesSWindowProxXxy.webkitIDBTransaction || M1625068079944JesSWindowProxXxy.msIDBTransaction || { READ_WRITE: "readwrite" };
+var M1623820653095indexedb_________ = M1625068079944JesSWindowProxXxy.indexedDB || M1625068079944JesSWindowProxXxy.mozIndexedDB || M1625068079944JesSWindowProxXxy.webkitIndexedDB || M1625068079944JesSWindowProxXxy.msIndexedDB;
+var M1623820745971idb_keyrange_____ = M1625068079944JesSWindowProxXxy.IDBKeyRange || M1625068079944JesSWindowProxXxy.webkitIDBKeyRange || M1625068079944JesSWindowProxXxy.msIDBKeyRange;
+
 var M1623830819132first_idb_connect;
 var M1623832698492idb_sample_store_;
 var M1623831893386db_______________;
-async function M1623830709556indexeddb_init___(){//M16238307510080J7194791896383828 - name for db
+async function M1623830709556indexeddb_init___(){//deprecated, inactive. NEat example
    await M1623821216754indexeddb_opendb_(["M1623830819132first_idb_connect","M16238307510080J7194791896383828",1]);
    M1623830819132first_idb_connect.onupgradeneeded = function(event) {
     //      if (event.oldVersion < 1) {
@@ -39,7 +36,7 @@ function M1623834654341get_desc_for_____(M16238346618430J0161460206740422)
 {
    M1623831893386db_______________.transaction("M1623831451834idb_descript_stor","readonly")
    .objectStore("M1623831451834idb_descript_stor").get(M16238346618430J0161460206740422.id).onsuccess=function(event){
-    M1625044980303window_Proxy_____[M16238346618430J0161460206740422.where_put]=event.target.result;
+    M1625068079944JesSWindowProxXxy[M16238346618430J0161460206740422.where_put]=event.target.result;
    }
 }
 var M1623836072764get_desc_result__;
@@ -52,17 +49,12 @@ var M1623896454990idb_requires_for_;
 function M1623896476334learn_requires___(){}
 function M1623899718317export_adata_json(){}
 var M1623900089097indxeddb_goals_db;
-var M1623900223190idb_list_to_init_=[M1623830709556indexeddb_init___,M1623941545551idb_Mayn_db_init_]
+var M1623900223190idb_list_to_init_=[M1623941545551idb_Mayn_db_init_]
+// var M1623900223190idb_list_to_init_=[M1623830709556indexeddb_init___,M1623941545551idb_Mayn_db_init_]
 async function M1623900180431idb_init_batch___(){
     M1623900223190idb_list_to_init_.forEach(e=>e());
 }
-var M1623941001884idb_stores_list__=['M1623945792684idb_thesaurus____',//all vars go here
-    'M1623940897095idb_func_arg_stor',//map arg name tofunc name. arg - key, func - value
-'M1623831451834idb_descript_stor',//description for key
-'M1623940635385idb_type_map_____',//type of given variable
-'M1623945927273idb_related_vars_',
-'M1623948002128idb_dom_typeof_st',//grabbed data from dom
-]
+
 var M1623941499181idb_Mayn_db______;
 var M1623943250216idb_Mayn_db_cnct_;
 var M1623942055880idb_Mayn_db_name_="memoires_eternels"
@@ -87,12 +79,12 @@ function M1623947220823idb_thesaurus_put(M16239472551580J1795597627150527){
     M16239472551580J1795597627150527;//fixme
 }
 function M1624036276382wndw_to_idb_thesa(){
-    Object.keys(M1625044980303window_Proxy_____).forEach(key=>{if(key.length>30&key.startsWith('M')){
-    //{key:el,value:M1625044980303window_Proxy_____[key].toString()},type: typeof M1625044980303window_Proxy_____[key]}})
-    let type=typeof M1625044980303window_Proxy_____[key];
+    Object.keys(M1625068079944JesSWindowProxXxy).forEach(key=>{if(key.length>30&key.startsWith('M')){
+    //{key:el,value:M1625068079944JesSWindowProxXxy[key].toString()},type: typeof M1625068079944JesSWindowProxXxy[key]}})
+    let type=typeof M1625068079944JesSWindowProxXxy[key];
     let word;
-    if(type=="function")word=M1625044980303window_Proxy_____[key].toString();
-    else word=M1625044980303window_Proxy_____[key];
+    if(type=="function")word=M1625068079944JesSWindowProxXxy[key].toString();
+    else word=M1625068079944JesSWindowProxXxy[key];
     let transaction=M1623941499181idb_Mayn_db______.transaction(["M1623945792684idb_thesaurus____","M1623948002128idb_dom_typeof_st"],"readwrite");
     try {
     transaction.objectStore('M1623945792684idb_thesaurus____').put(word,key);
@@ -112,7 +104,7 @@ else console.log("M1624036276382wndw_to_idb_thesa err: ",error);
 }
 var M1624078206159idb_export_result={}
 function M1624077010981export_idb_json__(M16240767058400J8182149514192616){
-    let db=M1625044980303window_Proxy_____[M16240767058400J8182149514192616.db];
+    let db=M1625068079944JesSWindowProxXxy[M16240767058400J8182149514192616.db];
     var res_obj={};
     Array.from(new Set( db.objectStoreNames)).forEach(store=>{
         res_obj[store]={}
@@ -140,7 +132,7 @@ function M1624077010981export_idb_json__(M16240767058400J8182149514192616){
     })
 }
 function M1624081527326idbExportFileJSON(M16240815455540J2087249504105126){
-    let db=M1625044980303window_Proxy_____[M16240815455540J2087249504105126.db];
+    let db=M1625068079944JesSWindowProxXxy[M16240815455540J2087249504105126.db];
     var res_obj={};
     Array.from(new Set( db.objectStoreNames)).forEach(store=>{
         res_obj[store]={}
@@ -287,7 +279,7 @@ function M1625026869835IDBMergeUpdatePro(M16250268798680J8351418844886263){
     // M16250268798680J8351418844886263 : {store: store, M.....: {field3:new_value}, M...:value}
     let store = M16250268798680J8351418844886263.store;
     let keys = Object.keys(M16250268798680J8351418844886263);
-    let dbc = M1625044980303window_Proxy_____[M1625022877330IDBConnIDFor_____(store)];
+    let dbc = M1625068079944JesSWindowProxXxy[M1625022877330IDBConnIDFor_____(store)];
     let rwtstor = dbc.transaction(store, "readwrite").objectStore(store);
     // let req = rwtstor.get(obj);
     // let 
@@ -308,13 +300,13 @@ function M1624861960052add_var__________(M16248624352900J3616530429038678){
     let source = M16248624352900J3616530429038678.source||"M1624864048559Source_undefined_";
     let value = M16248624352900J3616530429038678.value;
     M1624861880949source___________[id]=source;
-    M1625044980303window_Proxy_____[id]=value;
+    M1625068079944JesSWindowProxXxy[id]=value;
     M1624864687777StateLastUpdated_[id]=Date.now()
 }
 function M1624956113501Write_var________(M16249480424750J4388463756040546){
     var key = M16249480424750J4388463756040546.key;
     var value = M16249480424750J4388463756040546.value;
-    M1625044980303window_Proxy_____[key]=value;
+    M1625068079944JesSWindowProxXxy[key]=value;
     M1624880970437IDB_put__________(["storage",key,value])
 }
 /**
@@ -331,8 +323,9 @@ var M1625045274944windowProxyHadler={
         return rv;
     }
 }
-var M1625044980303window_Proxy_____ = M1625045240464window_Proxy_idb_;
-// var M1625044980303window_Proxy_____ = window;
+// var
+ M1625068079944JesSWindowProxXxy = M1625045240464window_Proxy_idb_;
+// var M1625068079944JesSWindowProxXxy = window;
 var M1625045240464window_Proxy_idb_=new Proxy(window, M1625045274944windowProxyHadler)
 // playground
 
