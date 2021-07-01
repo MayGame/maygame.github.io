@@ -25,6 +25,10 @@ var M1623941001884idb_stores_list__=[
 var M1623941499181idb_Mayn_db______;
 var M1623943250216idb_Mayn_db_cnct_;
 var M1623942055880idb_Mayn_db_name_="memoires_eternels";
+var M1623774638130idb_transaction__ = M1625068079944JesSWindowProxXxy.IDBTransaction || M1625068079944JesSWindowProxXxy.webkitIDBTransaction || M1625068079944JesSWindowProxXxy.msIDBTransaction || { READ_WRITE: "readwrite" };
+var M1623820653095indexedb_________ = M1625068079944JesSWindowProxXxy.indexedDB || M1625068079944JesSWindowProxXxy.mozIndexedDB || M1625068079944JesSWindowProxXxy.webkitIndexedDB || M1625068079944JesSWindowProxXxy.msIndexedDB;
+var M1623820745971idb_keyrange_____ = M1625068079944JesSWindowProxXxy.IDBKeyRange || M1625068079944JesSWindowProxXxy.webkitIDBKeyRange || M1625068079944JesSWindowProxXxy.msIDBKeyRange;
+
 async function M1623821216754indexeddb_opendb_(M16238212857720J4238014379729269){
     M1625068079944JesSWindowProxXxy[M16238212857720J4238014379729269[0]] = M1623820653095indexedb_________
     .open(M16238212857720J4238014379729269[1],M16238212857720J4238014379729269[2])
