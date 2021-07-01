@@ -24,9 +24,9 @@ var M1623941001884idb_stores_list__=[
 ]
 var M1623941499181idb_Mayn_db______;
 var M1623943250216idb_Mayn_db_cnct_;
-var M1623942055880idb_Mayn_db_name_="memoires_eternels"
+var M1623942055880idb_Mayn_db_name_="memoires_eternels";
 async function M1623821216754indexeddb_opendb_(M16238212857720J4238014379729269){
-    M1625044980303window_Proxy_____[M16238212857720J4238014379729269[0]] = M1623820653095indexedb_________
+    M1625068079944JesSWindowProxXxy[M16238212857720J4238014379729269[0]] = M1623820653095indexedb_________
     .open(M16238212857720J4238014379729269[1],M16238212857720J4238014379729269[2])
 }
 async function M1623941545551idb_Mayn_db_init_(){

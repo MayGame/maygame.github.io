@@ -55,9 +55,6 @@ async function M1623900180431idb_init_batch___(){
     M1623900223190idb_list_to_init_.forEach(e=>e());
 }
 
-var M1623941499181idb_Mayn_db______;
-var M1623943250216idb_Mayn_db_cnct_;
-var M1623942055880idb_Mayn_db_name_="memoires_eternels"
 async function M1623941545551idb_Mayn_db_init_(){
     await M1623821216754indexeddb_opendb_(["M1623943250216idb_Mayn_db_cnct_",M1623942055880idb_Mayn_db_name_,2]);
     M1623943250216idb_Mayn_db_cnct_.onupgradeneeded = function(event) {
