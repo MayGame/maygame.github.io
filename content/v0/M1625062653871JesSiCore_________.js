@@ -115,8 +115,9 @@ var M1625297347110Deserial_function_=function(M16252973756790J2619777814455608){
         {
             let text = M16253008862770J8563612302758874.target.result
             console.log(text)
-            let func = Function(('return ' + text)())
+            let func = Function('return ' + text)
             console.log(func, func.toString())
+            
         }})
 //    window[M16252973756790J2619777814455608.key]//from idb:=new Function()('return ' + foo.toString())()
 }
