@@ -9,7 +9,7 @@ var M1624862132021input_for________=(e)=>{
 }
 var M1624785360140ask_update_______=(ctxt)=>{
     console.log("please, update ",ctxt.id,ctxt.reason);
-    let cid = M1624265066524rand_id__________()
+    let cid = M1624265066524rand_id__________();
     let text=`
     <p>id:${ctxt.id}. is ${ctxt.reason}</p>
     ${M1624862132021input_for________({cid:cid})}

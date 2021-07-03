@@ -97,13 +97,55 @@ async function M1623941545551idb_Mayn_db_init_(){
             M1623941499181idb_Mayn_db______.close();
           alert("Database is outdated, please reload the page.")
 }}}
+function M1625300496229IDBThesaurusGetCB(M16253001282300J6024000346344986){
+    let key = M16253001282300J6024000346344986.key;
+    let callback = M16253001282300J6024000346344986.cb;
+    let store = M1623941499181idb_Mayn_db______.transaction('M1623945792684idb_thesaurus____',"readonly").objectStore("M1623945792684idb_thesaurus____")
+    let req = store.get(key);
+    req.onsuccess=callback;
+}
 //#endregion
 //#region core
 function M1625294924126SubCorr__________(){
     console.log("Hi, Mistress")
 }
+var M1625297347110Deserial_function=function(M16252973756790J2619777814455608){
+    let key = M16252973756790J2619777814455608.key;
+    M1625300496229IDBThesaurusGetCB({key:key,cb:function(M16253008862770J8563612302758874){console.log(M16253008862770J8563612302758874)}})
+//    window[M16252973756790J2619777814455608.key]//from idb:=new Function()('return ' + foo.toString())()
+}
+var M1625310367858ID_RegExp________ =new RegExp(/M\d{13}\w{18}/,'g')
+function M1625306744551funcStrGetRelated(M16253067937360J4115575867813261){
+    // const result = [...M16253067937360J4115575867813261.matchAll(M1625310367858ID_RegExp________])];
+    const sresult = M16253067937360J4115575867813261.split(/\W/)
+    let result=[];
+    sresult.forEach(e=>{if(e.length==32)result.push(e)})
+4// result =M1625310367858ID_RegExp________.exec(M16253067937360J4115575867813261);
+    return sresult;
+}
+var M1625301090123Srialize_function = function(M16253011146210J9441376555473651){//arg - string(id)
+    let key = M16253011146210J9441376555473651;
+    let transaction=M1623941499181idb_Mayn_db______.transaction(['M1623945792684idb_thesaurus____',
+    'M1623940897095idb_func_arg_stor','M1623945927273idb_related_vars_','M1625105007943IDBStoreMeta_____'],"readwrite")
+    let thes = transaction.objectStore("M1623945792684idb_thesaurus____");
+    let text = window[key].toString();
+    thes.put(key,text);
+    let meta={source:"",modified:Date.now()};
+    transaction.objectStore("M1625105007943IDBStoreMeta_____").put(key,meta);
+    let related = {}
+    transaction.objectStore("M1623945927273idb_related_vars_").put(key,meta);
+}
 //#endregion
-
+function M1624265066524rand_id__________(){
+    let rnd = Math.random().toString();//.length varies. 16-21. doesn't really matter
+    let id=('M'+Date.now()+rnd.replace('.','J')+"BB00BB").substr(0,32);
+    //starts with a number, contains dot -> not a valid ID for C-like languages
+    //31-35 symbols. 
+    return id;}
+function M1624264785245value_to_id______(M16242647363800J5140259437325456){
+let a=('M'+Date.now()+M16242647363800J5140259437325456.value+'_________________________').slice(0,32);
+return a.replaceAll(' ','_');
+}
 
 
 M1625063458700JessyNeat________()
