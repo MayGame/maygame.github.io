@@ -1,5 +1,5 @@
 
-.M1624268064555window_style_clas{
+.M1624268064555window_style_clas_{
 display: grid;
 grid-template-areas: "a b b c d"
 "f e e e d";
@@ -9,15 +9,15 @@ gap:2px;
 background-color: deeppink;
 position: absolute;
 }
-.M1624269596707w_style_bar______{
+.M1624269596707w_style_bar_______{
     grid-area: b;
     background-color: lightseagreen;
 }
-.M1624269672137w_style_controls_{
+.M1624269672137w_style_controls__{
     grid-area: c;
     background-color: lawngreen;
 }
-.M1624270899914w_style_innercont{
+.M1624270899914w_style_innercont_{
     grid-area: e;
     background-color: rgb(199, 187, 193);
 }
