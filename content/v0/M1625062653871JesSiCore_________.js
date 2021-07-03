@@ -115,13 +115,12 @@ var M1625297347110Deserial_function_=function(M16252973756790J2619777814455608){
 //    window[M16252973756790J2619777814455608.key]//from idb:=new Function()('return ' + foo.toString())()
 }
 var M1625310367858ID_RegExp_________ =new RegExp(/M\d{13}\w{18}/,'g')
+// function 
 function M1625306744551funcStrGetRelated_(M16253067937360J4115575867813261){
-    // const result = [...M16253067937360J4115575867813261.matchAll(M1625310367858ID_RegExp_________])];
-    const sresult = M16253067937360J4115575867813261.split(/\W/)
-    let result=[];
-    sresult.forEach(e=>{if(e.length==32)result.push(e)})
-4// result =M1625310367858ID_RegExp_________.exec(M16253067937360J4115575867813261);
-    return sresult;
+    const result = [...M16253067937360J4115575867813261.matchAll(M1625310367858ID_RegExp_________)];
+    let flet = [];
+    result.forEach(e=>{flet.push(e[0])})
+    return [...new Set(flet)];
 }
 var M1625301090123Srialize_function_ = function(M16253011146210J9441376555473651){//arg - string(id)
     let key = M16253011146210J9441376555473651;
