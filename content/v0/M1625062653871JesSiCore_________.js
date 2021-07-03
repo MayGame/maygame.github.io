@@ -115,7 +115,12 @@ var M1625297347110Deserial_function_=function(M16252973756790J2619777814455608){
 //    window[M16252973756790J2619777814455608.key]//from idb:=new Function()('return ' + foo.toString())()
 }
 var M1625310367858ID_RegExp_________ =new RegExp(/M\d{13}\w{18}/,'g')
-// function 
+var M1625320414108Func_Get_Arg_Name_=function(M16253205254550J1305364840200156){
+    let result = M16253205254550J1305364840200156.match(/function*?\(\W*(\w*)/);
+    if(result)
+    return result[1];
+    else return "";
+}
 function M1625306744551funcStrGetRelated_(M16253067937360J4115575867813261){
     const result = [...M16253067937360J4115575867813261.matchAll(M1625310367858ID_RegExp_________)];
     let flet = [];
@@ -130,9 +135,9 @@ var M1625301090123Srialize_function_ = function(M16253011146210J9441376555473651
     let text = window[key].toString();
     thes.put(key,text);
     let meta={source:"",modified:Date.now()};
-    transaction.objectStore("M1625105007943IDBStoreMeta______").put(key,meta);
-    let related = {}
-    transaction.objectStore("M1623945927273idb_related_vars__").put(key,meta);
+    transaction.objectStore("M1625105007943IDBStoreMeta______").put(meta,key);
+    transaction.objectStore("M1623945927273idb_related_vars__").put(M1625306744551funcStrGetRelated_(text),key);
+    transaction.objectStore("M1623940897095idb_func_arg_stor_").put(key,M1625320414108Func_Get_Arg_Name_(text));
 }
 //#endregion
 function M1624265066524rand_id___________(){
