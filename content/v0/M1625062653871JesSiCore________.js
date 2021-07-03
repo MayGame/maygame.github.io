@@ -13,7 +13,9 @@ function M1625220622470NoCoreFallback___(){
     console.log("No core")
 }
 function M1625282527470OnCorrLoaddeed___(M16252825647730J5031440897863075){
-    M1625068079944JesSWindowProxXxy[M16252825647730J5031440897863075.detail.core]();
+    let ex = M1625068079944JesSWindowProxXxy[M16252825647730J5031440897863075.detail.core];
+    console.log(ex);
+    ex();
 
 }
 
