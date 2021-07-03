@@ -133,7 +133,7 @@ var M1625301090123Srialize_function_ = function(M16253011146210J9441376555473651
     'M1623940897095idb_func_arg_stor_','M1623945927273idb_related_vars__','M1625105007943IDBStoreMeta______'],"readwrite")
     let thes = transaction.objectStore("M1623945792684idb_thesaurus_____");
     let text = window[key].toString();
-    thes.put(key,text);
+    thes.put(text,key);
     let meta={source:"",modified:Date.now()};
     transaction.objectStore("M1625105007943IDBStoreMeta______").put(meta,key);
     transaction.objectStore("M1623945927273idb_related_vars__").put(M1625306744551funcStrGetRelated_(text),key);
