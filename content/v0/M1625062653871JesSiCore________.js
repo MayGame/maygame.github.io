@@ -25,8 +25,13 @@ function M1625284003422LodCorr__________(){
     let req = store.get('M1625063417462CoreToLoad_______');
     req.onsuccess=function(){
         M1625068079944JesSWindowProxXxy[M1625063417462CoreToLoad_______]=req.result;
-        console.log("loddin")
-        window.dispatchEvent(new CustomEvent("M1625282460482CorrLoaddeed_____", {detail:{core:req.result}}))        
+        console.log("loddin", req.result);
+        if(req.result)
+        window.dispatchEvent(new CustomEvent("M1625282460482CorrLoaddeed_____", {detail:{core:req.result}})) ;
+        else {
+            console.log(req.error, req.result,"falling back to NoCore")
+            window.dispatchEvent(new CustomEvent("M1625282460482CorrLoaddeed_____", {detail:{core:"M1625220622470NoCoreFallback___"}}))        
+        }
     }
     req.onerror=function(){
         console.log(req.error, req.result,"falling back to NoCore")
