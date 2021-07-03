@@ -111,7 +111,13 @@ function M1625294924126SubCorr___________(){
 }
 var M1625297347110Deserial_function_=function(M16252973756790J2619777814455608){
     let key = M16252973756790J2619777814455608.key;
-    M1625300496229IDBThesaurusGetCB_({key:key,cb:function(M16253008862770J8563612302758874){console.log(M16253008862770J8563612302758874)}})
+    M1625300496229IDBThesaurusGetCB_({key:key,cb:function(M16253008862770J8563612302758874)
+        {
+            let text = M16253008862770J8563612302758874.target.result
+            console.log(text)
+            let func = Function(('return ' + text)())
+            console.log(func, func.toString())
+        }})
 //    window[M16252973756790J2619777814455608.key]//from idb:=new Function()('return ' + foo.toString())()
 }
 var M1625310367858ID_RegExp_________ =new RegExp(/M\d{13}\w{18}/,'g')
