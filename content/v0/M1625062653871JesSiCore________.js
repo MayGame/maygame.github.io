@@ -10,7 +10,10 @@ function M1625063654235InitVarrssksks___(){
 
 }
 function M1625220622470NoCoreFallback___(){
-    console.log("No core")
+    console.log("No core");
+    let store = M1623941499181idb_Mayn_db______.transaction('M1623945792684idb_thesaurus____',"readwrite").objectStore("M1623945792684idb_thesaurus____");
+    store.put("M1625294924126SubCorr__________",'M1625063417462CoreToLoad_______')
+
 }
 function M1625282527470OnCorrLoaddeed___(M16252825647730J5031440897863075){
     let ex = M1625068079944JesSWindowProxXxy[M16252825647730J5031440897863075.detail.core];
@@ -95,5 +98,12 @@ async function M1623941545551idb_Mayn_db_init_(){
           alert("Database is outdated, please reload the page.")
 }}}
 //#endregion
+//#region core
+function M1625294924126SubCorr__________(){
+    console.log("Hi, Mistress")
+}
+//#endregion
+
+
 
 M1625063458700JessyNeat________()
