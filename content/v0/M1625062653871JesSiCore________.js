@@ -18,6 +18,7 @@ function M1625282527470OnCorrLoaddeed___(M16252825647730J5031440897863075){
 }
 
 function M1625284003422LodCorr__________(){
+    if(!M1623941499181idb_Mayn_db______){setTimeout(M1625284003422LodCorr__________,100); return;}
     let store = M1623941499181idb_Mayn_db______.transaction('M1623945792684idb_thesaurus____',"readonly").objectStore("M1623945792684idb_thesaurus____")
     let req = store.get('M1625063417462CoreToLoad_______');
     req.onsuccess=function(){
