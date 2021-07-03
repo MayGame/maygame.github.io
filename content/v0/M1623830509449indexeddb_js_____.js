@@ -1,6 +1,3 @@
-var M1623774638130idb_transaction__ = M1625068079944JesSWindowProxXxy.IDBTransaction || M1625068079944JesSWindowProxXxy.webkitIDBTransaction || M1625068079944JesSWindowProxXxy.msIDBTransaction || { READ_WRITE: "readwrite" };
-var M1623820653095indexedb_________ = M1625068079944JesSWindowProxXxy.indexedDB || M1625068079944JesSWindowProxXxy.mozIndexedDB || M1625068079944JesSWindowProxXxy.webkitIndexedDB || M1625068079944JesSWindowProxXxy.msIndexedDB;
-var M1623820745971idb_keyrange_____ = M1625068079944JesSWindowProxXxy.IDBKeyRange || M1625068079944JesSWindowProxXxy.webkitIDBKeyRange || M1625068079944JesSWindowProxXxy.msIDBKeyRange;
 
 var M1623830819132first_idb_connect;
 var M1623832698492idb_sample_store_;
@@ -224,18 +221,7 @@ function M1624880981184IDB_add__________(M16248809879510J2760662569410157){
     let transaction = db.transaction(storage,"readwrite");
     transaction.objectStore(storage).add(value,key);
 }
-function M1624881225032IDB_get__________(M16248812445460J1281169936397554){
-    let storage = M16248812445460J1281169936397554[0];
-    let key = M16248812445460J1281169936397554[1];
-    // let value = M16248812445460J1281169936397554[2];
-    let db = M1624881345841IDB_store_index__[storage].db
-    if(!db){console.log("no entry for ",storage, "in M1624881345841IDB_store_index__"); return}
-    let transaction = db.transaction(storage,"readonly");
-    let OSrequest = transaction.objectStore(storage).get(key);
-    OSrequest.onsuccess=function(event){
-        console.log("IDB get for ",key, "returned",OSrequest.result);
-    }
-}
+
 var M1624956383058generic_put______ = M1624956113501Write_var________;
 
 
@@ -243,16 +229,7 @@ var M1624956383058generic_put______ = M1624956113501Write_var________;
 var M1625022724571idbNameToConnObj_={
 // db_name:connection_object_id
 }
-var M1624881345841IDB_store_index__={
-    // storage: db_name
-    'M1623945792684idb_thesaurus____':"memoires_eternels",
-    'M1623940897095idb_func_arg_stor':"memoires_eternels",
-'M1623831451834idb_descript_stor':"memoires_eternels",
-'M1623940635385idb_type_map_____':"memoires_eternels",
-'M1623945927273idb_related_vars_':"memoires_eternels",
-'M1623948002128idb_dom_typeof_st':"memoires_eternels",                                              
 
-}
 function M1625022318769idbIdxErrPrmptAdd(M16250223541600J7474095390848625){
     //fixme
     console.log("IDB: There's no entry for ",M16250223541600J7474095390848625," store")
@@ -298,7 +275,7 @@ function M1624861960052add_var__________(M16248624352900J3616530429038678){
     let value = M16248624352900J3616530429038678.value;
     M1624861880949source___________[id]=source;
     M1625068079944JesSWindowProxXxy[id]=value;
-    M1624864687777StateLastUpdated_[id]=Date.now()
+    M1624864687777StateLastUpdated_[id]=Date.now();
 }
 function M1624956113501Write_var________(M16249480424750J4388463756040546){
     var key = M16249480424750J4388463756040546.key;
