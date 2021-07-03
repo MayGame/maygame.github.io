@@ -40,7 +40,7 @@ function M1624332799887spawn_var_inner___(){
 
 return `
 <input type="text" placeholder="name to IDfy:" onchange="
-let a=('M'+Date.now()+this.value+'_________________________').slice(0,31);
+let a=('M'+Date.now()+this.value+'_________________________').slice(0,32);
 ${id}.value=a.replaceAll(' ','_');" ><br>
 <textarea id="${id}" placeholder="Result goes here" style="height: 70px;"></textarea><br>
 <button onclick="${id}.value=M1624265066524rand_id___________();">Rand</button>
