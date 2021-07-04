@@ -115,12 +115,13 @@ var M1625297347110Deserial_function_=function(M16252973756790J2619777814455608){
         {
             let text = M16253008862770J8563612302758874.target.result
             console.log(text)
-            let func = Function('return ' + text)
-            console.log(func, func.toString())
-            
+            // let func = Function('return ' + text)
+            // console.log(func, func.toString())
+
         }})
 //    window[M16252973756790J2619777814455608.key]//from idb:=new Function()('return ' + foo.toString())()
 }
+// let fa = new Function()
 var M1625310367858ID_RegExp_________ =new RegExp(/M\d{13}\w{18}/,'g')
 var M1625320414108Func_Get_Arg_Name_=function(M16253205254550J1305364840200156){
     let result = M16253205254550J1305364840200156.match(/function*?\(\W*(\w*)/);
@@ -140,14 +141,22 @@ var M1625301090123Srialize_function_ = function(M16253011146210J9441376555473651
     'M1623940897095idb_func_arg_stor_','M1623945927273idb_related_vars__','M1625105007943IDBStoreMeta______'],"readwrite")
     let thes = transaction.objectStore("M1623945792684idb_thesaurus_____");
     let text = window[key].toString();
-    thes.put(text,key);
+    let fnbody = M1625368437043SerSimpl__________(text)
+    let arg = M1625320414108Func_Get_Arg_Name_(text);
+    thes.put({text:text,body:fnbody,arg:arg},key);
     let meta={source:"",modified:Date.now()};
     transaction.objectStore("M1625105007943IDBStoreMeta______").put(meta,key);
     transaction.objectStore("M1623945927273idb_related_vars__").put(M1625306744551funcStrGetRelated_(text),key);
-    transaction.objectStore("M1623940897095idb_func_arg_stor_").put(key,M1625320414108Func_Get_Arg_Name_(text));
+    transaction.objectStore("M1623940897095idb_func_arg_stor_").put(key,arg);
+}
+var M1625368437043SerSimpl__________ = function(M16253684599980J0384719987037425){
+   let text = M1625068079944JesSWindowProxXxy_[M16253684599980J0384719987037425].toString();
+//    let text = M16253684599980J0384719987037425.toString();
+    let fnbody = text.substring(text.indexOf("{")+1,text.lastIndexOf("}"))
+   return fnbody;
 }
 //#endregion
-function M1624265066524rand_id___________(){
+var M1624265066524rand_id___________=function(){
     let rnd = Math.random().toString();//.length varies. 16-21. doesn't really matter
     let id=('M'+Date.now()+rnd.replace('.','J')+"BB00BB").substr(0,32);
     //starts with a number, contains dot -> not a valid ID for C-like languages
