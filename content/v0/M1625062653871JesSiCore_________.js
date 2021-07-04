@@ -146,7 +146,7 @@ var M1625301090123Srialize_function_ = function(M16253011146210J9441376555473651
     let key;
     let text;
     let transaction=M1623941499181idb_Mayn_db_______.transaction(['M1623945792684idb_thesaurus_____',
-    'M1623940897095idb_func_arg_stor_','M1623945927273idb_related_vars__','M1625105007943IDBStoreMeta______','M1623940635385idb_type_map______'],"readwrite")
+    'M1623940897095idb_func_arg_stor_','M1623945927273idb_related_vars__','M1625105007943IDBStoreMeta______',/*'M1623940635385idb_type_map______'*/],"readwrite")
     let thes = transaction.objectStore("M1623945792684idb_thesaurus_____");
     if(typeof M16253011146210J9441376555473651=="object"){
         key=M16253011146210J9441376555473651.key;
@@ -160,7 +160,7 @@ var M1625301090123Srialize_function_ = function(M16253011146210J9441376555473651
     thes.put({text:text,body:fnbody,arg:arg,key:key},key);
     let meta={source:"",modified:Date.now()};
     
-    transaction.objectStore("M1623940635385idb_type_map______").put('M1625406744808Type_JS_Function__',key);
+    // transaction.objectStore("M1623940635385idb_type_map______").put('M1625406744808Type_JS_Function__',key);
     transaction.objectStore("M1625105007943IDBStoreMeta______").put(meta,key);
     transaction.objectStore("M1623945927273idb_related_vars__").put(M1625306744551funcStrGetRelated_(text),key);
     transaction.objectStore("M1623940897095idb_func_arg_stor_").put(key,arg);
