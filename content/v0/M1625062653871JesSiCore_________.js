@@ -150,8 +150,8 @@ var M1625301090123Srialize_function_ = function(M16253011146210J9441376555473651
     transaction.objectStore("M1623940897095idb_func_arg_stor_").put(key,arg);
 }
 var M1625368437043SerSimpl__________ = function(M16253684599980J0384719987037425){
-   let text = M1625068079944JesSWindowProxXxy_[M16253684599980J0384719987037425].toString();
-//    let text = M16253684599980J0384719987037425.toString();
+//    let text = M1625068079944JesSWindowProxXxy_[M16253684599980J0384719987037425].toString();
+   let text = M16253684599980J0384719987037425.toString();
     let fnbody = text.substring(text.indexOf("{")+1,text.lastIndexOf("}"))
    return fnbody;
 }
