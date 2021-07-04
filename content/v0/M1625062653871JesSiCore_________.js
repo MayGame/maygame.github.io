@@ -114,9 +114,12 @@ var M1625297347110Deserial_function_=function(M16252973756790J2619777814455608){
     M1625300496229IDBThesaurusGetCB_({key:key,cb:function(M16253008862770J8563612302758874)
         {
             let text = M16253008862770J8563612302758874.target.result
-            console.log(text)
-            // let func = Function('return ' + text)
-            // console.log(func, func.toString())
+            console.log(text);
+            let func = Function(text.arg, text.body);
+            M1625068079944JesSWindowProxXxy_[text.key]=func;
+            console.log(func, func.toString(), text)
+            return func;
+            // key 
 
         }})
 //    window[M16252973756790J2619777814455608.key]//from idb:=new Function()('return ' + foo.toString())()
@@ -143,7 +146,7 @@ var M1625301090123Srialize_function_ = function(M16253011146210J9441376555473651
     let text = window[key].toString();
     let fnbody = M1625368437043SerSimpl__________(text)
     let arg = M1625320414108Func_Get_Arg_Name_(text);
-    thes.put({text:text,body:fnbody,arg:arg},key);
+    thes.put({text:text,body:fnbody,arg:arg,key:key},key);
     let meta={source:"",modified:Date.now()};
     transaction.objectStore("M1625105007943IDBStoreMeta______").put(meta,key);
     transaction.objectStore("M1623945927273idb_related_vars__").put(M1625306744551funcStrGetRelated_(text),key);
