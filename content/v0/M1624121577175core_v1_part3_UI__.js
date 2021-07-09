@@ -154,6 +154,7 @@ function M1624636345100Cook_toast________(M16246363716160J5304635871646979){
     a.style.backgroundColor="deeppink";
     a.style.fontSize="2em";
     a.style.display="block";
+    a.style.zIndex="20000000";
     a.style.opacity="0.6"
     let id=M1624265066524rand_id___________();
     a.id=id;
@@ -170,7 +171,7 @@ var M1624636688748last_toast________;
 function M1624635774325Toast_____________(M16246359166560J5750862477732466){
     let a =M16246359166560J5750862477732466.text||'Toast';
     M1624636345100Cook_toast________(a)
-
+console.log(a)
     setTimeout(M1624636725133end_toast_________,1500);
 }
 /////////////////////
@@ -264,6 +265,6 @@ function M1624444850349UI_Init___________(){
 }
 var M1624608952349Panels_panel_id___;
 
-M1624444850349UI_Init___________();
+// M1624444850349UI_Init___________();
 
 

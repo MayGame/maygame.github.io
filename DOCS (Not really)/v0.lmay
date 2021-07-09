@@ -1,0 +1,34 @@
+Default mode:
+  run M1625063458700JessyNeat_________:
+    - inits db, 
+    - fetches core from there,
+    - runs it
+
+Edit mode:
+  init db using M1623941545551idb_Mayn_db_init__():
+  put things inside , that's it.
+
+
+get indices
+sync
+lookup through
+
+type:
+   index for
+
+delayed action (request from the other agent, quest, async):
+  todo.
+
+action request: 
+  M1625626294058Do_your_version_of %ACTION_NAME%
+
+do your action with this context:
+  ...
+
+or do your action (if ctxt needed - request it).
+
+
+
+ask someone:
+
+delegate to:

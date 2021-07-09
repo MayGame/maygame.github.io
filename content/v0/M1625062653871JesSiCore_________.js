@@ -1,28 +1,86 @@
-var M1622519980405clairdlwlrMayJesCA = true;
+const M1622519980405clairdlwlrMayJesCA = true;
+var M1625535370183handler_apply_____ =  function(target, thisArg, argumentsList){
+    console.log("Yeye")
+    if(argumentsList[0])
+    return target(argumentsList[0])
+    else return target;
+}
 
-var M1625068079944JesSWindowProxXxy_=window;
+var M1625535165819handler_basicProxy = {
+    // apply:M1625535370183handler_apply_____,
+    apply:function(target, thisArg, argumentsList){
+        console.log("Yeye")
+        if(argumentsList[0])
+        return target(argumentsList[0])
+        else return target;
+    }
+}
+var M1625068079944JesSWindowProxXxy_=new Proxy(window,M1625535165819handler_basicProxy);
+var testfunc = function(){console.log(2)};
+M1625068079944JesSWindowProxXxy_["testfunc"]();
+// var M1625068079944JesSWindowProxXxy_=window;
 var M1625063417462CoreToLoad________;
-function M1625063654235InitVarrssksks____(){
+// var 
+// var M1625463760212LstOfImportntThngs = []
+// var M1625463700198FetchImportntThngs = function(){
+// // let store = M1623941499181idb_Mayn_db_______.transaction('M1623945792684idb_thesaurus_____',"readwrite").objectStore("M1623945792684idb_thesaurus_____");
+// // M1625463760212LstOfImportntThngs
+// M1625300496229IDBThesaurusGetCB_({key:"M1625463760212LstOfImportntThngs",cb:function(M16254784050120J0553455690855821){
+//     let tmp = M16254784050120J0553455690855821.target.result;
+//     if(tmp){
+        
+//         M1625068079944JesSWindowProxXxy_["M1625463760212LstOfImportntThngs"]=tmp;
+//         M1625068079944JesSWindowProxXxy_["M1625463760212LstOfImportntThngs"].forEach(el=>{
+//             // if(el.body&&el.arg&&el.key)
+//             M1625297347110Deserial_function_(el)
+//         })
+//     }
+// }})
+// }
+
+var M1625063654235InitVarrssksks____=function(){
+    let store = M1623941499181idb_Mayn_db_______.transaction('M1623940897095idb_func_arg_stor_',"readwrite").objectStore("M1623945792684idb_thesaurus_____");
+    store.openCursor().onsuccess=function(e){
+        var cursor = e.target.result;
+        if (cursor) {
+            M1625297347110Deserial_function_({key:cursor.key})
+          cursor.continue();
+        }
+        else {
+          console.log("Func init finished");
+          window.dispatchEvent(new CustomEvent(""))        
+            
+        }
+    }
     // M1625068079944JesSWindowProxXxy_=window;
     // M1625063417462CoreToLoad________=
     // M1625068079944JesSWindowProxXxy_[M1625063417462CoreToLoad________]
     //()=>console.log("V-1");
 
 }
-function M1625220622470NoCoreFallback____(){
-    console.log("No core");
-    let store = M1623941499181idb_Mayn_db_______.transaction('M1623945792684idb_thesaurus_____',"readwrite").objectStore("M1623945792684idb_thesaurus_____");
-    store.put("M1625294924126SubCorr___________",'M1625063417462CoreToLoad________')
-
+var M1625220622470NoCoreFallback____=function(){
+    alert("No core");
+    // let store = M1623941499181idb_Mayn_db_______.transaction('M1623945792684idb_thesaurus_____',"readwrite").objectStore("M1623945792684idb_thesaurus_____");
+    // store.put("M1625294924126SubCorr___________",'M1625063417462CoreToLoad________')
+//     M1625301090123Srialize_function_({
+// key: "M1625294924126SubCorr___________",text:`function(){
+//             console.log("Hi, Mistress");
+//         }`
+//     })
+//     M1625284003422LodCorr___________();
 }
-function M1625282527470OnCorrLoaddeed____(M16252825647730J5031440897863075){
+var M1625282527470OnCorrLoaddeed____=function(M16252825647730J5031440897863075){
     let ex = M1625068079944JesSWindowProxXxy_[M16252825647730J5031440897863075.detail.core];
-    console.log(ex);
+    // console.log(ex);
     ex();
-
 }
-
-function M1625284003422LodCorr___________(){
+var M1625496980098OnCorrKnown_______=function(M16254970028490J3228711664140349){
+    M1625300496229IDBThesaurusGetCB_({key:key,cb:function(M16254979038500J5527428907636049)
+        {M16254979038500J5527428907636049
+        
+        }})
+}
+var M1625284003422LodCorr___________=function(){
     if(!M1623941499181idb_Mayn_db_______){setTimeout(M1625284003422LodCorr___________,100); return;}
     let store = M1623941499181idb_Mayn_db_______.transaction('M1623945792684idb_thesaurus_____',"readonly").objectStore("M1623945792684idb_thesaurus_____")
     let req = store.get('M1625063417462CoreToLoad________');
@@ -46,8 +104,7 @@ async function M1625063458700JessyNeat_________(){
     M1625283856579CorrLddEvListener_=window.addEventListener("M1625282460482CorrLoaddeed______",M1625282527470OnCorrLoaddeed____)
     await M1623941545551idb_Mayn_db_init__();
     // M1625119163931GetCore___________();
-    // M1625063654235InitVarrssksks____();
-    M1625284003422LodCorr___________()
+    M1625284003422LodCorr___________();
     // M1625220622470NoCoreFallback____();
 }
 //#region 
@@ -73,9 +130,9 @@ var M1624881345841IDB_store_index___={
 var M1623941499181idb_Mayn_db_______;
 var M1623943250216idb_Mayn_db_cnct__;
 var M1623942055880idb_Mayn_db_name__="memoires_eternels";
-var M1623774638130idb_transaction___ = M1625068079944JesSWindowProxXxy_.IDBTransaction || M1625068079944JesSWindowProxXxy_.webkitIDBTransaction || M1625068079944JesSWindowProxXxy_.msIDBTransaction || { READ_WRITE: "readwrite" };
-var M1623820653095indexedb__________ = M1625068079944JesSWindowProxXxy_.indexedDB || M1625068079944JesSWindowProxXxy_.mozIndexedDB || M1625068079944JesSWindowProxXxy_.webkitIndexedDB || M1625068079944JesSWindowProxXxy_.msIndexedDB;
-var M1623820745971idb_keyrange______ = M1625068079944JesSWindowProxXxy_.IDBKeyRange || M1625068079944JesSWindowProxXxy_.webkitIDBKeyRange || M1625068079944JesSWindowProxXxy_.msIDBKeyRange;
+var M1623774638130idb_transaction___ = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction || { READ_WRITE: "readwrite" };
+var M1623820653095indexedb__________ = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+var M1623820745971idb_keyrange______ = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
 
 var M1623821216754indexeddb_opendb__=async function (M16238212857720J4238014379729269){
     M1625068079944JesSWindowProxXxy_[M16238212857720J4238014379729269[0]] = M1623820653095indexedb__________
@@ -106,18 +163,21 @@ var M1625300496229IDBThesaurusGetCB_ = function(M16253001282300J6024000346344986
 }
 //#endregion
 //#region core
-var M1625294924126SubCorr___________ = function(){
-    console.log("Hi, Mistress")
-}
+// var M1625294924126SubCorr___________ = function(){
+//     console.log("Hi, Mistress");
+//     let store = M1623941499181idb_Mayn_db_______.transaction('M1623945792684idb_thesaurus_____',"readwrite").objectStore("M1623945792684idb_thesaurus_____");
+//     store.put("M1625294924126SubCorr___________",'M1625063417462CoreToLoad________');
+
+// }
 var M1625297347110Deserial_function_=function(M16252973756790J2619777814455608){
     let key = M16252973756790J2619777814455608.key;
     M1625300496229IDBThesaurusGetCB_({key:key,cb:function(M16253008862770J8563612302758874)
         {
             let text = M16253008862770J8563612302758874.target.result
-            console.log(text);
+            // console.log(text);
             let func = Function(text.arg, text.body);
             M1625068079944JesSWindowProxXxy_[text.key]=func;
-            console.log(func, func.toString(), text)
+            // console.log(func, func.toString(), text)
             return func;
             // key 
 
@@ -185,5 +245,84 @@ let a=('M'+Date.now()+M16242647363800J5140259437325456.value+'__________________
 return a.replaceAll(' ','_');
 }
 
+var M1625630506754strToChunks_______ = function(obj){
+    let str=obj.str;
+    let size = obj.size;
+     const numChunks = Math.ceil(str.length / size)
+  const chunks = new Array(numChunks)
 
-M1625063458700JessyNeat_________()
+  for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
+    chunks[i] = str.substr(o, size)
+  }
+
+  return chunks
+}
+var M1625638342457ProcessMessage____= function(M16256383712820J408501848601289B){
+    let result={}
+    let type = "text";
+    if (type=="problem")
+    ;// solution()
+
+    result.in = M16256383712820J408501848601289B;
+    result.type = "Text"
+
+    console.log(result)
+    // source.replywith()
+}
+var M1625725958898AgentsContacts____={}
+var M1625742920799CommonMessageQueue=[]//not specified
+var M1625743005851MockAgentSpecMessQ=[]
+
+var M1625638680355message_queue_____=[
+    // {src:"from",content:"", meta:{id:"M16256460466300J2640778711942904",type:"topic"}}
+]
+var M1625659227392MessageMockup_____ = function(M16256593476210J7448992652314737){
+    M1625657964795on_message________([
+    
+    "M16256594561750J8837302399170879",//source
+    M1624265066524rand_id___________(),//msg_id//if applicable
+    "M1625741171424TopicTextMessage__",//topic
+    M16256593476210J7448992652314737,//text content
+
+])
+
+}
+// msg_sample: "M162300230..0IntroduceNewWordWordM16234...233TheWordItselfM1623737..4TypeOfThatWordContents...."
+
+var M1625659570255SourceReplyMap____={M16256594561750J8837302399170879:""}
+var M1625657964795on_message________ = function(M16256579825650J8184529398652303){
+    let qmsg = {};
+    qmsg.content=M16256579825650J8184529398652303.content;
+    qmsg.src=M16256579825650J8184529398652303.src;
+    M1625638680355message_queue_____.push(qmsg)
+}
+//optional: topic as a part of the source
+// var M1625636964457ThesaurusLookup___ = function(M16256369998000J6708110342539335){
+//     let word = M16256369998000J6708110342539335;
+//     if(found)
+//     let typeof_ = get_type()
+//     do_action_for_typeof(word)
+
+//     return true
+// }
+var M1625636720145ReactWord_________ = function(M16256369002450J1372852237634516){
+    let b = M1625630506754strToChunks_______({str:M16256369002450J1372852237634516,size:32})
+    
+}
+var M1625636474579ParseSentence_____ = function(M16256346793470J5024179214589444){
+    let b = M1625630506754strToChunks_______({str:M16256346793470J5024179214589444,size:32})
+    if (b.length==1)
+    M1625636720145ReactWord_________()
+}
+
+// M1625063458700JessyNeat_________()
+/**
+ * init db
+ * init basic vars:
+ * 
+ */
+var NeedWordsFor=[
+ "Introduce new word",
+ "request the type of",
+ "type: message"   
+]
