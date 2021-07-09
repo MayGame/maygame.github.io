@@ -208,11 +208,11 @@ var M1625805527580MayJesstyTypeIndex = {
 var M1625819920757MayJesstyIndices__={
     // "type":"its index"
 }
-var M1625828670593MayJessLearnNewTyp = function(typen){
-    var ind = M1625819920757MayJesstyIndices__[typen];
+var M1625828670593MayJessLearnNewTyp = function(M1625830322771ArgNewTypeToLearn_){
+    var ind = M1625819920757MayJesstyIndices__[M1625830322771ArgNewTypeToLearn_];
     if(!ind){
-        let newIndex = M1625828153481MJGenIndexNameFor_(typen);
-        M1625819920757MayJesstyIndices__[typen]=newIndex;
+        let newIndex = M1625828153481MJGenIndexNameFor_(M1625830322771ArgNewTypeToLearn_);
+        M1625819920757MayJesstyIndices__[M1625830322771ArgNewTypeToLearn_]=newIndex;
         M1625829133478IDBUpdMayJesstyVar("M1625819920757MayJesstyIndices__");
         window[newIndex]={}
         M1625829133478IDBUpdMayJesstyVar(newIndex);
