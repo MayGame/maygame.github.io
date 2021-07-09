@@ -202,6 +202,41 @@ var M1625306744551funcStrGetRelated_ = function(M16253067937360J4115575867813261
     return [...new Set(flet)];
 }
 //M1625406744808Type_JS_Function__
+var M1625805527580MayJesstyTypeIndex = {
+    // "MJword":"its type"
+}
+var M1625819920757MayJesstyIndices__={
+    // "type":"its index"
+}
+var M1625828670593MayJessLearnNewTyp = function(typen){
+    var ind = M1625819920757MayJesstyIndices__[typen];
+    if(!ind){
+        let newIndex = M1625828153481MJGenIndexNameFor_(typen);
+        M1625819920757MayJesstyIndices__[typen]=newIndex;
+        M1625829133478IDBUpdMayJesstyVar("M1625819920757MayJesstyIndices__");
+        window[newIndex]={}
+        M1625829133478IDBUpdMayJesstyVar(newIndex);
+    }
+}
+var M1625829133478IDBUpdMayJesstyVar = function(M1625829174202ARGSerializableVar){
+    let v = window[M1625829174202ARGSerializableVar];
+    let store = M1623941499181idb_Mayn_db_______.transaction(
+        ["M1623945792684idb_thesaurus_____"]).objectStore("M1623945792684idb_thesaurus_____")
+    store.put(v,M1625829174202ARGSerializableVar)
+}
+var M1625828153481MJGenIndexNameFor_ = function(M1625828183717ARG_Name_to_be_ind){
+    return "M"+Date.now()+"IND4"+ M1625828183717ARG_Name_to_be_ind.slice(14,28);}
+var M1625819728564MayJesstyWordToIDB = function(M1625805395680ARG_WORD__________){
+let w=M1625805395680ARG_WORD__________;
+let typeof_w =  M1625805527580MayJesstyTypeIndex[w];
+let typeInd =   M1625819920757MayJesstyIndices__[typeof_w];
+let transaction = M1623941499181idb_Mayn_db_______.transaction(
+["M1623945792684idb_thesaurus_____",
+// "M1623940635385idb_type_map______",//no typemap, simple obj indices for now.
+"M1625105007943IDBStoreMeta______"],"readwrite")
+let thes = transaction.objectStore("M1623945792684idb_thesaurus_____");
+let meta = transaction.objectStore("M1625105007943IDBStoreMeta______");
+}
 var M1625301090123Srialize_function_ = function(M16253011146210J9441376555473651){//arg - string(id) or obj
     let key;
     let text;

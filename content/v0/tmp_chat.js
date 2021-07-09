@@ -35,8 +35,9 @@ common_message_queue.push(JSON.parse(e));
 // console.table(common_message_queue)
 update_logs()
 // M1624262716713UISpawnNewWindow__({content:"m", title:"p1"})
-
 }
+var word_for_type_message="new_text_message";
+var word_for_introduce_new_word;
 gun.get("tmp").get("cmq").on(oncmq)
 // gun.get("tmp").get("cmq").on(e=>oncmq(e))
 function test_send(){
@@ -53,3 +54,8 @@ function update_logs(){
     document.getElementById('chat_log').insertAdjacentHTML("afterbegin",txt)   
 }
 
+// function save_to_idb(msg){
+//     let store = M1623941499181idb_Mayn_db_______.transaction(
+//         ["M1623945792684idb_thesaurus_____","M1623940635385idb_type_map______",
+//     "M1625105007943IDBStoreMeta______"],"readwrite").objectStore("M1623945792684idb_thesaurus_____");
+// }
