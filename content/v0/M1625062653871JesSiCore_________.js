@@ -218,6 +218,14 @@ var M1625828670593MayJessLearnNewTyp = function(M1625830322771ArgNewTypeToLearn_
         M1625829133478IDBUpdMayJesstyVar(newIndex);
     }
 }
+var M1625831323123MayJessIDBSyncLoad = function(M1625831361046ArgIDToLoadFromIDB){
+    let store = M1623941499181idb_Mayn_db_______.transaction(
+        ["M1623945792684idb_thesaurus_____"],"readonly").objectStore("M1623945792684idb_thesaurus_____")
+    var req = store.get(M1625831361046ArgIDToLoadFromIDB);
+    req.onsuccess = function(){
+        window[M1625831361046ArgIDToLoadFromIDB]=req.result
+    }
+}
 var M1625829133478IDBUpdMayJesstyVar = function(M1625829174202ARGSerializableVar){
     let v = window[M1625829174202ARGSerializableVar];
     let store = M1623941499181idb_Mayn_db_______.transaction(
