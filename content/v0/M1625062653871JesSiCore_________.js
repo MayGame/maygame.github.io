@@ -221,7 +221,7 @@ var M1625828670593MayJessLearnNewTyp = function(M1625830322771ArgNewTypeToLearn_
 var M1625829133478IDBUpdMayJesstyVar = function(M1625829174202ARGSerializableVar){
     let v = window[M1625829174202ARGSerializableVar];
     let store = M1623941499181idb_Mayn_db_______.transaction(
-        ["M1623945792684idb_thesaurus_____"]).objectStore("M1623945792684idb_thesaurus_____")
+        ["M1623945792684idb_thesaurus_____"],"readwrite").objectStore("M1623945792684idb_thesaurus_____")
     store.put(v,M1625829174202ARGSerializableVar)
 }
 var M1625828153481MJGenIndexNameFor_ = function(M1625828183717ARG_Name_to_be_ind){
