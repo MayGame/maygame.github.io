@@ -1,4 +1,5 @@
 var common_message_queue=[];
+M1623941545551idb_Mayn_db_init__();
 var gun = new Gun("https://vine-mature-morocco.glitch.me/gun");
 var sea = Gun.SEA
 var user = gun.user()
