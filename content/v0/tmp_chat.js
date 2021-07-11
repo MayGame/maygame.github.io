@@ -47,6 +47,11 @@ function test_send(){
 let id = Date.now()
     gun.get("tmp").get("cmq").put(JSON.stringify({from:1,receiver:1,content:"hi",id:id}))
 }
+function nts_id(){
+let Jrand = (Math.random()+"000000").replace('.','J').substr(0,18);
+let res = "M"+Gun.state()+Jrand;
+return res;
+}
 function send(content, from, to){
 let id = Date.now()
     gun.get("tmp").get("cmq").put(JSON.stringify({from:from,receiver:to,content:content,id:id}))
