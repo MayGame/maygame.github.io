@@ -30,7 +30,7 @@ var M1624615216720windw_addedEreact_=e=>{//console.log(e.detail);
     console.log(M1624262971875UITopLevelZindex__)
         var div = document.createElement('div');
         div.setAttribute("class","M1624268064555window_style_clas_");
-        div.style.height="100%";
+        div.style.height="70%";
         div.style.zIndex=M1624262971875UITopLevelZindex__;
         var closeX = document.createElement("a");
         let divid=M1624265066524rand_id___________();

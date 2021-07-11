@@ -1,7 +1,8 @@
 var common_message_queue=[];
 // M1623941545551idb_Mayn_db_init__();
 // var gun = new Gun({localStorage:false, peers:["https://gun-manhattan.herokuapp.com/gun"]});
-var gun = new Gun({localStorage:false, peers:["https://vine-mature-morocco.glitch.me/gun"]});
+var gun = new Gun({localStorage:false, peers:["https://mg-gun-manhattan.herokuapp.com/gun"]});
+// var gun = new Gun({localStorage:false, peers:["https://vine-mature-morocco.glitch.me/gun"]});
 var sea = Gun.SEA
 var user = gun.user()
 var me;
@@ -38,8 +39,8 @@ common_message_queue.push(JSON.parse(e));
 update_logs()
 // M1624262716713UISpawnNewWindow__({content:"m", title:"p1"})
 }
-var word_for_type_message="new_text_message";
-var word_for_introduce_new_word;
+var word_for_type_message="M1625913370169MessageDeBonher___";
+var word_for_introduce_new_word="M1625908424615NewMJWordToInspire";
 gun.get("tmp").get("cmq").on(oncmq)
 // gun.get("tmp").get("cmq").on(e=>oncmq(e))
 function test_send(){
