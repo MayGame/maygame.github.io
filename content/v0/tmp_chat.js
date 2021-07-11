@@ -51,6 +51,9 @@ function send(content, from, to){
 let id = Date.now()
     gun.get("tmp").get("cmq").put(JSON.stringify({from:from,receiver:to,content:content,id:id}))
 }
+function sendv2(content, from, to){
+//gun.get("tmp").get(
+}
 function update_logs(){
     let el = common_message_queue.pop();
     let txt=`<br><p onclick="M1624635774325Toast_____________({text:'at ${new Date(el.id)}'})">${el.from}: ${el.content}</p> `
