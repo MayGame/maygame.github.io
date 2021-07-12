@@ -71,9 +71,12 @@ function update_logs(){
 //         ["M1623945792684idb_thesaurus_____","M1623940635385idb_type_map______",
 //     "M1625105007943IDBStoreMeta______"],"readwrite").objectStore("M1623945792684idb_thesaurus_____");
 // }
-var rtcpc = opt.RTCPeerConnection || env.RTCPeerConnection || env.webkitRTCPeerConnection || env.mozRTCPeerConnection;
-var rtcsd = opt.RTCSessionDescription || env.RTCSessionDescription || env.webkitRTCSessionDescription || env.mozRTCSessionDescription;
-var rtcic = opt.RTCIceCandidate || env.RTCIceCandidate || env.webkitRTCIceCandidate || env.mozRTCIceCandidate;
+var env;
+		if(typeof window !== "undefined"){ env = window }
+		if(typeof global !== "undefined"){ env = global }
+var rtcpc = env.RTCPeerConnection || env.webkitRTCPeerConnection || env.mozRTCPeerConnection;
+var rtcsd = env.RTCSessionDescription || env.webkitRTCSessionDescription || env.mozRTCSessionDescription;
+var rtcic = env.RTCIceCandidate || env.webkitRTCIceCandidate || env.mozRTCIceCandidate;
 var rtc = {'iceServers': [
     {urls: 'stun:stun.l.google.com:19302'},
     {urls: "stun:stun.sipgate.net:3478"}/*,
