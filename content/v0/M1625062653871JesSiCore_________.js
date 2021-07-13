@@ -146,11 +146,11 @@ var M1623941545551idb_Mayn_db_init__=async function (){
             if (!M1623941499181idb_Mayn_db_______.objectStoreNames.contains(e)) {
             M1623941499181idb_Mayn_db_______.createObjectStore(e);}
         })
-        dispatchEvent("M1626160294282memoirsEternelsRdy");
+        dispatchEvent(new CustomEvent("M1626160294282memoirsEternelsRdy"));
     };
     M1623943250216idb_Mayn_db_cnct__.onsuccess = function() {
         M1623941499181idb_Mayn_db_______=M1623943250216idb_Mayn_db_cnct__.result;
-        dispatchEvent("M1626160294282memoirsEternelsRdy");
+        dispatchEvent(new CustomEvent("M1626160294282memoirsEternelsRdy"));
 
         M1623941499181idb_Mayn_db_______.onversionchange = function() {
             M1623941499181idb_Mayn_db_______.close();
