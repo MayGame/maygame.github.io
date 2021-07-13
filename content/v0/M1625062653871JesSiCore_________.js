@@ -39,7 +39,9 @@ var M1625063417462CoreToLoad________;
 // }
 
 var M1625063654235InitVarrssksks____=function(){
-    let store = M1623941499181idb_Mayn_db_______.transaction('M1623940897095idb_func_arg_stor_',"readwrite").objectStore("M1623945792684idb_thesaurus_____");
+    let store = M1623941499181idb_Mayn_db_______.transaction('M1623940897095idb_func_arg_stor_',"readwrite")
+    .objectStore("M1623940897095idb_func_arg_stor_");
+    // .objectStore("M1623945792684idb_thesaurus_____");
     store.openCursor().onsuccess=function(e){
         var cursor = e.target.result;
         if (cursor) {
@@ -48,7 +50,7 @@ var M1625063654235InitVarrssksks____=function(){
         }
         else {
           console.log("Func init finished");
-          window.dispatchEvent(new CustomEvent(""))        
+          window.dispatchEvent(new CustomEvent("M1626179077130FunxXXLoddedEvento"))        
             
         }
     }
