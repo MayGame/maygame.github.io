@@ -138,7 +138,7 @@ var M1623821216754indexeddb_opendb__=async function (M16238212857720J42380143797
     M1625068079944JesSWindowProxXxy_[M16238212857720J4238014379729269[0]] = M1623820653095indexedb__________
     .open(M16238212857720J4238014379729269[1],M16238212857720J4238014379729269[2])
 }
-var M1623941545551idb_Mayn_db_init__=async function (){
+var M1626165154938InitMemEternelsSpE = async function(){
     await M1623821216754indexeddb_opendb__(["M1623943250216idb_Mayn_db_cnct__",M1623942055880idb_Mayn_db_name__,2]);
     M1623943250216idb_Mayn_db_cnct__.onupgradeneeded = function(event) {
         M1623941499181idb_Mayn_db_______ = event.target.result;
@@ -151,6 +151,22 @@ var M1623941545551idb_Mayn_db_init__=async function (){
     M1623943250216idb_Mayn_db_cnct__.onsuccess = function() {
         M1623941499181idb_Mayn_db_______=M1623943250216idb_Mayn_db_cnct__.result;
         dispatchEvent(new CustomEvent("M1626160294282memoirsEternelsRdy"));
+
+        M1623941499181idb_Mayn_db_______.onversionchange = function() {
+            M1623941499181idb_Mayn_db_______.close();
+          alert("Database is outdated, please reload the page.")
+}}}
+var M1623941545551idb_Mayn_db_init__=async function (){
+    await M1623821216754indexeddb_opendb__(["M1623943250216idb_Mayn_db_cnct__",M1623942055880idb_Mayn_db_name__,2]);
+    M1623943250216idb_Mayn_db_cnct__.onupgradeneeded = function(event) {
+        M1623941499181idb_Mayn_db_______ = event.target.result;
+        M1623941001884idb_stores_list___.forEach(e=>{
+            if (!M1623941499181idb_Mayn_db_______.objectStoreNames.contains(e)) {
+            M1623941499181idb_Mayn_db_______.createObjectStore(e);}
+        })
+    };
+    M1623943250216idb_Mayn_db_cnct__.onsuccess = function() {
+        M1623941499181idb_Mayn_db_______=M1623943250216idb_Mayn_db_cnct__.result;
 
         M1623941499181idb_Mayn_db_______.onversionchange = function() {
             M1623941499181idb_Mayn_db_______.close();
@@ -359,7 +375,7 @@ var M1625636474579ParseSentence_____ = function(M16256346793470J5024179214589444
     if (b.length==1)
     M1625636720145ReactWord_________()
 }
-M1623941545551idb_Mayn_db_init__()//fixme
+// M1623941545551idb_Mayn_db_init__()//fixme
 
 // M1625063458700JessyNeat_________()
 /**
