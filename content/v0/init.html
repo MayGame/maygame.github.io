@@ -8,7 +8,7 @@
         </button>
         <button onclick="load_ind_map();">
 Load sync index map from idb</button>
-<button onclick="console.log(M1625819920757MayJesstyIndices__);">log indices</button>
+<button onclick="console.log(M1625819920757MayJesstyIndices__);">log indix map</button>
 <button onclick="load_indices()">load indices</button>
         <script>
             // M1625829133478IDBUpdMayJesstyVar()
@@ -30,8 +30,10 @@ Load sync index map from idb</button>
                 M1625831323123MayJessIDBSyncLoad("M1625819920757MayJesstyIndices__");
             }
             var load_indices = function(){//wip
-                Object.keys(M1625819920757MayJesstyIndices__).forEach(
-                    M1625831323123MayJessIDBSyncLoad
+                Object.keys(M1625819920757MayJesstyIndices__).forEach(e=>{
+                    M1625831323123MayJessIDBSyncLoad(e);
+                    console.log(e);
+                }
                 )
             }
         </script>
