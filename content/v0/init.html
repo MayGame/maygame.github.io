@@ -31,7 +31,8 @@ Load sync index map from idb</button>
             }
             var load_indices = function(){//wip
                 Object.keys(M1625819920757MayJesstyIndices__).forEach(e=>{
-                    M1625831323123MayJessIDBSyncLoad(e);
+                    let val = M1625819920757MayJesstyIndices__[e]
+                    M1625831323123MayJessIDBSyncLoad(val);
                     console.log(e);
                 }
                 )
