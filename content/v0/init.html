@@ -6,9 +6,10 @@
         <button onclick="init();">
         Init put
         </button>
-        <button onclick="load();">
-Load sync from idb</button>
+        <button onclick="load_ind_map();">
+Load sync index map from idb</button>
 <button onclick="console.log(M1625819920757MayJesstyIndices__);">log indices</button>
+<button onclick="load_indices()">load indices</button>
         <script>
             // M1625829133478IDBUpdMayJesstyVar()
             // M1625828153481MJGenIndexNameFor_()
@@ -25,9 +26,13 @@ Load sync from idb</button>
             }
             M1626165154938InitMemEternelsSpE()
             // M1625819920757MayJesstyIndices__["A"]=""
-            var load = function(){
+            var load_ind_map = function(){
                 M1625831323123MayJessIDBSyncLoad("M1625819920757MayJesstyIndices__");
-
+            }
+            var load_indices = function(){//wip
+                Object.keys(M1625819920757MayJesstyIndices__).forEach(
+                    M1625831323123MayJessIDBSyncLoad
+                )
             }
         </script>
     </body>
