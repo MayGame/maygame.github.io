@@ -30,11 +30,11 @@ if(a&&me&&to){
 </div>
 `
 var chatWindow2=`
-<label for="choose_me">Me:</label>
-<input type="text" id="choose_me" placeholder="I am" value="J">
+<label for="choose_me2">Me:</label>
+<input type="text" id="choose_me2" placeholder="I am" value="J">
 <br>
-<label for="choose_to">To:</label>
-<input type="text" id="choose_to" placeholder="send to" value="O">
+<label for="choose_to2">To:</label>
+<input type="text" id="choose_to2" placeholder="send to" value="O">
 <textarea id="chat_area" placeholder="Spread your love here">
 </textarea>
 <br>
@@ -42,8 +42,8 @@ var chatWindow2=`
 <br>
 <button onclick="
 let a = chat_area.value;
-let me = choose_me.value;
-let to = choose_to.value;
+let me = choose_me2.value;
+let to = choose_to2.value;
 if(a&&me&&to){
     send(a,me,to);
     chat_area.value=null;
