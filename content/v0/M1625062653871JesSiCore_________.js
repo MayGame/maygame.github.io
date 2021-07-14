@@ -195,7 +195,7 @@ var M1625297347110Deserial_function_=function(M16252973756790J2619777814455608){
         {
             let text = M16253008862770J8563612302758874.target.result
             // console.log(text);
-            let func = Function(text.arg, text.body);
+            let func = new Function(text.arg, text.body);
             M1625068079944JesSWindowProxXxy_[text.key]=func;
             // console.log(func, func.toString(), text)
             return func;
@@ -289,7 +289,47 @@ var M1625301090123Srialize_function_ = function(M16253011146210J9441376555473651
     transaction.objectStore("M1623940897095idb_func_arg_stor_").put(key,arg);
 }
 }
-
+var M1626241133330FuncArgMap________ = {}
+var M1626276579700FuncStore_________ = {}
+var M1626238871776Serialize_function = function(M16262389747440J2304738882833630){
+    // M16262389747440J2304738882833630;
+    let key;
+    let text;
+    if(typeof M16262389747440J2304738882833630=="object"){
+        key=M16262389747440J2304738882833630.key;
+        text=M16262389747440J2304738882833630.text;}
+    if(typeof M16262389747440J2304738882833630=="string"){
+        key = M16262389747440J2304738882833630;
+        text = window[key].toString();
+    }
+    let fnbody = M1625368437043SerSimpl__________(text)
+    let arg = M1625320414108Func_Get_Arg_Name_(text);
+console.log(fnbody)
+if(arg===""){
+    // console.log(arg.length);M1626241133330FuncArgMap________
+}
+else {
+    M1626241133330FuncArgMap________[arg]=key;
+    M1625829133478IDBUpdMayJesstyVar("M1626241133330FuncArgMap________");
+}
+M1626276579700FuncStore_________[key]={fnbody:fnbody,arg:arg};
+M1625829133478IDBUpdMayJesstyVar("M1626276579700FuncStore_________");
+}
+var M1626276809000DesFuncFromArgNBod = function(M16262768358600J2790124427742373){
+    let key;
+    let fnbody;
+    if(typeof M16262768358600J2790124427742373=="object"){
+        key=M16262768358600J2790124427742373.key;
+        text=M16262768358600J2790124427742373.fnbody;
+        arg=M16262768358600J2790124427742373.arg||""
+    }
+    if(typeof M16262768358600J2790124427742373=="string"){
+        key = M16262768358600J2790124427742373;
+        fnbody = M1626276579700FuncStore_________[key].fnbody;
+        arg = M1626276579700FuncStore_________[key].arg;}
+    let func = new Function(arg, fnbody);
+    M1625068079944JesSWindowProxXxy_[key]=func;
+}
 var M1625368437043SerSimpl__________ = function(M16253684599980J0384719987037425){
 //    let text = M1625068079944JesSWindowProxXxy_[M16253684599980J0384719987037425].toString();
    let text = M16253684599980J0384719987037425.toString();
